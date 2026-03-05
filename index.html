@@ -89,7 +89,9 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
 .header-left{display:flex;align-items:center;gap:10px}
 .category-icon{font-size:18px}
 .count{background:rgba(255,255,255,0.25);padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;backdrop-filter:blur(4px)}
-.group-content{display:none;padding:16px;background:var(--surface)}
+.group-content{display:none;padding:16px;background:var(--surface);animation:slideDown 0.3s ease}
+.group-content[style*="block"]{display:block}
+@keyframes slideDown{from{opacity:0;max-height:0}to{opacity:1;max-height:2000px}}
 .filter-item{padding:16px;border-bottom:1px solid var(--border)}
 .filter-item:last-child{border-bottom:none;padding-bottom:8px}
 .filter-item:first-child{padding-top:8px}
@@ -191,7 +193,7 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
         </div>
         <span class="count">12条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none">
       <div class="filter-item">
         <h4>公众号躺更神器！OpenClaw+Claude Skill 实现自动读对标 + 写文 + 配图 + 存入草稿箱</h4>
         <div class="field"><span class="label-tag info">核心信息</span>利用OpenClaw和Claude Skill工具，实现自动读取对标账号文章、围绕指定主题撰写文章、配图并存入公众号草稿箱的全流程自动化操作步骤。</div>
@@ -334,7 +336,7 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
         </div>
         <span class="count">14条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none">
       <div class="filter-item">
         <h4>从'傻等'到'流淌'：我在AI项目中实现流式输出的血泪史（附真实代码+深度解析）</h4>
         <div class="field"><span class="label-tag info">核心信息</span>作者分享了在AI项目中实现流式输出的完整实践经验，从最初误用定时器模拟打字机效果，到解决中文乱码、数据混杂等问题，最终通过结合 fetch、EventSourceParserStream 和 for await 循环进行重构，并配合 AbortController 实现真正的流式输出。</div>
@@ -499,7 +501,7 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
         </div>
         <span class="count">9条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none">
       <div class="filter-item">
         <h4>CC Switch 作者故事启发 - 从转行到破局</h4>
         <div class="field"><span class="label-tag info">核心信息</span>用于管理和切换Claude Code、Codex、Gemini CLI等工具配置的实用工具，是一个开源项目。</div>
@@ -609,7 +611,7 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
         </div>
         <span class="count">9条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none">
       <div class="filter-item">
         <h4>在学校引入人工智能时，年龄适宜性至关重要</h4>
         <div class="field"><span class="label-tag info">核心信息</span>发布主体：《印度人报》社论；核心举措：强调在学校引入人工智能工具时必须优先考虑年龄适宜性，应根据学生的认知发展阶段定制AI教育内容和互动方式；实施要求：确保技术辅助学习的安全性与有效性，避免过早或不当接触带来的风险。</div>
@@ -719,7 +721,7 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
         </div>
         <span class="count">6条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none">
       <div class="filter-item">
         <h4>当「技术派」遭遇「教研派」:AI+教育赛道,谁更懂老师的痛?</h4>
         <div class="field"><span class="label-tag info">核心信息</span>文章对比分析了AI+教育赛道的三类主要参与者：以阿里、字节为代表的“技术派”（依托技术优势）、创业公司“创新派”及好未来等“教育科技派”（依托教研优势），探讨了各方如何利用技术、流量及教研优势为教师减负赋能，并分析了如何更精准解决教师实际痛点。</div>
@@ -1233,7 +1235,7 @@ Windows supported.</div>
         <span class="collapse-text">英文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">Unveiling User Perceptions in the Generative AI Era: A Sentiment-Driven\nEvaluation of AI Educationa...</div>
+      <div class="collapse-content">Unveiling User Perceptions in the Generative AI Era: A Sentiment-Driven\nEvaluation of AI Educational Apps' Role in Digital Transformation of e-Teaching</div>
     </div>
     <a href="https://huggingface.co/papers/2512.11934" target="_blank" class="btn-primary paper-btn">
       <span>📖</span> 阅读论文
@@ -1256,7 +1258,7 @@ Windows supported.</div>
         <span class="collapse-text">英文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">A Benchmark for Math Misconceptions: Bridging Gaps in Middle School Algebra with\nAI-Supported Instr...</div>
+      <div class="collapse-content">A Benchmark for Math Misconceptions: Bridging Gaps in Middle School Algebra with\nAI-Supported Instruction</div>
     </div>
     <a href="https://huggingface.co/papers/2412.03765" target="_blank" class="btn-primary paper-btn">
       <span>📖</span> 阅读论文
@@ -1302,7 +1304,7 @@ Windows supported.</div>
         <span class="collapse-text">英文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">AI-Driven Virtual Teacher for Enhanced Educational Efficiency: Leveraging Large\nPretrain Models for...</div>
+      <div class="collapse-content">AI-Driven Virtual Teacher for Enhanced Educational Efficiency: Leveraging Large\nPretrain Models for Autonomous Error Analysis and Correction</div>
     </div>
     <a href="https://huggingface.co/papers/2409.09403" target="_blank" class="btn-primary paper-btn">
       <span>📖</span> 阅读论文
@@ -3045,6 +3047,8 @@ function switchTab(index){
 function toggleGroup(el){
   const content = el.nextElementSibling;
   const isOpen = content.style.display === 'block';
+  // 关闭其他已展开的分组（手风琴效果，可选）
+  // document.querySelectorAll('.group-content').forEach(c => c.style.display = 'none');
   content.style.display = isOpen ? 'none' : 'block';
   el.style.borderRadius = isOpen ? 'var(--radius-lg)' : 'var(--radius-lg) var(--radius-lg) 0 0';
 }
@@ -3057,12 +3061,6 @@ function toggleAbstract(el){
   el.classList.toggle('active',!isOpen);
   el.querySelector('.collapse-text').textContent = isOpen ? '英文摘要（点击查看）' : '英文摘要（点击收起）';
 }
-
-// 初始化第一个分类展开
-document.addEventListener('DOMContentLoaded',()=>{
-  const firstGroup = document.querySelector('.group-header');
-  if(firstGroup) firstGroup.click();
-});
 </script>
 </body>
 </html>
