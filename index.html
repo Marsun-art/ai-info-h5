@@ -7,83 +7,136 @@
 <title>教育AI+信息聚合平台</title>
 <style>
 :root{
-  --bg:#f8fafc;
-  --surface:rgba(255,255,255,0.72);
-  --blur:blur(20px);
+  --bg:#f0f7ff;
+  --surface:rgba(255,255,255,0.85);
+  --blur:blur(12px);
   --primary:#0f172a;
   --secondary:#475569;
   --accent:#0ea5e9;
-  --border:rgba(255,255,255,0.32);
-  --shadow:0 8px 32px rgba(0,0,0,.08);
-  --radius:20px;
-  --radius-lg:24px;
-  --radius-xl:28px;
+  --success:#10b981;
+  --warning:#f59e0b;
+  --purple:#8b5cf6;
+  --border:rgba(14, 165, 233, 0.1);
+  --shadow:0 10px 40px rgba(14, 165, 233, 0.1);
+  --radius:16px;
+  --radius-lg:20px;
+  --radius-xl:24px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.6;color:var(--primary);-webkit-font-smoothing:antialiased}
-.header{text-align:center;margin:24px 0 20px;padding:0 16px}
-.header h2{font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.header p{font-size:13px;color:var(--secondary);margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px}
-.header p::before{content:"";width:6px;height:6px;background:#10b981;border-radius:50%;animation:pulse 2s infinite}
-@keyframes pule{0%,100%{opacity:1}50%{opacity:.5}}
+body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;color:var(--primary);-webkit-font-smoothing:antialiased}
 
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;padding:0 4px}
-.tab{position:relative;padding:14px 8px;border-radius:var(--radius-lg);text-align:center;font-size:12px;font-weight:600;cursor:pointer;border:none;color:#fff;transition:all .3s;overflow:hidden}
-.tab:nth-child(1){background:linear-gradient(135deg,#10b981,#06b6d4)}
-.tab:nth-child(2){background:linear-gradient(135deg,#0ea5e9,#6366f1)}
+/* 头部样式 */
+.header{text-align:center;margin:32px 0 24px;padding:0 16px}
+.header h2{font-size:32px;font-weight:800;background:linear-gradient(135deg,#0ea5e9,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.header p{font-size:14px;color:var(--secondary);display:flex;align-items:center;justify-content:center;gap:8px}
+.header p::before{content:"";width:8px;height:8px;background:var(--success);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.1)}}
+
+/* 标签栏 */
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.tab{position:relative;padding:16px 8px;border-radius:var(--radius-lg);text-align:center;font-size:13px;font-weight:700;cursor:pointer;border:none;color:#fff;transition:all 0.3s ease;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.tab:nth-child(1){background:linear-gradient(135deg,#10b981,#0ea5e9)}
+.tab:nth-child(2){background:linear-gradient(135deg,#0ea5e9,#3b82f6)}
 .tab:nth-child(3){background:linear-gradient(135deg,#8b5cf6,#ec4899)}
 .tab:nth-child(4){background:linear-gradient(135deg,#f59e0b,#f97316)}
-.tab.active{transform:translateY(-3px);box-shadow:var(--shadow)}
-.tab .tab-icon{display:block;font-size:18px;margin-bottom:4px}
+.tab.active{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+.tab .tab-icon{display:block;font-size:22px;margin-bottom:6px}
 
-.panel{display:none;animation:fadeIn .3s ease}
+/* 面板 */
+.panel{display:none;animation:fadeIn 0.4s ease}
 .panel.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-.card{background:var(--surface);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-radius:var(--radius-xl);padding:20px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .2s}
-.card:active{transform:scale(.995)}
+/* 卡片样式 */
+.card{background:var(--surface);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-radius:var(--radius-xl);padding:24px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border);transition:all 0.3s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 15px 45px rgba(14, 165, 233, 0.15)}
 
-.label-tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-right:8px}
+/* 标签样式 */
+.label-tag{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-right:8px;margin-bottom:6px}
 .label-tag.info{background:#dbeafe;color:#1d4ed8}
 .label-tag.value{background:#dcfce7;color:#15803d}
 .label-tag.scene{background:#fef3c7;color:#b45309}
 .label-tag.reason{background:#fce7f3;color:#be185d}
 
-.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 20px;border-radius:16px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border:none;cursor:pointer;margin-top:16px;color:#fff}
+/* 字段网格布局 */
+.field-grid{display:grid;gap:8px;margin:12px 0}
+.field{line-height:1.6;margin:8px 0}
+
+/* 按钮样式 */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 20px;border-radius:var(--radius);font-size:15px;font-weight:700;text-decoration:none;transition:all 0.3s;border:none;cursor:pointer;margin-top:20px;color:#fff}
 .github-btn{background:linear-gradient(135deg,#10b981,#059669)}
 .paper-btn{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
-.btn-link{display:inline-flex;align-items:center;gap:4px;color:var(--accent);font-size:13px;font-weight:600;text-decoration:none;transition:gap .2s}
+.btn-link{display:inline-flex;align-items:center;gap:4px;color:var(--accent);font-size:14px;font-weight:700;text-decoration:none;transition:gap 0.2s}
 .btn-link:hover{gap:8px}
 
-.group-card{margin-bottom:14px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
-.group-header{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;color:#fff;font-weight:600;cursor:pointer;transition:opacity .2s}
-.group-header:active{opacity:.9}
+/* 分组卡片 */
+.group-card{margin-bottom:16px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.group-header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;color:#fff;font-weight:700;cursor:pointer;transition:all 0.2s}
+.group-header:hover{opacity:0.95}
 .header-left{display:flex;align-items:center;gap:10px}
-.category-icon{font-size:18px}
-.count{background:rgba(255,255,255,.25);padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
-.group-content{display:none;padding:16px;background:var(--surface);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);animation:slideDown .3s ease}
-.group-content[style*="block"]{display:block}
-@keyframes slideDown{from{opacity:0;max-height:0}to{opacity:1;max-height:2000px}}
-.filter-item{padding:16px;border-bottom:1px solid var(--border)}
+.category-icon{font-size:20px}
+.count{background:rgba(255,255,255,0.3);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.group-content{padding:20px;background:var(--surface);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);animation:slideDown 0.4s ease}
+@keyframes slideDown{from{opacity:0;max-height:0}to{opacity:1;max-height:3000px}}
+
+/* 筛选项 */
+.filter-item{padding:20px;border-bottom:1px solid var(--border)}
 .filter-item:last-child{border-bottom:none}
-.filter-item h4{font-size:16px;color:var(--primary);margin-bottom:12px;font-weight:700}
-.filter-item .footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px dashed var(--border)}
-.date{font-size:12px;color:var(--secondary)}
+.filter-item h4{font-size:18px;color:var(--primary);margin-bottom:12px;font-weight:700}
+.filter-item .content{font-size:14px;color:var(--secondary);margin:12px 0;line-height:1.7}
+.filter-item .footer{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;border-top:1px dashed var(--border)}
+.date{font-size:13px;color:var(--secondary)}
 
-.empty-state{text-align:center;padding:60px 20px;color:var(--secondary)}
-.empty-state .icon{font-size:48px;margin-bottom:16px;opacity:.5}
-.empty-state p{font-size:14px}
+/* 标签组 */
+.tag-group{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tag{padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.tag.category{background:#e0e7ff;color:#4f46e5}
+.tag.section{background:#f0f9ff;color:#0369a1}
+.tag.source{background:rgba(14,165,233,0.1);color:#0ea5e9}
 
-@media (hover:hover){
-  .tab:hover:not(.active){opacity:.9;transform:translateY(-1px)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.1)}
+/* GitHub卡片 */
+.repo-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.repo-title-wrapper{display:flex;align-items:center;gap:8px}
+.repo-icon{font-size:24px}
+.repo-header h3{font-size:20px;font-weight:700}
+.stars{background:#fffbeb;color:#d97706;padding:6px 12px;border-radius:20px;font-size:13px;font-weight:700}
+.repo-meta{display:flex;gap:10px;margin-bottom:16px}
+.lang-badge,.score-badge{padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.lang-badge{background:#fafafa;color:#374151;border:1px solid #e5e7eb}
+.score-badge{background:#fef3c7;color:#b45309}
+
+/* 论文卡片 */
+.paper-badge{display:inline-block;background:#f0f9ff;color:#0369a1;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px}
+.paper-title{font-size:20px;font-weight:700;margin-bottom:12px;line-height:1.5}
+.paper-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.meta-item{font-size:14px;color:var(--secondary)}
+.abstract-en{color:#475569;margin-bottom:8px}
+.abstract-cn{color:#0f172a;font-weight:500}
+
+/* 折叠区域 */
+.collapse-section{margin:16px 0}
+.collapse-btn{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f8fafc;border-radius:var(--radius);cursor:pointer;font-weight:600;color:var(--primary)}
+.collapse-content{display:none;padding:16px;background:#fff;border-radius:0 0 var(--radius) var(--radius);margin-top:4px;font-size:14px;color:var(--secondary)}
+.collapse-btn.active .collapse-arrow{transform:rotate(180px)}
+.collapse-arrow{transition:transform 0.3s ease}
+
+/* 空状态 */
+.empty-state{text-align:center;padding:80px 20px;color:var(--secondary)}
+.empty-state .icon{font-size:64px;margin-bottom:20px;opacity:.6}
+.empty-state p{font-size:16px;font-weight:500}
+
+/* 响应式 */
+@media (max-width:380px){
+  .tabs{gap:6px}
+  .tab{padding:12px 4px;font-size:12px}
+  .header h2{font-size:28px}
 }
 </style>
 </head>
 <body>
 <div class="header">
   <h2>教育AI+信息聚合平台</h2>
-  <p>更新时间：2026/3/6</p>
+  <p>每日更新 | 2026/3/6</p>
 </div>
 
 <div class="tabs">
@@ -97,30 +150,32 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
   </div>
   <div class="tab" onclick="switchTab(2)">
     <span class="tab-icon">📝</span>
-    <div>Hugging Face论文</div>
+    <div>论文</div>
   </div>
   <div class="tab" onclick="switchTab(3)">
     <span class="tab-icon">📰</span>
-    <div>所有资讯</div>
+    <div>全部资讯</div>
   </div>
 </div>
 
-<!-- 对应面板 -->
+<!-- 内容面板 -->
 <div class="panel active">
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#10b981,#14b8a6)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#10b981,#059669)">
         <div class="header-left">
           <span class="category-icon">💡</span>
           <span>AI使用技巧/方法</span>
         </div>
         <span class="count">12条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <h4>公众号躺更神器！OpenClaw+Claude Skill 实现自动读对标 + 写文 + 配图 + 存入草稿箱</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>利用OpenClaw和Claude Skill工具，实现自动读取对标账号文章、围绕指定主题撰写文章、配图并存入公众号草稿箱的全流程自动化操作步骤。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为内容创作者和运营人员提供一套完整的公众号内容自动化生产方法，大幅减少人工收集、撰写、排版和上传的时间，提升内容产出效率。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>办公</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>利用OpenClaw和Claude Skill工具，实现自动读取对标账号文章、围绕指定主题撰写文章、配图并存入公众号草稿箱的全流程自动化操作步骤。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为内容创作者和运营人员提供一套完整的公众号内容自动化生产方法，大幅减少人工收集、撰写、排版和上传的时间，提升内容产出效率。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>办公</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T07:42:33.000Z</span>
           <a href="https://juejin.cn/post/7612572336241901602" target="_blank" class="btn-link">查看详情 →</a>
@@ -128,9 +183,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>Unity 资源导入设置脚本 笔记</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>核心依赖UnityEditor.AssetImporter类，用于批量自动化配置资源导入参数，替代手动操作，适用于大型项目。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>对游戏或大型项目开发工作，提供批量自动化配置资源的方法，替代手动操作，提升开发效率，具有方法复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>核心依赖UnityEditor.AssetImporter类，用于批量自动化配置资源导入参数，替代手动操作，适用于大型项目。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>对游戏或大型项目开发工作，提供批量自动化配置资源的方法，替代手动操作，提升开发效率，具有方法复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T07:41:13.000Z</span>
           <a href="https://juejin.cn/post/7612837626281820170" target="_blank" class="btn-link">查看详情 →</a>
@@ -138,9 +195,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>RAG技术学习笔记（含实操解析）</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>探讨RAG技术解决大语言模型幻觉问题，通过检索外部知识增强LLM回答准确性和时效性，提供从理论到实践的系统学习路径与实操解析。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>提供解决LLM幻觉问题的具体技术方法与实践路径，对AI产品开发与优化具有直接的方法复用与实操参考价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>探讨RAG技术解决大语言模型幻觉问题，通过检索外部知识增强LLM回答准确性和时效性，提供从理论到实践的系统学习路径与实操解析。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>提供解决LLM幻觉问题的具体技术方法与实践路径，对AI产品开发与优化具有直接的方法复用与实操参考价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T07:40:01.000Z</span>
           <a href="https://juejin.cn/post/7612599599946727459" target="_blank" class="btn-link">查看详情 →</a>
@@ -148,9 +207,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>Context 不是压缩出来的，而是设计出来的</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>文章讨论了AI Agent开发中Context设计的重要性，指出Context不应仅靠压缩，而应通过精心设计来节省大量token，并分享了相关观点与思考。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为AI Agent开发者提供了优化Context设计的核心思路与方法，有助于在开发过程中节省token、提升效率，具有直接的方法复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>文章讨论了AI Agent开发中Context设计的重要性，指出Context不应仅靠压缩，而应通过精心设计来节省大量token，并分享了相关观点与思考。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为AI Agent开发者提供了优化Context设计的核心思路与方法，有助于在开发过程中节省token、提升效率，具有直接的方法复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T07:32:48.000Z</span>
           <a href="https://juejin.cn/post/7612837626281721866" target="_blank" class="btn-link">查看详情 →</a>
@@ -158,9 +219,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>麻省理工学院提供免费AI学习课程：查看面向初学者、高级和研究人员的课程列表</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>麻省理工学院提供一系列免费的在线人工智能学习课程，涵盖从入门到高级以及研究导向的不同层次，旨在帮助学习者掌握AI基础知识、高级概念及前沿研究方向。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为全球学习者提供了系统学习AI知识的高质量免费教育资源，对个人技能提升和教育工作者课程设计具有直接的学习和参考价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>麻省理工学院提供一系列免费的在线人工智能学习课程，涵盖从入门到高级以及研究导向的不同层次，旨在帮助学习者掌握AI基础知识、高级概念及前沿研究方向。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为全球学习者提供了系统学习AI知识的高质量免费教育资源，对个人技能提升和教育工作者课程设计具有直接的学习和参考价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T03:52:00Z</span>
           <a href="https://timesofindia.indiatimes.com/education/news/mit-offers-free-ai-learning-courses-check-list-of-beginner-advanced-and-research-focused-programmes/articleshow/128958487.cms" target="_blank" class="btn-link">查看详情 →</a>
@@ -168,9 +231,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>用户正弃用ChatGPT转向Claude——以下是切换方法</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>介绍了从ChatGPT切换到Claude的方法，包括具体的操作步骤和切换流程。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为用户提供了从主流AI工具切换到替代产品的具体操作指引，具有方法复用价值，帮助用户根据自身需求灵活选择工具以提高工作效率。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>介绍了从ChatGPT切换到Claude的方法，包括具体的操作步骤和切换流程。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为用户提供了从主流AI工具切换到替代产品的具体操作指引，具有方法复用价值，帮助用户根据自身需求灵活选择工具以提高工作效率。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T18:42:11.000Z</span>
           <a href="https://techcrunch.com/2026/03/02/users-are-ditching-chatgpt-for-claude-heres-how-to-make-the-switch/" target="_blank" class="btn-link">查看详情 →</a>
@@ -178,9 +243,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>对AI有很多不满，但若有一种正念的使用方式呢？</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>免费课程，提供与AI合作的实用方法，强调在合作中保持判断力、保护隐私、维护人性</div>
-        <div class="field"><span class="label-tag value">核心价值</span>提供一种平衡、审慎的AI使用理念和实用方法，帮助用户在多种场景下更负责任、更有效地利用AI，避免盲目依赖或技术异化</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>免费课程，提供与AI合作的实用方法，强调在合作中保持判断力、保护隐私、维护人性</div>
+          <div class="field"><span class="label-tag value">核心价值</span>提供一种平衡、审慎的AI使用理念和实用方法，帮助用户在多种场景下更负责任、更有效地利用AI，避免盲目依赖或技术异化</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T11:00:08.000Z</span>
           <a href="https://www.theguardian.com/lifeandstyle/ng-interactive/2026/mar/02/how-to-use-ai-practically" target="_blank" class="btn-link">查看详情 →</a>
@@ -188,9 +255,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>从零构建一个 Mini Claude Code：面向初学者的 Agent 开发实战指南</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>源自Agent开发实战公开课，面向零基础初学者。核心要点在于如何向初学者讲清楚“Agent是什么”，避免直接引用复杂论文或只停留在概念层面，并提供实战指南。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为初学者提供从零开始的Agent开发实战方法，降低学习门槛，对AI产品开发工作具有具体的方法复用和提效价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>源自Agent开发实战公开课，面向零基础初学者。核心要点在于如何向初学者讲清楚“Agent是什么”，避免直接引用复杂论文或只停留在概念层面，并提供实战指南。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为初学者提供从零开始的Agent开发实战方法，降低学习门槛，对AI产品开发工作具有具体的方法复用和提效价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T06:13:08.000Z</span>
           <a href="https://juejin.cn/post/7612129754633633819" target="_blank" class="btn-link">查看详情 →</a>
@@ -198,9 +267,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>西湖大学破解Rectified Flow反演不稳定难题，实现零成本稳定增强｜ICLR'26</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>西湖大学张驰研究团队提出PMI机制，解决Rectified Flow模型反演阶段的数值不稳定问题。该机制无需额外训练或修改模型结构，通过轻量级修正步骤稳定逆向轨迹，实现即插即用的稳定增强。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为AI图像生成与编辑领域的研究者和开发者提供了一种零成本、即插即用的稳定增强方法，可显著提升图像重建与编辑任务的可控性和可靠性，具有直接的方法复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>西湖大学张驰研究团队提出PMI机制，解决Rectified Flow模型反演阶段的数值不稳定问题。该机制无需额外训练或修改模型结构，通过轻量级修正步骤稳定逆向轨迹，实现即插即用的稳定增强。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为AI图像生成与编辑领域的研究者和开发者提供了一种零成本、即插即用的稳定增强方法，可显著提升图像重建与编辑任务的可控性和可靠性，具有直接的方法复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-01T04:00:00.000Z</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247871223&idx=3&sn=80ffdbb00ad6b5913b1802810cece216" target="_blank" class="btn-link">查看详情 →</a>
@@ -208,9 +279,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>Claude Code之父首曝：「养蛊式」开发，质量碾压老架构师</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>Boris Cherny团队分享高效使用Claude Code的工程实践，包括：1. 利用Git Worktrees并行运行多个AI会话；2. 通过Plan Mode规划复杂任务并让AI相互审查；3. 使用CLAUDE.md文件沉淀项目知识；4. 通过MCP协议打通工具链。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>提供了一套具体的AI编程提效方法，旨在将开发者从微观管理中解放，提升AI编程效率与代码质量，具有直接的方法复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>Boris Cherny团队分享高效使用Claude Code的工程实践，包括：1. 利用Git Worktrees并行运行多个AI会话；2. 通过Plan Mode规划复杂任务并让AI相互审查；3. 使用CLAUDE.md文件沉淀项目知识；4. 通过MCP协议打通工具链。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>提供了一套具体的AI编程提效方法，旨在将开发者从微观管理中解放，提升AI编程效率与代码质量，具有直接的方法复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-01T02:50:00.000Z</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&mid=2652678869&idx=3&sn=10ffee70b959f09ec3bf34a86ea40cf1" target="_blank" class="btn-link">查看详情 →</a>
@@ -218,9 +291,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>破解RL样本效率难题！让AI一次性提炼环境常识，后续零调用成本</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>南京大学与腾讯研究团队提出新方法，利用大模型一次性提炼环境通用背景知识（如“绕开障碍物”），并转化为奖励函数，用于后续强化学习任务。该方法在Minigrid和Crafter等环境中验证，显著提升样本效率，且知识可泛化至新任务和更大规模环境，后续训练无需再调用大模型，实现零调用成本。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为AI产品开发（特别是强化学习应用）提供了一种提升样本效率、降低大模型调用成本的具体方法，该方法具有可复用性，能加速AI智能体的训练与部署。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>南京大学与腾讯研究团队提出新方法，利用大模型一次性提炼环境通用背景知识（如“绕开障碍物”），并转化为奖励函数，用于后续强化学习任务。该方法在Minigrid和Crafter等环境中验证，显著提升样本效率，且知识可泛化至新任务和更大规模环境，后续训练无需再调用大模型，实现零调用成本。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为AI产品开发（特别是强化学习应用）提供了一种提升样本效率、降低大模型调用成本的具体方法，该方法具有可复用性，能加速AI智能体的训练与部署。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-02-28T08:30:00.000Z</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247871217&idx=2&sn=bf8338e8efe059b27b8acae8247f763b" target="_blank" class="btn-link">查看详情 →</a>
@@ -228,9 +303,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>阿里提出MoE「专家分化」新策略：打破同质化，让专家各司其职｜ICLR2026</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>阿里巴巴团队提出针对MoE模型的专家分化学习新策略。该方法利用数据中的领域标签设计辅助损失函数，引导不同领域的Token激活不同专家，以解决专家同质化问题，提升模型专业化能力与性能。实验表明该方法能有效提升多项基准测试表现，且几乎不增加额外计算成本。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为AI模型（尤其是MoE架构）的开发者提供了解决专家同质化、提升模型性能的具体训练方法和思路，具有方法复用价值，可用于开发更高效的AI模型。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>阿里巴巴团队提出针对MoE模型的专家分化学习新策略。该方法利用数据中的领域标签设计辅助损失函数，引导不同领域的Token激活不同专家，以解决专家同质化问题，提升模型专业化能力与性能。实验表明该方法能有效提升多项基准测试表现，且几乎不增加额外计算成本。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为AI模型（尤其是MoE架构）的开发者提供了解决专家同质化、提升模型性能的具体训练方法和思路，具有方法复用价值，可用于开发更高效的AI模型。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-02-28T08:30:00.000Z</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247871217&idx=3&sn=0a4a6fb209fd2a80deaa5a35dc357da3" target="_blank" class="btn-link">查看详情 →</a>
@@ -238,19 +315,21 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#ec4899,#db2777)">
         <div class="header-left">
           <span class="category-icon">🚀</span>
           <span>AI落地实践/案例</span>
         </div>
         <span class="count">14条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <h4>从'傻等'到'流淌'：我在AI项目中实现流式输出的血泪史（附真实代码+深度解析）</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>作者分享了在AI项目中实现流式输出的完整实践经验，从最初误用定时器模拟打字机效果，到解决中文乱码、数据混杂等问题，最终通过结合 fetch、EventSourceParserStream 和 for await 循环进行重构，并配合 AbortController 实现真正的流式输出。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为开发者在AI项目中实现高效、稳定的流式输出提供了具体的技术路径、踩坑经验与优化方案，具有直接的实践复用和参考价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>作者分享了在AI项目中实现流式输出的完整实践经验，从最初误用定时器模拟打字机效果，到解决中文乱码、数据混杂等问题，最终通过结合 fetch、EventSourceParserStream 和 for await 循环进行重构，并配合 AbortController 实现真正的流式输出。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为开发者在AI项目中实现高效、稳定的流式输出提供了具体的技术路径、踩坑经验与优化方案，具有直接的实践复用和参考价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T07:35:51.000Z</span>
           <a href="https://juejin.cn/post/7612641614825521202" target="_blank" class="btn-link">查看详情 →</a>
@@ -258,9 +337,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>SFBU与OpenAI启动AI教育合作 | ETIH教育科技新闻</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>旧金山湾区大学（SFBU）与OpenAI建立合作，将AI技术全面融入教学课程和劳动力预备计划，为学生和教职员工提供先进的AI工具与资源，旨在培养未来工作所需的AI技能，重塑教育体验，为学生进入AI驱动的就业市场做准备。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育机构如何与顶尖AI公司合作、将AI技术融入课程体系与人才培养提供了具体的实践参考，展示了通过校企合作培养未来AI技能、重塑教育体验的可行路径，对教育领域的AI落地具有复用和借鉴价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>旧金山湾区大学（SFBU）与OpenAI建立合作，将AI技术全面融入教学课程和劳动力预备计划，为学生和教职员工提供先进的AI工具与资源，旨在培养未来工作所需的AI技能，重塑教育体验，为学生进入AI驱动的就业市场做准备。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育机构如何与顶尖AI公司合作、将AI技术融入课程体系与人才培养提供了具体的实践参考，展示了通过校企合作培养未来AI技能、重塑教育体验的可行路径，对教育领域的AI落地具有复用和借鉴价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T03:34:59Z</span>
           <a href="https://www.edtechinnovationhub.com/news/sfbu-launches-openai-partnership-to-embed-ai-across-teaching-and-workforce-prep" target="_blank" class="btn-link">查看详情 →</a>
@@ -268,9 +349,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>人工智能赋能教学改革</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>AI融入日常课堂，助力教学从以教师为中心转向以学习者为中心；通过分析学生数据提供个性化学习路径；助力教师实现更全面、更真实的过程性与作品性混合评估；推动课程设计与评估体系变革。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育工作者提供了AI赋能教学改革的具体方向和实施思路，展示了AI在实现个性化教学、优化评估方式、推动课程设计变革方面的实践路径，具有直接的参考和复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>AI融入日常课堂，助力教学从以教师为中心转向以学习者为中心；通过分析学生数据提供个性化学习路径；助力教师实现更全面、更真实的过程性与作品性混合评估；推动课程设计与评估体系变革。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育工作者提供了AI赋能教学改革的具体方向和实施思路，展示了AI在实现个性化教学、优化评估方式、推动课程设计变革方面的实践路径，具有直接的参考和复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="http://word.baidu.com/noteview/8cdb392a5d0102020740be1e650e52ea5518ce71.html" target="_blank" class="btn-link">查看详情 →</a>
@@ -278,9 +361,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>教育部AI基地落户门头沟,“小悟空空间站”新学期启用</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>教育部AI教育基地“小悟空空间站”在北京景山学校京西实验学校启动运行，新学期学生将在此体验自主学习、体育锻炼、跨学科实践等多元育人新生态。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为其他学校或教育机构建设AI教育基地、利用AI技术构建多元育人新生态（如自主学习、跨学科实践）提供了具体的落地实践参考和案例借鉴。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>教育部AI教育基地“小悟空空间站”在北京景山学校京西实验学校启动运行，新学期学生将在此体验自主学习、体育锻炼、跨学科实践等多元育人新生态。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为其他学校或教育机构建设AI教育基地、利用AI技术构建多元育人新生态（如自主学习、跨学科实践）提供了具体的落地实践参考和案例借鉴。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="https://baijiahao.baidu.com/s?id=1858461705901107157&wfr=spider&for=pc" target="_blank" class="btn-link">查看详情 →</a>
@@ -288,9 +373,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>人工智能赋能 构建教育新域新质</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>金台书院小学面向教师开展AI专题培训，核心举措是提升教师人工智能素养，探索生成式AI在教学中的多元应用场景，旨在促进科技与教育深度融合，助力新学期教学提质增效。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为其他学校或教育机构提供了通过教师培训提升AI素养、探索生成式AI教学应用的实践路径，具有直接的实践复用和参考价值，有助于推动科技与教育的具体融合。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>金台书院小学面向教师开展AI专题培训，核心举措是提升教师人工智能素养，探索生成式AI在教学中的多元应用场景，旨在促进科技与教育深度融合，助力新学期教学提质增效。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为其他学校或教育机构提供了通过教师培训提升AI素养、探索生成式AI教学应用的实践路径，具有直接的实践复用和参考价值，有助于推动科技与教育的具体融合。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzI1MDI2OTM1NA==&mid=2247564156&idx=1&sn=3b70a9df9c6674464a879543a6d454f6&chksm=e828c6c660e58f97d2b04bdc91fc6a06c81c8a90e8673b5468d1dc8a84e659576ce0cc2286eb&scene=27" target="_blank" class="btn-link">查看详情 →</a>
@@ -298,9 +385,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>人工智能如何支持远程教育</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>文章阐述了人工智能在远程教育中的多方面支持作用，包括提供辅导与即时反馈、自动生成与优化学习资源、实现智能化评估、提供语言与无障碍支持以及促进协作与互动（如虚拟实验）。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>展示了AI如何有效提升远程教学效率、改善学习体验和扩大教育覆盖范围，为教育工作者在远程教学场景中应用AI提供了具体的实践思路和方向参考。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>文章阐述了人工智能在远程教育中的多方面支持作用，包括提供辅导与即时反馈、自动生成与优化学习资源、实现智能化评估、提供语言与无障碍支持以及促进协作与互动（如虚拟实验）。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>展示了AI如何有效提升远程教学效率、改善学习体验和扩大教育覆盖范围，为教育工作者在远程教学场景中应用AI提供了具体的实践思路和方向参考。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="http://word.baidu.com/noteview/f6c2c4f5a5c30c22590102020740be1e640ecc85.html" target="_blank" class="btn-link">查看详情 →</a>
@@ -308,9 +397,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>AI深度融入上海中小学课堂 赋能教育提质增效与创新人才培养</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>上海通过“试验区+实验校”模式推动AI教育落地。具体做法包括：徐汇区发布教育大模型应用“汇启学”，辅助教师备课并已生成超2万份学情报告；虹口区通过平台共享教学智能体，促进区域资源均衡；普陀区实施“763”人才培养工程，开展79个AI教育创新项目；上外云间中学作为教育部人工智能教育基地，构建螺旋式课程体系。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为区域及学校层面系统化推进AI与教育教学深度融合提供了可复用的实践模式，包括区域平台建设、大模型应用、课程体系构建等具体做法，对教育工作者规划与实施AI赋能教学具有直接参考价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>上海通过“试验区+实验校”模式推动AI教育落地。具体做法包括：徐汇区发布教育大模型应用“汇启学”，辅助教师备课并已生成超2万份学情报告；虹口区通过平台共享教学智能体，促进区域资源均衡；普陀区实施“763”人才培养工程，开展79个AI教育创新项目；上外云间中学作为教育部人工智能教育基地，构建螺旋式课程体系。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为区域及学校层面系统化推进AI与教育教学深度融合提供了可复用的实践模式，包括区域平台建设、大模型应用、课程体系构建等具体做法，对教育工作者规划与实施AI赋能教学具有直接参考价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="https://stock.10jqka.com.cn/20260303/c675035625.shtml" target="_blank" class="btn-link">查看详情 →</a>
@@ -318,9 +409,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>新泽西理工学院将全天课程调整为全校范围的AI探索日</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>新泽西理工学院（NJIT）将某一天的全部课程重新规划，用于全校范围内的AI探索活动。活动内容包括AI相关的讲座、研讨会和实践体验，旨在提升全校师生对AI的理解和应用能力。此举是该校将AI教育融入整个学术体验的组成部分。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为其他教育机构提供了将AI教育融入校园文化、提升师生AI素养的具体实践模式，具有可复用的参考价值，有助于推动AI在教育领域的普及和应用能力建设。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>新泽西理工学院（NJIT）将某一天的全部课程重新规划，用于全校范围内的AI探索活动。活动内容包括AI相关的讲座、研讨会和实践体验，旨在提升全校师生对AI的理解和应用能力。此举是该校将AI教育融入整个学术体验的组成部分。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为其他教育机构提供了将AI教育融入校园文化、提升师生AI素养的具体实践模式，具有可复用的参考价值，有助于推动AI在教育领域的普及和应用能力建设。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T19:36:50Z</span>
           <a href="https://news.njit.edu/njit-dedicates-entire-day-ai-repurposing-all-classes-campus-wide-exploration" target="_blank" class="btn-link">查看详情 →</a>
@@ -328,9 +421,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>约克学院教师参与纽约市立大学-智利人工智能教育研讨会</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>约克学院教师与智利同行在纽约市立大学-智利人工智能教育研讨会上合作，共同探索AI在教育领域的应用，分享最佳实践，并讨论如何将AI工具整合到教学与课程设计中。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育工作者提供了将AI工具整合进教学与课程设计的具体合作模式、实践探索思路及经验分享案例，具有实践参考和复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>约克学院教师与智利同行在纽约市立大学-智利人工智能教育研讨会上合作，共同探索AI在教育领域的应用，分享最佳实践，并讨论如何将AI工具整合到教学与课程设计中。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育工作者提供了将AI工具整合进教学与课程设计的具体合作模式、实践探索思路及经验分享案例，具有实践参考和复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T15:47:06Z</span>
           <a href="https://www.york.cuny.edu/news/2026/york-college-faculty-collaborate-in-cuny-chile-ai-in-education-workshop-1" target="_blank" class="btn-link">查看详情 →</a>
@@ -338,9 +433,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>纽约市立大学获AI教育奖</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>纽约市立大学因在人工智能教育领域的贡献获奖。具体实践包括：将AI技术融入课程体系、培养学生AI素养、推动教育公平；开发AI教学工具、培训教师、创建相关课程，致力于让所有学生接触并掌握前沿AI知识与技能。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育机构如何系统性地将AI融入教学、培养师生AI素养、促进教育公平提供了具体的实践路径和参考案例，具有直接的实践复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>纽约市立大学因在人工智能教育领域的贡献获奖。具体实践包括：将AI技术融入课程体系、培养学生AI素养、推动教育公平；开发AI教学工具、培训教师、创建相关课程，致力于让所有学生接触并掌握前沿AI知识与技能。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育机构如何系统性地将AI融入教学、培养师生AI素养、促进教育公平提供了具体的实践路径和参考案例，具有直接的实践复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T14:00:00Z</span>
           <a href="https://www.theknightnews.com/2026/03/02/cunys-award-for-ai-education/" target="_blank" class="btn-link">查看详情 →</a>
@@ -348,9 +445,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>瓦拉瓦拉学区获得微软资助以利用人工智能推进学习</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>瓦拉瓦拉公立学校获得微软资助，将利用人工智能技术推进个性化学习。资金用于开发AI驱动的教育工具和资源，旨在根据学生个体需求定制学习路径，提升教学效果与效率。此举是微软支持教育创新计划的一部分。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育机构利用AI技术实现个性化学习、开发定制化教育工具提供了具体的资金获取与项目落地实践参考，具有方法复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>瓦拉瓦拉公立学校获得微软资助，将利用人工智能技术推进个性化学习。资金用于开发AI驱动的教育工具和资源，旨在根据学生个体需求定制学习路径，提升教学效果与效率。此举是微软支持教育创新计划的一部分。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育机构利用AI技术实现个性化学习、开发定制化教育工具提供了具体的资金获取与项目落地实践参考，具有方法复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T14:00:00Z</span>
           <a href="https://www.union-bulletin.com/news/local/education/walla-walla-schools-receive-microsoft-grant-to-advance-learning-with-ai/article_fb0dd194-292f-4d51-bff8-01cde97a14fe.html" target="_blank" class="btn-link">查看详情 →</a>
@@ -358,9 +457,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>ADvTECH教师培训平台获SACE认可，AI正重塑教育</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>ADvTECH的教师培训平台获得南非教育从业者委员会（SACE）官方认可。平台利用人工智能技术，为教师提供个性化、数据驱动的专业发展路径，旨在提升教学技能与课堂效果。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>展示了AI在教师专业发展和教育质量提升方面的官方认可实践案例，为教育机构引入AI进行教师培训、提升教学效果提供了具体的实践参考和复用思路。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>ADvTECH的教师培训平台获得南非教育从业者委员会（SACE）官方认可。平台利用人工智能技术，为教师提供个性化、数据驱动的专业发展路径，旨在提升教学技能与课堂效果。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>展示了AI在教师专业发展和教育质量提升方面的官方认可实践案例，为教育机构引入AI进行教师培训、提升教学效果提供了具体的实践参考和复用思路。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T13:53:21Z</span>
           <a href="https://www.advtech.co.za/advtech-teacher-training-platform-receives-sace-endorsement-as-ai-reshapes-education" target="_blank" class="btn-link">查看详情 →</a>
@@ -368,9 +469,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>杜克大学为学术领导者开设AI学院</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>杜克大学推出AI学院项目，为校内学术领导者提供人工智能知识培训，旨在帮助他们理解AI在教育领域的应用潜力与挑战，从而更好地制定战略、管理团队并推动教学创新。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为高校及其他教育机构如何对管理层进行AI赋能培训、制定AI教育战略、推动教学创新提供了具体的实践参考和可复用的模式。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>杜克大学推出AI学院项目，为校内学术领导者提供人工智能知识培训，旨在帮助他们理解AI在教育领域的应用潜力与挑战，从而更好地制定战略、管理团队并推动教学创新。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为高校及其他教育机构如何对管理层进行AI赋能培训、制定AI教育战略、推动教学创新提供了具体的实践参考和可复用的模式。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T12:07:21Z</span>
           <a href="https://today.duke.edu/2026/03/ai-school-dukes-academic-leaders" target="_blank" class="btn-link">查看详情 →</a>
@@ -378,9 +481,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>中国的新学习伙伴：人工智能聊天机器人</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>中国家长正在使用国产聊天机器人（如DeepSeek和豆包）以及谷歌的Gemini，来帮助孩子完成家庭作业并获取学业优势。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>展示了AI聊天机器人在家庭教育辅导场景中的具体应用方式，为教育工作者和家长提供了利用AI工具辅助学生学习的实践参考，具有方法复用价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>中国家长正在使用国产聊天机器人（如DeepSeek和豆包）以及谷歌的Gemini，来帮助孩子完成家庭作业并获取学业优势。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>展示了AI聊天机器人在家庭教育辅导场景中的具体应用方式，为教育工作者和家长提供了利用AI工具辅助学生学习的实践参考，具有方法复用价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T05:02:09.000Z</span>
           <a href="https://www.nytimes.com/video/world/asia/100000010707197/china-ai-chatbot-homework.html" target="_blank" class="btn-link">查看详情 →</a>
@@ -388,19 +493,21 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)">
         <div class="header-left">
           <span class="category-icon">🛠️</span>
           <span>AI工具/产品</span>
         </div>
         <span class="count">9条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <h4>CC Switch 作者故事启发 - 从转行到破局</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>用于管理和切换Claude Code、Codex、Gemini CLI等工具配置的实用工具，是一个开源项目。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>对通用办公（如开发工作）的具体提效价值，通过统一管理和快速切换不同AI编码工具的配置，提高工作效率。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>用于管理和切换Claude Code、Codex、Gemini CLI等工具配置的实用工具，是一个开源项目。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>对通用办公（如开发工作）的具体提效价值，通过统一管理和快速切换不同AI编码工具的配置，提高工作效率。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T07:32:06.000Z</span>
           <a href="https://juejin.cn/post/7612657123742973967" target="_blank" class="btn-link">查看详情 →</a>
@@ -408,9 +515,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>Anthropic升级Claude的记忆功能以吸引AI用户转换</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>Anthropic升级Claude的记忆功能，并向免费计划用户开放。推出新的提示词和专用工具，用于从其他聊天机器人（如ChatGPT、Gemini）导入数据，实现用户偏好和历史信息的快速迁移。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>降低用户切换AI工具的学习与迁移成本，无需“从头开始”教导新AI，能快速复用原有聊天机器人已掌握的上下文，提升在办公、生活等多场景下的使用效率和连续性。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>Anthropic升级Claude的记忆功能，并向免费计划用户开放。推出新的提示词和专用工具，用于从其他聊天机器人（如ChatGPT、Gemini）导入数据，实现用户偏好和历史信息的快速迁移。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>降低用户切换AI工具的学习与迁移成本，无需“从头开始”教导新AI，能快速复用原有聊天机器人已掌握的上下文，提升在办公、生活等多场景下的使用效率和连续性。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T22:29:46.000Z</span>
           <a href="https://www.theverge.com/ai-artificial-intelligence/887885/anthropic-claude-memory-upgrades-importing" target="_blank" class="btn-link">查看详情 →</a>
@@ -418,9 +527,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>夫妻创始人的公司14.ai正在取代初创企业的客服团队</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>由夫妻创始人创立的公司，推出了一个消费品牌，旨在探索AI处理客户支持任务的能力，目前正在取代初创企业的客服团队。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>通过AI客服系统替代人工客服团队，为企业（尤其是初创企业）在客户支持场景中提供自动化解决方案，具有降低人力成本、提升服务效率的通用办公提效价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>由夫妻创始人创立的公司，推出了一个消费品牌，旨在探索AI处理客户支持任务的能力，目前正在取代初创企业的客服团队。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>通过AI客服系统替代人工客服团队，为企业（尤其是初创企业）在客户支持场景中提供自动化解决方案，具有降低人力成本、提升服务效率的通用办公提效价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T15:14:36.000Z</span>
           <a href="https://techcrunch.com/2026/03/02/a-married-founder-duos-company-14-ai-is-replacing-customer-support-teams-at-startups/" target="_blank" class="btn-link">查看详情 →</a>
@@ -428,9 +539,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>Anthropic推出免费AI学习平台，提供Claude、AI通识与开发者工具课程</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>Anthropic推出的免费AI学习平台，提供Claude使用、AI通识知识、面向开发者的工具等系列课程，旨在降低AI学习门槛，促进AI技能普及。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育工作者、学生、开发者等提供免费、系统的AI学习资源，有助于提升AI认知与应用技能，对教育工作、个人学习及产品开发均有提效价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>Anthropic推出的免费AI学习平台，提供Claude使用、AI通识知识、面向开发者的工具等系列课程，旨在降低AI学习门槛，促进AI技能普及。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育工作者、学生、开发者等提供免费、系统的AI学习资源，有助于提升AI认知与应用技能，对教育工作、个人学习及产品开发均有提效价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T08:36:20Z</span>
           <a href="https://www.ndtv.com/education/anthropic-launches-free-ai-learning-platform-with-courses-on-claude-ai-fluency-and-developer-tools-11157830" target="_blank" class="btn-link">查看详情 →</a>
@@ -438,9 +551,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>OpenClaw 是什么？为什么节后热度如此之高？</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>开源爪机项目，在节后技术圈突然“出圈”，GitHub Star数量暴涨，在社群、论坛中频繁出现演示视频。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>作为一款开源项目，其技术实现和设计思路可为开发者、硬件爱好者提供学习和复用的价值，有助于推动相关硬件或机器人技术的创新与应用。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>开源爪机项目，在节后技术圈突然“出圈”，GitHub Star数量暴涨，在社群、论坛中频繁出现演示视频。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>作为一款开源项目，其技术实现和设计思路可为开发者、硬件爱好者提供学习和复用的价值，有助于推动相关硬件或机器人技术的创新与应用。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T05:33:33.000Z</span>
           <a href="https://juejin.cn/post/7612455273808003118" target="_blank" class="btn-link">查看详情 →</a>
@@ -448,9 +563,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>OpenClaw 从能聊到能干差的是这 50 个 Skills 😍😍😍</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>新增50个技能，从对话工具升级为能执行具体任务的多功能助手；涉及AI全栈开发、Tiptap编辑器定制及DocFlow项目等技术方案</div>
-        <div class="field"><span class="label-tag value">核心价值</span>通过新增的多种技能，将AI助手从对话功能扩展到具体任务执行，为通用办公、产品开发等场景提供多功能提效工具</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>新增50个技能，从对话工具升级为能执行具体任务的多功能助手；涉及AI全栈开发、Tiptap编辑器定制及DocFlow项目等技术方案</div>
+          <div class="field"><span class="label-tag value">核心价值</span>通过新增的多种技能，将AI助手从对话功能扩展到具体任务执行，为通用办公、产品开发等场景提供多功能提效工具</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T01:06:44.000Z</span>
           <a href="https://juejin.cn/post/7612455273806463022" target="_blank" class="btn-link">查看详情 →</a>
@@ -458,9 +575,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>联想展示带小狗眼睛的机器人手臂等桌面AI概念产品</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>联想在MWC上发布的桌面AI概念产品，是一款始终在线的桌面伴侣，形似带旋转底座的小型机械臂，末端屏幕显示一双富有表情的眼睛。它通过本地AI处理，可作为智能助手进行语音交互，旨在提升办公效率并提供陪伴感。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>作为智能助手通过语音交互提升办公效率，同时其富有表情的交互设计能提供陪伴感，改善办公体验。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>办公</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>联想在MWC上发布的桌面AI概念产品，是一款始终在线的桌面伴侣，形似带旋转底座的小型机械臂，末端屏幕显示一双富有表情的眼睛。它通过本地AI处理，可作为智能助手进行语音交互，旨在提升办公效率并提供陪伴感。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>作为智能助手通过语音交互提升办公效率，同时其富有表情的交互设计能提供陪伴感，改善办公体验。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>办公</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-01T23:01:00.000Z</span>
           <a href="https://www.theverge.com/tech/885228/lenovo-ai-workmate-companion-work-concept-robot-arm-desktop-clock-hub" target="_blank" class="btn-link">查看详情 →</a>
@@ -468,9 +587,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>让搜索Agent不「傻等」：人大团队依托扩散模型实现「一心二用」，边等搜索结果边思考，加速15%性能不减</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>中国人民大学团队提出的搜索Agent，首次将扩散大语言模型（dLLM）应用于搜索Agent。通过两阶段训练（监督微调与偏好优化）教会dLLM推理与调用工具，并提出P-ReAct推理加速方案，使其能优先解码工具调用指令，在等待搜索结果时并行生成思考内容。在多个多跳问答基准上达到与先进自回归模型相当的准确率，同时实现14.77%至22.08%的端到端加速，泛化能力强。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>通过让搜索Agent在等待搜索结果时并行思考，实现端到端加速，提升信息检索与处理的效率，可复用于需要结合外部信息进行复杂推理的各类办公、研究或生活场景。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>中国人民大学团队提出的搜索Agent，首次将扩散大语言模型（dLLM）应用于搜索Agent。通过两阶段训练（监督微调与偏好优化）教会dLLM推理与调用工具，并提出P-ReAct推理加速方案，使其能优先解码工具调用指令，在等待搜索结果时并行生成思考内容。在多个多跳问答基准上达到与先进自回归模型相当的准确率，同时实现14.77%至22.08%的端到端加速，泛化能力强。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>通过让搜索Agent在等待搜索结果时并行思考，实现端到端加速，提升信息检索与处理的效率，可复用于需要结合外部信息进行复杂推理的各类办公、研究或生活场景。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多场景</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-01T04:00:00.000Z</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247871223&idx=2&sn=ef6fb450e665420d7cbe76ec772b19ef" target="_blank" class="btn-link">查看详情 →</a>
@@ -478,9 +599,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>大模型越聪明，学习机越抢手：科大讯飞T90 Pro定义「真」个性化</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>科大讯飞发布的AI学习机产品，具备AI 1对1精准学、超拟人AI老师晓悦及学习动力系统，构建系统级个性化学习闭环。基于22年教育Know-How沉淀，实现跨年级知识溯源、启发式互动答疑与情感激励，旨在守护学习过程中的主动思考能力，与通用大模型形成互补。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>通过AI技术实现个性化学习辅导，提供精准学情诊断、互动答疑和情感激励，能有效提升学生的学习效率和主动性，对教育工作（如个性化教学、课后辅导）具有明确的提效价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>科大讯飞发布的AI学习机产品，具备AI 1对1精准学、超拟人AI老师晓悦及学习动力系统，构建系统级个性化学习闭环。基于22年教育Know-How沉淀，实现跨年级知识溯源、启发式互动答疑与情感激励，旨在守护学习过程中的主动思考能力，与通用大模型形成互补。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>通过AI技术实现个性化学习辅导，提供精准学情诊断、互动答疑和情感激励，能有效提升学生的学习效率和主动性，对教育工作（如个性化教学、课后辅导）具有明确的提效价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-02-28</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247871217&idx=1&sn=80742cc03ebee0b575f84c7265ead24f" target="_blank" class="btn-link">查看详情 →</a>
@@ -488,19 +611,21 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#8b5cf6,#a855f7)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">
         <div class="header-left">
           <span class="category-icon">📋</span>
           <span>AI政策/规划</span>
         </div>
         <span class="count">9条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <h4>在学校引入人工智能时，年龄适宜性至关重要</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体：《印度人报》社论；核心举措：强调在学校引入人工智能工具时必须优先考虑年龄适宜性，应根据学生的认知发展阶段定制AI教育内容和互动方式；实施要求：确保技术辅助学习的安全性与有效性，避免过早或不当接触带来的风险。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育机构、教育AI产品规划者及政策制定者在学校引入AI时提供了重要的决策参考，强调需根据学生认知发展阶段进行定制化设计，以确保安全有效，对教育AI的合规、安全落地具有指导价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体：《印度人报》社论；核心举措：强调在学校引入人工智能工具时必须优先考虑年龄适宜性，应根据学生的认知发展阶段定制AI教育内容和互动方式；实施要求：确保技术辅助学习的安全性与有效性，避免过早或不当接触带来的风险。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育机构、教育AI产品规划者及政策制定者在学校引入AI时提供了重要的决策参考，强调需根据学生认知发展阶段进行定制化设计，以确保安全有效，对教育AI的合规、安全落地具有指导价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03T01:41:48Z</span>
           <a href="https://www.thehansindia.com/editors-desk/age-appropriateness-critical-while-introducing-ai-in-schools-1053191" target="_blank" class="btn-link">查看详情 →</a>
@@ -508,9 +633,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>2026教育大转折:AI全面进课堂</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体：教育部；核心举措：AI进课程标准、进日常教学、进考试评价，旨在重构基础教育底层逻辑；实施要求：AI将渗透到各学科日常学习中，例如辅助语文阅读写作、数学数据分析、科学仿真实验等。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划、教育行业布局及教育工作者决策提供了明确的政策导向和实施路径参考，指明了AI与基础教育深度融合的具体方向。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体：教育部；核心举措：AI进课程标准、进日常教学、进考试评价，旨在重构基础教育底层逻辑；实施要求：AI将渗透到各学科日常学习中，例如辅助语文阅读写作、数学数据分析、科学仿真实验等。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划、教育行业布局及教育工作者决策提供了明确的政策导向和实施路径参考，指明了AI与基础教育深度融合的具体方向。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="https://baijiahao.baidu.com/s?id=1858462418393683341&wfr=spider&for=pc" target="_blank" class="btn-link">查看详情 →</a>
@@ -518,9 +645,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>AI赋能教育!教育部让科技“看见”每个孩子,精准培养不落下一人</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体：教育部；核心举措：推动AI进入课程标准，将其定位为“懂孩子的助手”，旨在让科技服务于每个孩子的差异化发展。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划（如个性化学习系统）和学校工作决策（如引入AI辅助教学）提供了明确的政策导向和方向参考。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体：教育部；核心举措：推动AI进入课程标准，将其定位为“懂孩子的助手”，旨在让科技服务于每个孩子的差异化发展。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划（如个性化学习系统）和学校工作决策（如引入AI辅助教学）提供了明确的政策导向和方向参考。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="https://baijiahao.baidu.com/s?id=1858525486250695737&wfr=spider&for=pc" target="_blank" class="btn-link">查看详情 →</a>
@@ -528,9 +657,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>教育部文件!教师不得将AI用于下列情形!AI出错,教师担责</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体为教育部；核心举措为明确禁止教师将AI用于某些特定情形，并强调若AI出错，责任由教师承担；旨在引导教师科学、安全地使用AI技术，使其成为教学助力。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育机构及教师合规使用AI提供了明确的政策边界和责任界定，对教育AI产品的规划、设计及教师的工作决策具有直接的指导和参考价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体为教育部；核心举措为明确禁止教师将AI用于某些特定情形，并强调若AI出错，责任由教师承担；旨在引导教师科学、安全地使用AI技术，使其成为教学助力。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育机构及教师合规使用AI提供了明确的政策边界和责任界定，对教育AI产品的规划、设计及教师的工作决策具有直接的指导和参考价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzI3OTEyMzEwOQ==&mid=2650100134&idx=1&sn=f1077d5a4a0926f09513cce982b84e4e&chksm=f2f20a3c41f7c3a2774cd4e7f78921f74bf6bad644d4b324222ac0a79e6ef2074ef6d24e7982&scene=27" target="_blank" class="btn-link">查看详情 →</a>
@@ -538,9 +669,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>西弗吉尼亚州教育部着手在课堂中整合AI工具</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体：西弗吉尼亚州教育部；核心举措：将人工智能工具整合到全州K-12课堂，旨在利用AI技术为学生提供个性化学习体验，并帮助教师进行课程规划和学生评估；试点/实施要求：全州范围K-12课堂整合。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划（如面向K-12的个性化学习、教师辅助工具）及教育机构进行AI整合的决策提供政策动向和需求场景参考。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体：西弗吉尼亚州教育部；核心举措：将人工智能工具整合到全州K-12课堂，旨在利用AI技术为学生提供个性化学习体验，并帮助教师进行课程规划和学生评估；试点/实施要求：全州范围K-12课堂整合。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划（如面向K-12的个性化学习、教师辅助工具）及教育机构进行AI整合的决策提供政策动向和需求场景参考。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T23:42:00Z</span>
           <a href="https://www.wvva.com/2026/03/02/west-virginia-department-education-moves-integrate-ai-tools-classrooms/" target="_blank" class="btn-link">查看详情 →</a>
@@ -548,9 +681,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>更新：美国众议院立法者称教师需要接受人工智能培训</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体：美国众议院立法者；核心举措：强调教师群体急需获得人工智能相关培训，以掌握有效利用AI工具的能力。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育机构及相关部门制定教师AI能力培训规划、推动AI在教育领域的有效应用提供了明确的政策导向和决策参考。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体：美国众议院立法者；核心举措：强调教师群体急需获得人工智能相关培训，以掌握有效利用AI工具的能力。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育机构及相关部门制定教师AI能力培训规划、推动AI在教育领域的有效应用提供了明确的政策导向和决策参考。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T18:53:42Z</span>
           <a href="https://edsource.org/updates/teachers-need-training-on-artificial-intelligence-u-s-house-legislators-say" target="_blank" class="btn-link">查看详情 →</a>
@@ -558,9 +693,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>弗吉尼亚州立法者提议为教育领域人工智能应用设立护栏</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体为弗吉尼亚州立法者；核心举措是为K-12学校中AI工具的使用制定指导方针和限制；实施要求是确保AI应用符合伦理标准并保护学生数据隐私。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育机构引入和使用AI产品提供了合规性参考与风险防范框架，对教育AI产品的规划与部署决策具有直接的政策参考价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体为弗吉尼亚州立法者；核心举措是为K-12学校中AI工具的使用制定指导方针和限制；实施要求是确保AI应用符合伦理标准并保护学生数据隐私。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育机构引入和使用AI产品提供了合规性参考与风险防范框架，对教育AI产品的规划与部署决策具有直接的政策参考价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T14:59:00Z</span>
           <a href="https://www.whro.org/education-news/2026-03-02/virginia-lawmakers-propose-guardrails-for-artificial-intelligence-use-in-education" target="_blank" class="btn-link">查看详情 →</a>
@@ -568,9 +705,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>阿联酋将AI精通与金融素养纳入新教育路线图</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体：阿联酋教育部。核心举措：将人工智能（AI）精通和金融素养作为核心技能，纳入从幼儿园到高中的课程体系；包括教师培训、课程开发以及与科技公司的合作。实施要求：旨在使教育体系与未来劳动力市场需求保持一致。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为其他国家或地区的教育部门规划AI教育、课程改革及产教融合提供了政策参考范例，对教育AI产品规划、课程开发及教师培训方向具有决策参考价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体：阿联酋教育部。核心举措：将人工智能（AI）精通和金融素养作为核心技能，纳入从幼儿园到高中的课程体系；包括教师培训、课程开发以及与科技公司的合作。实施要求：旨在使教育体系与未来劳动力市场需求保持一致。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为其他国家或地区的教育部门规划AI教育、课程改革及产教融合提供了政策参考范例，对教育AI产品规划、课程开发及教师培训方向具有决策参考价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T08:43:17Z</span>
           <a href="https://www.crowdfundinsider.com/2026/03/264570-uae-embeds-ai-mastery-financial-literacy-in-new-education-roadmap/" target="_blank" class="btn-link">查看详情 →</a>
@@ -578,9 +717,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>柯政等：“十五五”期间教育改革发展重点任务的思考建议</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体为华东师范大学教授柯政等；核心举措包括围绕教育的政治、人民、战略三大属性展开，并从资源配置、教育科技人才一体推进、国际人才引育等方面提出具体建议；旨在支撑教育强国建设。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育领域的AI产品规划、行业布局及教育政策制定提供宏观方向与具体任务参考。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体为华东师范大学教授柯政等；核心举措包括围绕教育的政治、人民、战略三大属性展开，并从资源配置、教育科技人才一体推进、国际人才引育等方面提出具体建议；旨在支撑教育强国建设。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育领域的AI产品规划、行业布局及教育政策制定提供宏观方向与具体任务参考。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T01:01:00.000Z</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzAxOTE1NzE2Ng==&mid=2651661371&idx=1&sn=8529cd786329876492b194b1ba3722d4" target="_blank" class="btn-link">查看详情 →</a>
@@ -588,19 +729,21 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#f59e0b,#f97316)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
         <div class="header-left">
           <span class="category-icon">📊</span>
           <span>AI行业数据/趋势</span>
         </div>
         <span class="count">6条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <h4>当「技术派」遭遇「教研派」:AI+教育赛道,谁更懂老师的痛?</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>文章对比分析了AI+教育赛道的三类主要参与者：以阿里、字节为代表的“技术派”（依托技术优势）、创业公司“创新派”及好未来等“教育科技派”（依托教研优势），探讨了各方如何利用技术、流量及教研优势为教师减负赋能，并分析了如何更精准解决教师实际痛点。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划、行业竞争格局分析以及企业战略决策提供了市场现状和不同发展路径的参考信息，有助于理解当前AI教育产品的核心竞争要素。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育AI</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>文章对比分析了AI+教育赛道的三类主要参与者：以阿里、字节为代表的“技术派”（依托技术优势）、创业公司“创新派”及好未来等“教育科技派”（依托教研优势），探讨了各方如何利用技术、流量及教研优势为教师减负赋能，并分析了如何更精准解决教师实际痛点。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划、行业竞争格局分析以及企业战略决策提供了市场现状和不同发展路径的参考信息，有助于理解当前AI教育产品的核心竞争要素。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育AI</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="https://baijiahao.baidu.com/s?id=1858597347479102483&wfr=spider&for=pc" target="_blank" class="btn-link">查看详情 →</a>
@@ -608,9 +751,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>教、学、管、评、研、全链渗透:AI 教育的场景适配与技术支撑体系</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>AI教育市场规模已突破1200亿元，预计2030年将达到3500亿元；AI已全面渗透教学、管理、评价、科研、资源供给五大核心教育场景。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划、市场进入决策及行业分析提供了具体的市场规模数据、增长预测和核心应用场景参考。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>教育AI</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>AI教育市场规模已突破1200亿元，预计2030年将达到3500亿元；AI已全面渗透教学、管理、评价、科研、资源供给五大核心教育场景。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为教育AI产品规划、市场进入决策及行业分析提供了具体的市场规模数据、增长预测和核心应用场景参考。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>教育AI</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-03 08:04:18 UTC</span>
           <a href="https://post.smzdm.com/p/a2688w22/" target="_blank" class="btn-link">查看详情 →</a>
@@ -618,9 +763,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>移动端开发稳了？AI 目前还无法取代客户端开发，小红书的论文告诉你数据</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>小红书与多伦多大学等机构发布《SWE-Bench Mobile》论文，评估大语言模型智能体处理真实移动端应用开发任务的能力。研究表明，当前AI在复杂、真实的移动端开发任务上仍面临挑战，尚无法完全替代客户端开发人员。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为AI在移动端开发领域的能力边界提供了实证研究数据，对产品开发团队评估AI工具的应用潜力和局限性、制定技术选型与人力规划具有重要参考价值。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>小红书与多伦多大学等机构发布《SWE-Bench Mobile》论文，评估大语言模型智能体处理真实移动端应用开发任务的能力。研究表明，当前AI在复杂、真实的移动端开发任务上仍面临挑战，尚无法完全替代客户端开发人员。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为AI在移动端开发领域的能力边界提供了实证研究数据，对产品开发团队评估AI工具的应用潜力和局限性、制定技术选型与人力规划具有重要参考价值。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>产品开发</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-02T08:09:16.000Z</span>
           <a href="https://juejin.cn/post/7612016511351881734" target="_blank" class="btn-link">查看详情 →</a>
@@ -628,9 +775,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>花9万刀雇应届生，不如用AI！软件工程未来2年，太残酷</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>Google Cloud AI总监Addy Osmani发表博客，分析AI在未来两年对软件工程行业的影响，包括冲击初级程序员岗位、改变开发者技能需求与角色定位，并针对新手与资深工程师提出生存建议。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为软件工程行业从业者（包括新手与资深工程师）的职业规划、技能提升方向提供趋势分析和决策参考，强调适应变化和培养人类独特能力的重要性。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>通用AI</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>Google Cloud AI总监Addy Osmani发表博客，分析AI在未来两年对软件工程行业的影响，包括冲击初级程序员岗位、改变开发者技能需求与角色定位，并针对新手与资深工程师提出生存建议。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为软件工程行业从业者（包括新手与资深工程师）的职业规划、技能提升方向提供趋势分析和决策参考，强调适应变化和培养人类独特能力的重要性。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>通用AI</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-01T02:50:00.000Z</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&mid=2652678869&idx=2&sn=7e0f48e64fe3e6838d3b05bc5deac81f" target="_blank" class="btn-link">查看详情 →</a>
@@ -638,9 +787,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>对话九合王啸：90%具身智能公司没未来，市场名额只有三五家</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>发布主体为九合创投创始人王啸。核心观点包括：当前具身智能赛道存在估值泡沫，但适度泡沫能推动行业进步；未来市场仅能容纳三五家公司存活；竞争关键在于场景闭环、资本运作与成本控制；技术范式变革是小公司的机会；长期来看，To C市场潜力远超To B。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>对行业分析及投资决策提供参考价值，揭示了具身智能赛道的竞争格局、市场容量预测、关键成功要素（场景、资本、成本）以及To C市场的长期潜力，有助于相关从业者进行战略规划和风险评估。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>通用AI</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>发布主体为九合创投创始人王啸。核心观点包括：当前具身智能赛道存在估值泡沫，但适度泡沫能推动行业进步；未来市场仅能容纳三五家公司存活；竞争关键在于场景闭环、资本运作与成本控制；技术范式变革是小公司的机会；长期来看，To C市场潜力远超To B。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>对行业分析及投资决策提供参考价值，揭示了具身智能赛道的竞争格局、市场容量预测、关键成功要素（场景、资本、成本）以及To C市场的长期潜力，有助于相关从业者进行战略规划和风险评估。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>通用AI</div>
+        </div>
         <div class="footer">
           <span class="date">2026-03-01</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247871223&idx=1&sn=9641bd3f73ae711d22e496788736bef7" target="_blank" class="btn-link">查看详情 →</a>
@@ -648,9 +799,11 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div>
       <div class="filter-item">
         <h4>推动AI繁荣的数十亿美元基础设施协议</h4>
-        <div class="field"><span class="label-tag info">核心信息</span>汇总了Meta、Oracle、微软、谷歌和OpenAI等科技巨头在AI基础设施项目上的重大支出信息，反映了当前大规模AI基础设施建设的投资趋势。</div>
-        <div class="field"><span class="label-tag value">核心价值</span>为AI行业分析、企业战略规划及投资决策提供了关于基础设施投入规模与方向的关键参考信息。</div>
-        <div class="field"><span class="label-tag scene">适用场景</span>多领域</div>
+        <div class="field-grid">
+          <div class="field"><span class="label-tag info">核心信息</span>汇总了Meta、Oracle、微软、谷歌和OpenAI等科技巨头在AI基础设施项目上的重大支出信息，反映了当前大规模AI基础设施建设的投资趋势。</div>
+          <div class="field"><span class="label-tag value">核心价值</span>为AI行业分析、企业战略规划及投资决策提供了关于基础设施投入规模与方向的关键参考信息。</div>
+          <div class="field"><span class="label-tag scene">适用场景</span>多领域</div>
+        </div>
         <div class="footer">
           <span class="date">2026-02-28T20:41:55.000Z</span>
           <a href="https://techcrunch.com/2026/02/28/billion-dollar-infrastructure-deals-ai-boom-data-centers-openai-oracle-nvidia-microsoft-google-meta/" target="_blank" class="btn-link">查看详情 →</a>
@@ -670,19 +823,29 @@ body{padding:16px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       <span class="lang-badge">Rust</span>
       <span class="score-badge">推荐得分 4.5</span>
     </div>
-    <div class="field repo-desc">π RuView: WiFi DensePose turns commodity WiFi signals into real-time human pose
+    <div class="field"><span class="label-tag info">仓库描述</span>π RuView: WiFi DensePose turns commodity WiFi signals into real-time human pose
 estimation, vital sign monitoring, and presence detection — all without a single
 pixel of video.</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：利用WiFi CSI信号实现非视觉人体姿态估计、生命体征监测与存在感知。
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：利用WiFi CSI信号实现非视觉人体姿态估计、生命体征监测与存在感知。
 2. 核心技术栈：基于Rust的信号处理与机器学习，结合ESP32-S3等CSI硬件。
 3. 关键优势：隐私优先（无需摄像头）、可穿透墙壁、成本低廉（利用现有WiFi）。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 创新隐私保护：在无需视频监控下实现人员感知与行为分析，规避校园隐私合规风险。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 创新隐私保护：在无需视频监控下实现人员感知与行为分析，规避校园隐私合规风险。
 2. 显著降本增效：利用现有校园WiFi基础设施或低成本硬件，实现对物理空间的智能感知与安全管理。
 3. 提升科研与教学支持能力：为运动科学、心理学等学科提供新型非侵入式数据采集与分析工具。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（课堂活动监测、在线学习专注度分析）、科研支持（人体运动分析、行为学研究）、校园安全（区域入侵检测、紧急情况人员定位）、健康关怀（学生宿舍异常活动与生命体征监测）、设施管理（图书馆/实验室空间利用率分析）。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（课堂活动监测、在线学习专注度分析）、科研支持（人体运动分析、行为学研究）、校园安全（区域入侵检测、紧急情况人员定位）、健康关怀（学生宿舍异常活动与生命体征监测）、设施管理（图书馆/实验室空间利用率分析）。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>技术方案高度贴合高校对隐私、成本与多场景应用的需求，其非视觉感知特性在合规性与易用性上优势明显，软硬件设计考虑了校园IT环境适配与扩展性。</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/ruvnet/RuView/main/README.md</div>
+    </div>
     <a href="https://github.com/ruvnet/RuView" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -697,16 +860,26 @@ pixel of video.</div>
       <span class="lang-badge">TypeScript</span>
       <span class="score-badge">推荐得分 4.5</span>
     </div>
-    <div class="field repo-desc">GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side
+    <div class="field"><span class="label-tag info">仓库描述</span>GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side
 knowledge graph creator that runs entirely in your browser. Drop in a GitHub
 repo or ZIP file, and get an interactive knowledge graph wit a built in Graph
 RAG Agent. Perfect for code exploration</div>
-    <div class="field"><span class="label-tag info">核心信息</span>核心功能：浏览器端代码知识图谱构建与交互式探索。核心技术栈：Tree-sitter AST解析、KuzuDB图数据库、MCP协议。关键优势：完全本地/浏览器端运行，无需服务器，保障隐私。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提升代码理解与教学效率：通过可视化知识图谱快速掌握项目结构。2. 支持AI编程助手深度集成：为高校AI编程教学提供可靠代码上下文。3. 降低部署与合规成本：纯客户端方案规避高校服务器部署与数据外泄风险。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>教学辅助：编程课程代码结构分析与理解；科研支持：研究项目代码库探索与依赖分析；课程设计：教师构建教学案例代码知识图谱；毕业设计：学生项目代码审查与架构理解；实验室管理：研究团队代码资产梳理与导航。</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>核心功能：浏览器端代码知识图谱构建与交互式探索。核心技术栈：Tree-sitter AST解析、KuzuDB图数据库、MCP协议。关键优势：完全本地/浏览器端运行，无需服务器，保障隐私。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提升代码理解与教学效率：通过可视化知识图谱快速掌握项目结构。2. 支持AI编程助手深度集成：为高校AI编程教学提供可靠代码上下文。3. 降低部署与合规成本：纯客户端方案规避高校服务器部署与数据外泄风险。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>教学辅助：编程课程代码结构分析与理解；科研支持：研究项目代码库探索与依赖分析；课程设计：教师构建教学案例代码知识图谱；毕业设计：学生项目代码审查与架构理解；实验室管理：研究团队代码资产梳理与导航。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>产品高度贴合计算机教育场景，纯客户端方案完美匹配高校IT环境与隐私合规要求，MCP协议支持主流AI编程工具，扩展性强。</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/abhigyanpatwari/GitNexus/main/README.md</div>
+    </div>
     <a href="https://github.com/abhigyanpatwari/GitNexus" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -721,19 +894,29 @@ RAG Agent. Perfect for code exploration</div>
       <span class="lang-badge">Python</span>
       <span class="score-badge">推荐得分 4.5</span>
     </div>
-    <div class="field repo-desc">An open-source SuperAgent harness that researches, codes, and creates. With the
+    <div class="field"><span class="label-tag info">仓库描述</span>An open-source SuperAgent harness that researches, codes, and creates. With the
 help of sandboxes, memories, tools, skills and subagents, it handles different
 levels of tasks that could take minutes to hours.</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：开源超级代理框架，协调子代理、记忆和沙箱执行复杂任务。
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：开源超级代理框架，协调子代理、记忆和沙箱执行复杂任务。
 2. 核心技术栈：基于LangGraph和LangChain构建，支持Docker/Kubernetes沙箱隔离。
 3. 关键优势：支持技能扩展、子代理并行、长期记忆和沙箱文件系统。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提效：通过子代理并行与技能复用，自动化耗时任务（分钟至小时级）。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提效：通过子代理并行与技能复用，自动化耗时任务（分钟至小时级）。
 2. 创新：沙箱环境支持安全代码执行与文件操作，拓展AI在高校的实践场景。
 3. 降本：开源模型兼容与本地部署，降低高校AI应用成本与合规风险。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（课件生成、研究报告）、科研支持（文献分析、数据管道）、校园自动化（内容工作流、仪表板搭建）、学术写作（报告生成）、项目开发（代码生成与测试）。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（课件生成、研究报告）、科研支持（文献分析、数据管道）、校园自动化（内容工作流、仪表板搭建）、学术写作（报告生成）、项目开发（代码生成与测试）。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>子代理架构贴合高校多任务研究需求，沙箱隔离保障校园IT安全，技能扩展性支持教学科研场景定制，落地可行性高。</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/bytedance/deer-flow/main/README.md</div>
+    </div>
     <a href="https://github.com/bytedance/deer-flow" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -748,18 +931,28 @@ levels of tasks that could take minutes to hours.</div>
       <span class="lang-badge">Rust</span>
       <span class="score-badge">推荐得分 4.5</span>
     </div>
-    <div class="field repo-desc">RuVector is a High Performance, Real-Time, Self-Learning, Vector Graph Neural
+    <div class="field"><span class="label-tag info">仓库描述</span>RuVector is a High Performance, Real-Time, Self-Learning, Vector Graph Neural
 Network, and Database built in Rust.</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：自学习向量图神经网络数据库，具备实时优化与智能搜索能力。
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：自学习向量图神经网络数据库，具备实时优化与智能搜索能力。
 2. 核心技术栈：基于Rust构建，集成HNSW索引、GNN层、SONA自优化架构及PostgreSQL扩展。
 3. 关键优势：支持本地AI推理、多场景部署（浏览器/边缘/服务器），无需云端API，成本为零。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 显著提效：自学习搜索优化可提升教学资源检索精度与响应速度，降低师生时间成本。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 显著提效：自学习搜索优化可提升教学资源检索精度与响应速度，降低师生时间成本。
 2. 创新支持：本地化AI与图神经网络能力为科研数据处理与复杂分析提供新范式。
 3. 降本可行：开源免费、边缘部署特性大幅降低高校IT采购与运维支出。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（智能课件检索与推荐）、科研支持（文献知识图谱与相似性分析）、校园管理（个性化学习路径规划）、学术协作（多模态研究数据管理）、智能问答（课程答疑与学习资源匹配）。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（智能课件检索与推荐）、科研支持（文献知识图谱与相似性分析）、校园管理（个性化学习路径规划）、学术协作（多模态研究数据管理）、智能问答（课程答疑与学习资源匹配）。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>产品高度贴合高校教学科研场景，自学习与本地AI特性完美匹配师生对数据隐私与实时响应的需求；技术栈轻量且兼容校园IT环境，部署成本低，具备优秀的落地可行性。</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/ruvnet/ruvector/main/README.md</div>
+    </div>
     <a href="https://github.com/ruvnet/ruvector" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -774,20 +967,30 @@ Network, and Database built in Rust.</div>
       <span class="lang-badge">C</span>
       <span class="score-badge">推荐得分 4.5</span>
     </div>
-    <div class="field repo-desc">Fast and accurate automatic speech recognition (ASR) for edge devices</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：边缘设备实时语音识别与意图理解。
+    <div class="field"><span class="label-tag info">仓库描述</span>Fast and accurate automatic speech recognition (ASR) for edge devices</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：边缘设备实时语音识别与意图理解。
 2. 核心技术栈：基于ONNX Runtime的C++核心库，支持多平台。
 3. 关键优势：设备端运行、低延迟、多语言支持、高精度。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提效：实时转录与意图识别，提升教学互动与办公效率。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提效：实时转录与意图识别，提升教学互动与办公效率。
 2. 降本：设备端运行，无需云端API费用，降低部署成本。
 3. 创新：为校园智能设备提供低延迟、高隐私的语音交互方案。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>1. 教学辅助：课堂实时字幕与转录。
+      <div class="field"><span class="label-tag scene">适用场景</span>1. 教学辅助：课堂实时字幕与转录。
 2. 科研支持：访谈或会议录音的快速转录。
 3. 校园生活：语音控制设备或查询信息。
 4. 语言学习：多语言语音识别练习。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>产品高度贴合高校多语言教学与科研转录需求，设备端运行满足数据隐私与成本控制，技术栈适配校园多样IT环境，具备良好落地可行性。</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/moonshine-ai/moonshine/main/README.md</div>
+    </div>
     <a href="https://github.com/moonshine-ai/moonshine" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -802,20 +1005,30 @@ Network, and Database built in Rust.</div>
       <span class="lang-badge">Python</span>
       <span class="score-badge">推荐得分 4.0</span>
     </div>
-    <div class="field repo-desc"></div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：为AI编码代理提供标准化技能定义，覆盖数据集创建、模型训练、评估等ML任务。
+    <div class="field"><span class="label-tag info">仓库描述</span></div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：为AI编码代理提供标准化技能定义，覆盖数据集创建、模型训练、评估等ML任务。
 2. 核心技术栈：基于Agent Skills标准化格式，兼容OpenAI Codex、Claude Code、Gemini CLI、Cursor等主流AI编码工具。
 3. 关键优势：提供即插即用的技能包，包含指令、脚本和资源，降低AI代理使用门槛。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提效：标准化技能包简化复杂AI/ML工作流，提升师生实验与开发效率。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提效：标准化技能包简化复杂AI/ML工作流，提升师生实验与开发效率。
 2. 降本：复用预定义技能减少重复编码，降低学习和使用AI工具的成本。
 3. 创新：支持快速构建和迭代AI应用，促进教学与科研中的创新实践。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>1. 科研支持：辅助研究人员进行模型训练、评估和论文发布。
+      <div class="field"><span class="label-tag scene">适用场景</span>1. 科研支持：辅助研究人员进行模型训练、评估和论文发布。
 2. 教学辅助：支持学生实践数据集创建、模型微调等AI/ML实验。
 3. 项目开发：帮助师生快速构建Gradio演示界面，展示研究成果。
 4. 实验管理：通过Trackio技能跟踪和可视化训练实验过程。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>技能库高度贴合高校AI教学与科研需求，标准化格式易于集成到现有IT环境，支持多场景复用，降低师生使用AI工具门槛。</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/huggingface/skills/main/README.md</div>
+    </div>
     <a href="https://github.com/huggingface/skills" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -830,20 +1043,30 @@ Network, and Database built in Rust.</div>
       <span class="lang-badge">Python</span>
       <span class="score-badge">推荐得分 4.0</span>
     </div>
-    <div class="field repo-desc">OpenSandbox is a general-purpose sandbox platform for AI applications, offering
+    <div class="field"><span class="label-tag info">仓库描述</span>OpenSandbox is a general-purpose sandbox platform for AI applications, offering
 multi-language SDKs, unified sandbox APIs, and Docker/Kubernetes runtimes for
 scenarios like Coding Agents, GUI Agents, Agent Evaluation, AI Code Execution,
 and RL Training.</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 通用AI应用沙箱平台，支持多语言SDK与统一API。
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 通用AI应用沙箱平台，支持多语言SDK与统一API。
 2. 提供Docker/Kubernetes运行时，内置命令、文件系统、代码解释器。
 3. 支持网络策略控制，具备入口网关与出口控制。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 为AI教学与实验提供安全隔离的执行环境，保障校园IT安全。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 为AI教学与实验提供安全隔离的执行环境，保障校园IT安全。
 2. 统一平台支持多类AI应用开发与测试，降低教学与科研环境搭建成本。
 3. 支持大规模分布式调度，满足高校实验室高并发计算需求。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>AI代码执行、编程智能体开发、GUI智能体测试、智能体评估、强化学习训练</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>AI代码执行、编程智能体开发、GUI智能体测试、智能体评估、强化学习训练</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>平台提供安全可控的沙箱环境，高度契合高校AI教学与科研中对代码安全执行、实验环境隔离及资源调度的核心需求，技术架构与校园IT环境适配性强。</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/alibaba/OpenSandbox/main/README.md</div>
+    </div>
     <a href="https://github.com/alibaba/OpenSandbox" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -858,22 +1081,32 @@ and RL Training.</div>
       <span class="lang-badge">Python</span>
       <span class="score-badge">推荐得分 3.5</span>
     </div>
-    <div class="field repo-desc">A comprehensive collection of Agent Skills for context engineering, multi-agent
+    <div class="field"><span class="label-tag info">仓库描述</span>A comprehensive collection of Agent Skills for context engineering, multi-agent
 architectures, and production agent systems. Use when building, optimizing, or
 debugging agent systems that require effective context management.</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：提供构建、优化、调试智能体系统的上下文工程技能集合。
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：提供构建、优化、调试智能体系统的上下文工程技能集合。
 2. 核心技术栈：平台无关的上下文工程原则，包含多智能体架构、记忆系统、工具设计等。
 3. 关键优势：渐进式披露设计，技能按需加载，最大化有限上下文窗口的有效性。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提效：通过上下文优化与压缩技术，降低AI系统运行成本与资源消耗。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提效：通过上下文优化与压缩技术，降低AI系统运行成本与资源消耗。
 2. 创新：提供多智能体架构等模式，支持构建复杂的教育辅助与科研系统。
 3. 降本：平台无关的设计降低了对特定技术栈的依赖与集成成本。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>1. 科研支持：构建用于学术研究的智能体系统（如文献监控与合成）。
+      <div class="field"><span class="label-tag scene">适用场景</span>1. 科研支持：构建用于学术研究的智能体系统（如文献监控与合成）。
 2. 教学辅助：开发教学用AI助手，支持个性化学习与自动化评估。
 3. 项目开发：指导基于LLM的教育项目从构思到部署的全流程。
 4. 系统评估：建立AI教学工具的性能评估与优化框架。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/muratcankoylan/Agent-Skills-for-Context-Engineering/main/README.md</div>
+    </div>
     <a href="https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -888,16 +1121,26 @@ debugging agent systems that require effective context management.</div>
       <span class="lang-badge">Rust</span>
       <span class="score-badge">推荐得分 3.5</span>
     </div>
-    <div class="field repo-desc">Development at the speed of light</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 数据库与服务器一体化，应用逻辑直接部署在数据库内。
+    <div class="field"><span class="label-tag info">仓库描述</span>Development at the speed of light</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 数据库与服务器一体化，应用逻辑直接部署在数据库内。
 2. 核心技术栈为Rust，支持C#、TypeScript等客户端库。
 3. 关键优势：内存存储实现高速度低延迟，简化后端架构。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 大幅简化高校项目后端开发与运维，降低技术门槛与成本。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 大幅简化高校项目后端开发与运维，降低技术门槛与成本。
 2. 为实时协作类教学与科研应用提供高性能数据同步支持。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>实时多人协作应用开发、在线游戏后端、实时聊天系统、协同编辑工具、实时数据同步项目。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>实时多人协作应用开发、在线游戏后端、实时聊天系统、协同编辑工具、实时数据同步项目。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/clockworklabs/SpacetimeDB/master/README.md</div>
+    </div>
     <a href="https://github.com/clockworklabs/SpacetimeDB" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -912,20 +1155,30 @@ debugging agent systems that require effective context management.</div>
       <span class="lang-badge">Shell</span>
       <span class="score-badge">推荐得分 3.5</span>
     </div>
-    <div class="field repo-desc">An agentic skills framework & software development methodology that works.</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 基于可组合技能的智能体软件开发框架。
+    <div class="field"><span class="label-tag info">仓库描述</span>An agentic skills framework & software development methodology that works.</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 基于可组合技能的智能体软件开发框架。
 2. 强制TDD、YAGNI、DRY等工程最佳实践。
 3. 支持子智能体驱动开发与多阶段代码审查。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 通过标准化流程提升学生编程规范性。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 通过标准化流程提升学生编程规范性。
 2. 降低教师代码审查与指导负担。
 3. 培养学生软件工程思维与协作能力。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>1. 计算机相关课程项目开发教学。
+      <div class="field"><span class="label-tag scene">适用场景</span>1. 计算机相关课程项目开发教学。
 2. 学生编程作业的规范指导与辅助。
 3. 科研项目中的原型代码开发。
 4. 校园信息系统的小型功能迭代。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/obra/superpowers/main/README.md</div>
+    </div>
     <a href="https://github.com/obra/superpowers" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -940,17 +1193,27 @@ debugging agent systems that require effective context management.</div>
       <span class="lang-badge">TypeScript</span>
       <span class="score-badge">推荐得分 3.5</span>
     </div>
-    <div class="field repo-desc">Bash is all you need - A nano Claude Code–like agent, built from 0 to 1</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：构建类Claude Code的AI编程代理，从基础循环到多代理协作。
+    <div class="field"><span class="label-tag info">仓库描述</span>Bash is all you need - A nano Claude Code–like agent, built from 0 to 1</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：构建类Claude Code的AI编程代理，从基础循环到多代理协作。
 2. 核心技术栈：基于LLM的代理循环、工具调用分发、任务与子代理管理。
 3. 关键优势：渐进式学习设计，从0到1拆解代理核心机制，代码简洁可复现。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提效：通过自动化代理循环与工具调用，减少重复性编码任务。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提效：通过自动化代理循环与工具调用，减少重复性编码任务。
 2. 创新：提供从单代理到多代理系统的渐进式学习路径，启发AI工程教育。
 3. 降本：开源实现降低AI代理开发与教学实验门槛。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>编程教学辅助、自动化脚本编写、代码项目分析与重构、多步骤任务分解与执行、团队协作编程模拟。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>编程教学辅助、自动化脚本编写、代码项目分析与重构、多步骤任务分解与执行、团队协作编程模拟。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/shareAI-lab/learn-claude-code/main/README.md</div>
+    </div>
     <a href="https://github.com/shareAI-lab/learn-claude-code" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -965,13 +1228,23 @@ debugging agent systems that require effective context management.</div>
       <span class="lang-badge">Python</span>
       <span class="score-badge">推荐得分 3.5</span>
     </div>
-    <div class="field repo-desc">Assignments for CS146S: The Modern Software Dev (Stanford University Fall 2025)</div>
-    <div class="field"><span class="label-tag info">核心信息</span>核心功能：斯坦福大学CS146S课程作业仓库，提供现代软件开发实践环境。核心技术栈：Python 3.12、Anaconda、Poetry、Conda环境管理。关键优势：标准化开发环境配置流程，确保课程项目一致性。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提效：标准化环境配置流程，降低师生环境搭建时间成本。2. 创新：引入现代开发工具链（Poetry），提升学生工程实践能力。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>教学辅助：现代软件开发课程实践环境搭建；科研支持：标准化Python项目依赖管理与环境隔离；技能培训：学生掌握生产级开发工具链（Conda, Poetry）。</div>
+    <div class="field"><span class="label-tag info">仓库描述</span>Assignments for CS146S: The Modern Software Dev (Stanford University Fall 2025)</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>核心功能：斯坦福大学CS146S课程作业仓库，提供现代软件开发实践环境。核心技术栈：Python 3.12、Anaconda、Poetry、Conda环境管理。关键优势：标准化开发环境配置流程，确保课程项目一致性。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提效：标准化环境配置流程，降低师生环境搭建时间成本。2. 创新：引入现代开发工具链（Poetry），提升学生工程实践能力。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>教学辅助：现代软件开发课程实践环境搭建；科研支持：标准化Python项目依赖管理与环境隔离；技能培训：学生掌握生产级开发工具链（Conda, Poetry）。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/mihail911/modern-software-dev-assignments/master/README.md</div>
+    </div>
     <a href="https://github.com/mihail911/modern-software-dev-assignments" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -986,23 +1259,33 @@ debugging agent systems that require effective context management.</div>
       <span class="lang-badge">Shell</span>
       <span class="score-badge">推荐得分 3.5</span>
     </div>
-    <div class="field repo-desc">Claude Code is an agentic coding tool that lives in your terminal, understands
+    <div class="field"><span class="label-tag info">仓库描述</span>Claude Code is an agentic coding tool that lives in your terminal, understands
 your codebase, and helps you code faster by executing routine tasks, explaining
 complex code, and handling git workflows - all through natural language
 commands.</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：终端智能编码助手，理解代码库，执行任务，解释代码，处理Git工作流。
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：终端智能编码助手，理解代码库，执行任务，解释代码，处理Git工作流。
 2. 核心技术栈：基于Node.js 18+，支持自然语言命令交互。
 3. 关键优势：终端集成，支持插件扩展，提供多种安装方式。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提升编程教学与学习效率，通过自然语言降低编码门槛。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提升编程教学与学习效率，通过自然语言降低编码门槛。
 2. 支持代码解释与任务自动化，辅助理解复杂代码逻辑。
 3. 集成Git工作流管理，简化版本控制操作。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>1. 计算机相关课程编程教学辅助。
+      <div class="field"><span class="label-tag scene">适用场景</span>1. 计算机相关课程编程教学辅助。
 2. 学生项目开发与代码调试。
 3. 科研项目代码管理与协作。
 4. 教职工技术工具开发支持。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/anthropics/claude-code/main/README.md</div>
+    </div>
     <a href="https://github.com/anthropics/claude-code" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -1023,22 +1306,32 @@ commands.</div>
 [https://avatars.githubusercontent.com/u/178603515?s=40&v=4]/4regab</span>
       <span class="score-badge">推荐得分 2.5</span>
     </div>
-    <div class="field repo-desc">FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI,
+    <div class="field"><span class="label-tag info">仓库描述</span>FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI,
 Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke,
 Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf,
 Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal
 Tools & AI Models</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：收集AI工具系统提示词与模型信息。
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：收集AI工具系统提示词与模型信息。
 2. 核心技术栈：开源仓库管理与文档展示。
 3. 关键优势：提供超过30000行AI工具内部结构洞察。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 为AI开发者提供大量内部参考，降低学习成本。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 为AI开发者提供大量内部参考，降低学习成本。
 2. 通过开源共享促进AI工具透明度与安全性研究。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>1. AI工具开发研究与逆向工程。
+      <div class="field"><span class="label-tag scene">适用场景</span>1. AI工具开发研究与逆向工程。
 2. 开发者学习AI系统提示词设计。
 3. 技术安全审计与漏洞发现。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/x1xhlol/system-prompts-and-models-of-ai-tools/main/README.md</div>
+    </div>
     <a href="https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div>
   <div class="card repo-card">
@@ -1053,21 +1346,31 @@ Tools & AI Models</div>
       <span class="lang-badge">TypeScript</span>
       <span class="score-badge">推荐得分 2.0</span>
     </div>
-    <div class="field repo-desc">💖🧸 Self hosted, you-owned Grok Companion, a container of souls of waifu, cyber
+    <div class="field"><span class="label-tag info">仓库描述</span>💖🧸 Self hosted, you-owned Grok Companion, a container of souls of waifu, cyber
 livings to bring them into our worlds, wishing to achieve Neuro-sama's altitude.
 Capable of realtime voice chat, Minecraft, Factorio playing. Web / macOS /
 Windows supported.</div>
-    <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：自托管AI虚拟伴侣，支持实时语音聊天、游戏互动（Minecraft/Factorio）。
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>1. 核心功能：自托管AI虚拟伴侣，支持实时语音聊天、游戏互动（Minecraft/Factorio）。
 2. 核心技术栈：基于Web技术（WebGPU/WebAudio），支持多平台（Web/macOS/Windows）。
 3. 关键优势：开源可定制，支持多种LLM API，具备VRM/Live2D虚拟形象驱动。</div>
-    <div class="field"><span class="label-tag value">核心价值</span>1. 提供高度可定制的虚拟数字人解决方案，支持个性化交互。
+      <div class="field"><span class="label-tag value">核心价值</span>1. 提供高度可定制的虚拟数字人解决方案，支持个性化交互。
 2. 通过游戏自动化与多平台集成，拓展AI在娱乐场景的应用边界。</div>
-    <div class="field"><span class="label-tag scene">适用场景</span>1. 虚拟主播与互动娱乐
+      <div class="field"><span class="label-tag scene">适用场景</span>1. 虚拟主播与互动娱乐
 2. 游戏陪伴与自动化
 3. 多平台社交聊天（Discord/Telegram）</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
+    <div class="collapse-section">
+      <div class="collapse-btn" onclick="toggleAbstract(this)">
+        <span class="collapse-icon">📄</span>
+        <span class="collapse-text">README预览（点击查看）</span>
+        <span class="collapse-arrow">▼</span>
+      </div>
+      <div class="collapse-content">https://raw.githubusercontent.com/moeru-ai/airi/main/README.md</div>
+    </div>
     <a href="https://github.com/moeru-ai/airi" target="_blank" class="btn-primary github-btn">
-      <span>🔍</span> 查看仓库
+      <span>🔗</span> 访问仓库
     </a>
   </div></div>
 <div class="panel">
@@ -1079,18 +1382,25 @@ Windows supported.</div>
       <span class="meta-item">📅 2025-12-17T23:48:22</span>
       <span class="score-badge">⭐ 4.5</span>
     </div>
-    <div class="field"><span class="label-tag info">核心信息</span>研究方向：AI教育应用的用户情感与感知评估；核心技术：RoBERTa情感分类、GPT-4o关键点提取、GPT-5主题合成；研究创新点：基于真实用户评论的多模态AI评估框架，对七类应用进行对比分析。</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>研究方向：AI教育应用的用户情感与感知评估；核心技术：RoBERTa情感分类、GPT-4o关键点提取、GPT-5主题合成；研究创新点：基于真实用户评论的多模态AI评估框架，对七类应用进行对比分析。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>为高校AI教育应用开发提供基于用户真实反馈的效能评估与改进方向；揭示不同功能类型AI应用在高校教学中的适配差异，助力精准选型与整合；提出混合人机协作、VR/AR融合等未来生态，为高校教育数字化转型提供创新路径。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>高校学生课后作业辅助与解题；高校教师进行课程设计与教学材料准备；高校语言学习与辅导；高校在线学习管理系统（LMS）的AI功能集成；高校教育技术产品开发与评估。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>研究直接针对高校教学核心场景（作业、语言学习、LMS），评估框架为产品设计与选型提供数据支撑，提出的混合模型与伦理考量对高校落地具有指导价值。</div>
     <div class="collapse-section">
       <div class="collapse-btn" onclick="toggleAbstract(this)">
         <span class="collapse-icon">📄</span>
-        <span class="collapse-text">英文摘要（点击查看）</span>
+        <span class="collapse-text">论文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">Unveiling User Perceptions in the Generative AI Era: A Sentiment-Driven\nEvaluation of AI Educational Apps' Role in Digital Transformation of e-Teaching</div>
+      <div class="collapse-content">
+        <div class="abstract-en">Unveiling User Perceptions in the Generative AI Era: A Sentiment-Driven\nEvaluation of AI Educational Apps' Role in Digital Transformation of e-Teaching</div>
+        <div class="abstract-cn">The rapid integration of generative artificial intelligence into education has driven digital transformation in e-teaching, yet user perceptions of AI educational apps remain underexplored. This study performs a sentiment-driven evaluation of user reviews from top AI ed-apps on the Google Play Store…</div>
+      </div>
     </div>
     <a href="https://huggingface.co/papers/2512.11934" target="_blank" class="btn-primary paper-btn">
-      <span>📖</span> 阅读论文
+      <span>📖</span> 阅读全文
     </a>
   </div>
   <div class="card paper-card">
@@ -1101,18 +1411,25 @@ Windows supported.</div>
       <span class="meta-item">📅 2024-12-09T18:45:54</span>
       <span class="score-badge">⭐ 3.5</span>
     </div>
-    <div class="field"><span class="label-tag info">核心信息</span>研究方向：中学代数AI教育平台评估基准；核心技术：基于大语言模型诊断学生代数误解；研究创新点：构建包含55种误解与220个诊断示例的数据集。</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>研究方向：中学代数AI教育平台评估基准；核心技术：基于大语言模型诊断学生代数误解；研究创新点：构建包含55种误解与220个诊断示例的数据集。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>1. 为AI教育产品提供精准诊断学生代数误解的基准，提升教学针对性；2. 通过结合教师反馈优化AI模型，增强人机协作教学效果。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>1. 智能辅导系统诊断学生代数学习难点；2. 教师培训中模拟学生常见错误；3. 自适应学习平台个性化内容推荐；4. 数学教育研究数据支持。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
     <div class="collapse-section">
       <div class="collapse-btn" onclick="toggleAbstract(this)">
         <span class="collapse-icon">📄</span>
-        <span class="collapse-text">英文摘要（点击查看）</span>
+        <span class="collapse-text">论文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">A Benchmark for Math Misconceptions: Bridging Gaps in Middle School Algebra with\nAI-Supported Instruction</div>
+      <div class="collapse-content">
+        <div class="abstract-en">A Benchmark for Math Misconceptions: Bridging Gaps in Middle School Algebra with\nAI-Supported Instruction</div>
+        <div class="abstract-cn">This study introduces an evaluation benchmark for middle school algebra to be used in artificial intelligence(AI) based educational platforms. The goal is to support the design of AI systems that can enhance learner conceptual understanding of algebra by taking into account their current level of al…</div>
+      </div>
     </div>
     <a href="https://huggingface.co/papers/2412.03765" target="_blank" class="btn-primary paper-btn">
-      <span>📖</span> 阅读论文
+      <span>📖</span> 阅读全文
     </a>
   </div>
   <div class="card paper-card">
@@ -1123,18 +1440,25 @@ Windows supported.</div>
       <span class="meta-item">📅 --</span>
       <span class="score-badge">⭐ 4.5</span>
     </div>
-    <div class="field"><span class="label-tag info">核心信息</span>研究方向：教育评估中生成式AI的整合框架；核心技术：基于社会建构主义与评估效度的五级量表；研究创新点：更新视觉指南，提供灵活跨情境的评估设计方法。</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>研究方向：教育评估中生成式AI的整合框架；核心技术：基于社会建构主义与评估效度的五级量表；研究创新点：更新视觉指南，提供灵活跨情境的评估设计方法。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>为高校在AI时代重新设计评估提供结构化工具，促进评估有效性；搭建师生对话平台，明确AI使用规范，降低学术不端风险；支持灵活适配不同学科与课程，推动评估模式创新。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>高校课程作业与论文的AI使用规范制定；教师设计新型AI整合式考核任务；师生就AI使用边界进行教学对话；跨学科课程评估标准统一；教育技术培训与教师发展项目。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>框架高度贴合高校评估改革核心需求，结构化工具直接赋能教学管理，产品设计兼顾灵活性与指导性，落地可行性高。</div>
     <div class="collapse-section">
       <div class="collapse-btn" onclick="toggleAbstract(this)">
         <span class="collapse-icon">📄</span>
-        <span class="collapse-text">英文摘要（点击查看）</span>
+        <span class="collapse-text">论文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">The AI Assessment Scale Revisited: A Framework for Educational Assessment</div>
+      <div class="collapse-content">
+        <div class="abstract-en">The AI Assessment Scale Revisited: A Framework for Educational Assessment</div>
+        <div class="abstract-cn">Recent developments in Generative Artificial Intelligence (GenAI) have created significant uncertainty in education, particularly in terms of assessment practices. Against this backdrop, we present an updated version of the AI Assessment Scale (AIAS), a framework with two fundamental purposes: to fa…</div>
+      </div>
     </div>
     <a href="https://huggingface.co/papers/2412.09029" target="_blank" class="btn-primary paper-btn">
-      <span>📖</span> 阅读论文
+      <span>📖</span> 阅读全文
     </a>
   </div>
   <div class="card paper-card">
@@ -1145,18 +1469,25 @@ Windows supported.</div>
       <span class="meta-item">📅 --</span>
       <span class="score-badge">⭐ 4.5</span>
     </div>
-    <div class="field"><span class="label-tag info">核心信息</span>研究方向：基于AI的学生错误分析与纠正；核心技术：利用大语言模型分析学生草稿，结合提示工程与错误池；研究创新点：提出VATE系统，实现自主错误分析并集成实时对话。</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>研究方向：基于AI的学生错误分析与纠正；核心技术：利用大语言模型分析学生草稿，结合提示工程与错误池；研究创新点：提出VATE系统，实现自主错误分析并集成实时对话。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>赋能高校教学，通过自动化错误分析降低教师批改负担，提升教学效率；创新学习模式，通过实时对话与个性化反馈，提升学生学习效率与体验。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>高校数学/理工科课程作业自动批改与反馈；高校在线学习平台的智能辅导模块；高校编程/实验课程中的错误诊断与指导；高校大规模在线开放课程（MOOC）的个性化学习支持。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>系统贴合高校教学提效需求，技术方案（LLM+提示工程）适配高校IT环境，在数学等学科有明确落地场景与实证效果，具备扩展至其他课程领域的潜力。</div>
     <div class="collapse-section">
       <div class="collapse-btn" onclick="toggleAbstract(this)">
         <span class="collapse-icon">📄</span>
-        <span class="collapse-text">英文摘要（点击查看）</span>
+        <span class="collapse-text">论文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">AI-Driven Virtual Teacher for Enhanced Educational Efficiency: Leveraging Large\nPretrain Models for Autonomous Error Analysis and Correction</div>
+      <div class="collapse-content">
+        <div class="abstract-en">AI-Driven Virtual Teacher for Enhanced Educational Efficiency: Leveraging Large\nPretrain Models for Autonomous Error Analysis and Correction</div>
+        <div class="abstract-cn">Students frequently make mistakes while solving mathematical problems, and traditional error correction methods are both time-consuming and labor-intensive. This paper introduces an innovative Virtual AI Teacher system designed to autonomously analyze and correct student Errors (VATE). Leveraging ad…</div>
+      </div>
     </div>
     <a href="https://huggingface.co/papers/2409.09403" target="_blank" class="btn-primary paper-btn">
-      <span>📖</span> 阅读论文
+      <span>📖</span> 阅读全文
     </a>
   </div>
   <div class="card paper-card">
@@ -1167,18 +1498,25 @@ Windows supported.</div>
       <span class="meta-item">📅 --</span>
       <span class="score-badge">⭐ 4.5</span>
     </div>
-    <div class="field"><span class="label-tag info">核心信息</span>研究方向：面向课程大纲的教育内容生成。核心技术：整合课程三要素、控制可读性、采用“好奇驱动”方法。研究创新点：提出系统框架，确保内容与课程标准和年级阅读水平对齐。</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>研究方向：面向课程大纲的教育内容生成。核心技术：整合课程三要素、控制可读性、采用“好奇驱动”方法。研究创新点：提出系统框架，确保内容与课程标准和年级阅读水平对齐。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>赋能教师高效生成符合教学大纲的优质内容，提升备课效率。创新性地将课程标准与AI生成结合，保障教育内容的科学性与适配性。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>高校教师快速生成符合课程标准的教学材料；为不同年级学生生成自适应学习资源；辅助设计STEM课程的入门与科普内容；支持在线教育平台内容自动化生产；用于教学资源库的快速扩充与更新。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>框架直接贴合高校教学核心需求，其课程对齐与可读性控制机制对开发高校AI教学产品具有明确指导价值，落地可行性高。</div>
     <div class="collapse-section">
       <div class="collapse-btn" onclick="toggleAbstract(this)">
         <span class="collapse-icon">📄</span>
-        <span class="collapse-text">英文摘要（点击查看）</span>
+        <span class="collapse-text">论文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">COGENT: A Curriculum-oriented Framework for Generating Grade-appropriate\nEducational Content</div>
+      <div class="collapse-content">
+        <div class="abstract-en">COGENT: A Curriculum-oriented Framework for Generating Grade-appropriate\nEducational Content</div>
+        <div class="abstract-cn">While Generative AI has demonstrated strong potential and versatility in content generation, its application to educational contexts presents several challenges. Models often fail to align with curriculum standards and maintain grade-appropriate reading levels consistently. Furthermore, STEM educati…</div>
+      </div>
     </div>
     <a href="https://huggingface.co/papers/2506.09367" target="_blank" class="btn-primary paper-btn">
-      <span>📖</span> 阅读论文
+      <span>📖</span> 阅读全文
     </a>
   </div>
   <div class="card paper-card">
@@ -1189,18 +1527,25 @@ Windows supported.</div>
       <span class="meta-item">📅 --</span>
       <span class="score-badge">⭐ 4.5</span>
     </div>
-    <div class="field"><span class="label-tag info">核心信息</span>研究方向：评估主流LLM在商科入学考试（GMAT）上的表现。核心技术：基于GPT-4 Turbo等七种大型语言模型进行基准测试。研究创新点：首次建立LLM在GMAT上的评估基准，并分析其解释、评估、定制等能力。</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>研究方向：评估主流LLM在商科入学考试（GMAT）上的表现。核心技术：基于GPT-4 Turbo等七种大型语言模型进行基准测试。研究创新点：首次建立LLM在GMAT上的评估基准，并分析其解释、评估、定制等能力。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>为商科教育领域引入AI评估基准，量化LLM在复杂问题解决上的潜力。揭示AI在个性化辅导、答案解释与场景生成方面的应用价值，赋能教学与评估。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>商科研究生入学考试（GMAT）备考辅导；商科课程（如案例分析、商业决策）的智能教学辅助；商科学生作业与考试答案的自动评估与反馈；个性化商科学习路径与模拟面试生成；商科教育研究中的AI能力基准测试与对比分析。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>研究直接对标商科教育核心场景（GMAT与教学），为AI产品在商科备考、教学辅助等细分领域的精准开发提供了关键数据支撑和可行性验证。</div>
     <div class="collapse-section">
       <div class="collapse-btn" onclick="toggleAbstract(this)">
         <span class="collapse-icon">📄</span>
-        <span class="collapse-text">英文摘要（点击查看）</span>
+        <span class="collapse-text">论文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">Evaluating Large Language Models on the GMAT: Implications for the Future of\nBusiness Education</div>
+      <div class="collapse-content">
+        <div class="abstract-en">Evaluating Large Language Models on the GMAT: Implications for the Future of\nBusiness Education</div>
+        <div class="abstract-cn">The rapid evolution of artificial intelligence (AI), especially in the domain of Large Language Models (LLMs ) and generative AI , has opened new avenues for application across various fields, yet its role in business education remains underexplored. This study introduces the first benchmark to asse…</div>
+      </div>
     </div>
     <a href="https://huggingface.co/papers/2401.02985" target="_blank" class="btn-primary paper-btn">
-      <span>📖</span> 阅读论文
+      <span>📖</span> 阅读全文
     </a>
   </div>
   <div class="card paper-card">
@@ -1211,33 +1556,41 @@ Windows supported.</div>
       <span class="meta-item">📅 --</span>
       <span class="score-badge">⭐ 3.5</span>
     </div>
-    <div class="field"><span class="label-tag info">核心信息</span>研究方向：教师与生成式AI协作设计个性化学习任务。核心技术：利用大语言模型（如ChatGPT）生成情境化问题。研究创新点：实证分析教师参与对AI任务生成效率与效果的影响。</div>
+    <div class="field-grid">
+      <div class="field"><span class="label-tag info">核心信息</span>研究方向：教师与生成式AI协作设计个性化学习任务。核心技术：利用大语言模型（如ChatGPT）生成情境化问题。研究创新点：实证分析教师参与对AI任务生成效率与效果的影响。</div>
+      <div class="field"><span class="label-tag value">核心价值</span>为高校教师利用AI进行个性化教学设计提供实证参考。揭示人机协作模式在提升教学任务相关性方面的潜力与效率瓶颈。</div>
+      <div class="field"><span class="label-tag scene">适用场景</span>高校数学课程个性化习题设计、高校教师AI辅助教学工具培训、高校教育技术课程案例研究、高校教学管理系统个性化模块开发。</div>
+    </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
     <div class="collapse-section">
       <div class="collapse-btn" onclick="toggleAbstract(this)">
         <span class="collapse-icon">📄</span>
-        <span class="collapse-text">英文摘要（点击查看）</span>
+        <span class="collapse-text">论文摘要（点击查看）</span>
         <span class="collapse-arrow">▼</span>
       </div>
-      <div class="collapse-content">Should There be a Teacher In-the-Loop? A Study of Generative AI Personalized\nTasks Middle School</div>
+      <div class="collapse-content">
+        <div class="abstract-en">Should There be a Teacher In-the-Loop? A Study of Generative AI Personalized\nTasks Middle School</div>
+        <div class="abstract-cn">Adapting instruction to the fine-grained needs of individual students is a powerful application of recent advances in large language models . These generative AI models can create tasks that correspond to students' interests and enact context personalization, enhancing students' interest in learning…</div>
+      </div>
     </div>
     <a href="https://huggingface.co/papers/2602.15876" target="_blank" class="btn-primary paper-btn">
-      <span>📖</span> 阅读论文
+      <span>📖</span> 阅读全文
     </a>
   </div></div>
 <div class="panel">
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#07c160,#06b6d4)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#07c160,#059669)">
         <div class="header-left">
           <span class="category-icon">📢</span>
           <span>公众号</span>
         </div>
         <span class="count">18条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">教育技术学</span>
         </div>
         <h4>让民族团结教育走出课堂、把“大思政课” 讲到学生心里……为青少年成长绘就精神底色，她们这样做</h4>
@@ -1250,6 +1603,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">教育技术学</span>
         </div>
         <h4>柯政等：“十五五”期间教育改革发展重点任务的思考建议</h4>
@@ -1262,6 +1616,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">教育技术学</span>
         </div>
         <h4>2026全国两会召开在即，您最关心哪些基础教育话题？快来参与投票！</h4>
@@ -1274,6 +1629,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">教育技术学</span>
         </div>
         <h4>全国政协会议议程来了！</h4>
@@ -1286,10 +1642,11 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">量子位</span>
         </div>
         <h4>让搜索Agent不「傻等」：人大团队依托扩散模型实现「一心二用」，边等搜索结果边思考，加速15%性能不减</h4>
-        <p class="content">中国人民大学团队提出DLLM-Searcher，首次将扩散大语言模型（dLLM）应用于搜索Agent。针对传统自回归模型在等待搜索结果时闲置的问题，团队通过两阶段训练（监督微调与偏好优化）教会dLLM推理与调用工具，并提出P-ReAct推理加速方案，使其能优先解码工具调用指令，在等待结果时并行生成思考内容。该方法在多个多跳问答基准上达到与先进自回归模型相当的准确率，同时实现14.77%至22.08%的端到端加速，且泛化能力强。</p>
+        <p class="content">中国人民大学团队提出DLLM-Searcher，首次将扩散大语言模型（dLLM）应用于搜索Agent。针对传统自回归模型在等待搜索结果时闲置的问题，团队通过两阶段训练（监督微调与偏好优化）教会dLLM推理与调用工具，并提出P-ReAct推理加速方案，使其能优先解码工具调用指令，在等待结果时并行生成思考内容。该方法在多个多跳问答基准上达到与先进自回归模型相当的准确率，同时实现14.77%至22.08…</p>
         <div class="footer">
           <span class="date">2026-03-01T04:00:00.000Z</span>
           <a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247871223&idx=2&sn=ef6fb450e665420d7cbe76ec772b19ef" target="_blank" class="btn-link">阅读原文 →</a>
@@ -1298,6 +1655,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">量子位</span>
         </div>
         <h4>西湖大学破解Rectified Flow反演不稳定难题，实现零成本稳定增强｜ICLR'26</h4>
@@ -1310,6 +1668,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">量子位</span>
         </div>
         <h4>量子位编辑作者招聘</h4>
@@ -1322,6 +1681,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">新智元</span>
         </div>
         <h4>Claude被特朗普封杀24小时登顶App Store，CEO含泪首发声！</h4>
@@ -1334,6 +1694,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">新智元</span>
         </div>
         <h4>花9万刀雇应届生，不如用AI！软件工程未来2年，太残酷</h4>
@@ -1346,6 +1707,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">新智元</span>
         </div>
         <h4>Claude Code之父首曝：「养蛊式」开发，质量碾压老架构师</h4>
@@ -1358,6 +1720,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">量子位</span>
         </div>
         <h4>对话九合王啸：90%具身智能公司没未来，市场名额只有三五家</h4>
@@ -1370,6 +1733,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">教育技术学</span>
         </div>
         <h4>让乡村校园响起灵动旋律、在“泥土课堂”里种下文化的种子……以美育浸润心灵，他们这样做｜代表委员履职故事</h4>
@@ -1382,6 +1746,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">教育技术学</span>
         </div>
         <h4>开学“软着陆”！家长如何护航孩子平稳度过冬春衔接期？</h4>
@@ -1394,6 +1759,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">教育技术学</span>
         </div>
         <h4>习近平：让愿担当、敢担当、善担当蔚然成风</h4>
@@ -1406,6 +1772,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">量子位</span>
         </div>
         <h4>破解RL样本效率难题！让AI一次性提炼环境常识，后续零调用成本</h4>
@@ -1418,6 +1785,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">量子位</span>
         </div>
         <h4>阿里提出MoE「专家分化」新策略：打破同质化，让专家各司其职｜ICLR2026</h4>
@@ -1430,6 +1798,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">量子位</span>
         </div>
         <h4>量子位编辑作者招聘</h4>
@@ -1442,6 +1811,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">公众号</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">量子位</span>
         </div>
         <h4>大模型越聪明，学习机越抢手：科大讯飞T90 Pro定义「真」个性化</h4>
@@ -1453,17 +1823,18 @@ Windows supported.</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#2563eb,#3b82f6)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)">
         <div class="header-left">
           <span class="category-icon">📰</span>
           <span>新闻</span>
         </div>
         <span class="count">45条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>伊朗战争预示AI驱动轰炸时代，比“思维速度”更快</h4>
@@ -1476,10 +1847,11 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>特朗普想发动一场由AI驱动的战争吗？——播客</h4>
-        <p class="content">据报道，在过去的三个月里，特朗普的白宫曾两次利用AI实现政权更迭——一次是抓捕委内瑞拉总统尼古拉斯·马杜罗，最近一次是协助策划导致伊朗最高领袖阿亚图拉·阿里·哈梅内伊身亡的袭击。最近的袭击恰逢五角大楼因担忧其AI工具Claude被用于公司明确禁止的用途，而终止了与AI公司Anthropic的合作。政府迅速与OpenAI签订了新合同。为探究这对未来冲突中AI的使用意味着什么，玛德琳·芬利采访了科技记者克里斯·斯托克尔-沃克。他解释了为何认为此刻代表着一个危险的转折点。支持《卫报》：theguardian.com/sciencepod 继续阅读...</p>
+        <p class="content">据报道，在过去的三个月里，特朗普的白宫曾两次利用AI实现政权更迭——一次是抓捕委内瑞拉总统尼古拉斯·马杜罗，最近一次是协助策划导致伊朗最高领袖阿亚图拉·阿里·哈梅内伊身亡的袭击。最近的袭击恰逢五角大楼因担忧其AI工具Claude被用于公司明确禁止的用途，而终止了与AI公司Anthropic的合作。政府迅速与OpenAI签订了新合同。为探究这对未来冲突中AI的使用意味着什么，玛德琳·芬利采访了科技记…</p>
         <div class="footer">
           <span class="date">2026-03-03T05:00:30.000Z</span>
           <a href="https://www.theguardian.com/science/audio/2026/mar/03/does-trump-want-to-wage-an-ai-powered-war-podcast" target="_blank" class="btn-link">阅读原文 →</a>
@@ -1488,6 +1860,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>作弊机器还是强大助手？一位实习教师的AI焦虑</h4>
@@ -1500,6 +1873,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>OpenAI修订与五角大楼的人工智能协议</h4>
@@ -1512,6 +1886,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>北卡罗来纳州众议院初选涉及伊朗战争、以色列和人工智能分歧</h4>
@@ -1524,6 +1899,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>据报道Cursor年化收入已突破20亿美元</h4>
@@ -1536,6 +1912,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>ChatGPT卸载量在国防部交易后激增295%</h4>
@@ -1548,6 +1925,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>五角大楼最青睐的科技人物是这位身穿夏威夷衬衫的创始人</h4>
@@ -1560,6 +1938,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>尚无良策：AI公司应如何与政府合作？</h4>
@@ -1572,6 +1951,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Verge</span>
         </div>
         <h4>Anthropic升级Claude的记忆功能以吸引AI用户转换</h4>
@@ -1584,6 +1964,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>Anthropic与美国国防部谈判如何破裂</h4>
@@ -1596,6 +1977,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>人工智能正在创造‘幽灵GDP’吗？</h4>
@@ -1608,6 +1990,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>政府欲惩罚Anthropic</h4>
@@ -1620,10 +2003,11 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>Anthropic的AI模型Claude因与美国军方纠纷后人气飙升</h4>
-        <p class="content">在因伦理问题被五角大楼列入黑名单后，Claude在美国和英国的应用商店排行榜上攀升至榜首。上周，AI模型Claude因伦理问题被五角大楼列入黑名单后人气激增。周六，Claude在美国苹果应用商店免费应用排行榜上攀升至第一位，取代了OpenAI的ChatGPT。此前一天，五角大楼刚选定OpenAI为其机密军事网络提供AI。该机器人的应用在英国iPhone应用排行榜上也有所攀升，但未能超越ChatGPT。根据Sensor Tower的数据，Claude在美国和英国的安卓排行榜上也迅速上升，尽管ChatGPT仍占据主导地位。</p>
+        <p class="content">在因伦理问题被五角大楼列入黑名单后，Claude在美国和英国的应用商店排行榜上攀升至榜首。上周，AI模型Claude因伦理问题被五角大楼列入黑名单后人气激增。周六，Claude在美国苹果应用商店免费应用排行榜上攀升至第一位，取代了OpenAI的ChatGPT。此前一天，五角大楼刚选定OpenAI为其机密军事网络提供AI。该机器人的应用在英国iPhone应用排行榜上也有所攀升，但未能超越ChatGP…</p>
         <div class="footer">
           <span class="date">2026-03-02T20:31:31.000Z</span>
           <a href="https://www.theguardian.com/technology/2026/mar/02/claude-anthropic-ai-pentagon" target="_blank" class="btn-link">阅读原文 →</a>
@@ -1632,6 +2016,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Verge</span>
         </div>
         <h4>苹果或使用谷歌服务器存储升级版AI Siri数据</h4>
@@ -1644,6 +2029,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>一位哲学‘先知’</h4>
@@ -1656,6 +2042,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>用户正弃用ChatGPT转向Claude——以下是切换方法</h4>
@@ -1668,6 +2055,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Verge</span>
         </div>
         <h4>美国最高法院拒绝审理AI生成艺术版权案，维持其不可获得版权的规则</h4>
@@ -1680,6 +2068,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>科技工作者敦促国防部和国会撤销对Anthropic的供应链风险标签</h4>
@@ -1692,10 +2081,11 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Verge</span>
         </div>
         <h4>英伟达投资40亿美元于光子学以保持AI领先地位</h4>
-        <p class="content">英伟达周一宣布，将分别向Lumentum和Coherent投资20亿美元，这两家公司正在开发用于数据中心的光子学技术，如光收发器、电路交换机和激光器，用于长距离高速传输数据。其技术可提高未来AI数据中心的能效、数据传输速度和带宽。此前，英伟达已利用2020年收购网络硬件公司Mellanox来增强NVLink并增加其GPU之间的数据传输量。对于Lumentum，这项非排他性多年协议包括“数十亿美元的采购承诺……阅读The Verge的完整报道。</p>
+        <p class="content">英伟达周一宣布，将分别向Lumentum和Coherent投资20亿美元，这两家公司正在开发用于数据中心的光子学技术，如光收发器、电路交换机和激光器，用于长距离高速传输数据。其技术可提高未来AI数据中心的能效、数据传输速度和带宽。此前，英伟达已利用2020年收购网络硬件公司Mellanox来增强NVLink并增加其GPU之间的数据传输量。对于Lumentum，这项非排他性多年协议包括“数十亿美元的…</p>
         <div class="footer">
           <span class="date">2026-03-02T16:56:49.000Z</span>
           <a href="https://www.theverge.com/tech/887635/nvidia-ai-photonics-lumentum-coherent" target="_blank" class="btn-link">阅读原文 →</a>
@@ -1704,6 +2094,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>夫妻创始人的公司14.ai正在取代初创企业的客服团队</h4>
@@ -1716,6 +2107,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>‘飞越州的数据殖民化’：数据中心如何撕裂美国小镇</h4>
@@ -1728,12 +2120,12 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Verge</span>
         </div>
         <h4>OpenAI如何在AI监控问题上向五角大楼妥协</h4>
         <p class="content">周五晚间，在国防部与Anthropic对峙的余波中，OpenAI首席执行官萨姆·奥尔特曼宣布，他的公司已成功与五角大楼谈判达成新条款。美国政府刚刚因Anthropic坚持两条军事用途红线——不对美国人进行大规模监控，不使用致命性自主武器（或无需人类监督即可击杀目标的AI系统）——而将其列入黑名单。然而，奥尔特曼暗示，他找到了一种独特的方式，在OpenAI的合同中保留了同样的限制。
-“我们最重要的两项安全原则是禁止国内大规模监控和禁止致命性自主武器……”
-阅读The Verge的完整报道。</p>
+“我们最重要的两…</p>
         <div class="footer">
           <span class="date">2026-03-02T14:22:18.000Z</span>
           <a href="https://www.theverge.com/ai-artificial-intelligence/887309/openai-anthropic-dod-military-pentagon-contract-sam-altman-hegseth" target="_blank" class="btn-link">阅读原文 →</a>
@@ -1742,6 +2134,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>Anthropic的Claude报告大规模服务中断</h4>
@@ -1754,10 +2147,11 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>我是Meta监督委员会成员。我们现在就需要AI保护措施 | 苏珊娜·诺塞尔</h4>
-        <p class="content">AI正在改变我们的世界。接受独立监督是公司保护我们权利最起码该做的事。AI改变我们生活的速度令人目眩。与以往的技术革命（无线电、核裂变或互联网）不同，政府并未引领潮流。我们知道AI可能是危险的；聊天机器人建议青少年自杀，并且可能很快就能指导如何制造生物武器。然而，目前没有类似美国食品药品监督管理局的机构，在新模型公开发布前进行安全性测试。与核工业不同，公司通常不必披露危险的违规行为或事故。科技行业的游说力量、华盛顿瘫痪性的两极分化，以及这种强大、快速发展的技术本身的极端复杂性，使得联邦监管举步维艰。欧洲官员正面临一些声称其规则阻碍了欧洲大陆竞争力的反对声音。尽管美国有几个州正在试点AI法律，但它们以一种试探性的拼凑方式运作，而唐纳德·特朗普曾试图使其无效。像OpenAI的ChatGPT和Google的Gemini这样的AI平台负责人表示他们关心安全。但掌控AI的未来意味着向连其创造者都无法完全理解的模型投入数十亿美元，并做出诸如添加广告——以及五角大楼现在正从Anthropic寻求的能力——等增加风险的选择。Anthropic自称是最有良心的前沿AI公司，表示其模型被训练来“想象一位深思熟虑的资深Anthropic员工”会如何权衡帮助性与潜在危害。这一指令呼应了多年前对硅谷公司的批评，这些公司从封闭的董事会会议室塑造了全球用户的生活。消费者不相信他们得到了妥善的照顾。去年接受调查的美国人中，足足有77%认为AI可能对人类构成威胁。继续阅读...</p>
+        <p class="content">AI正在改变我们的世界。接受独立监督是公司保护我们权利最起码该做的事。AI改变我们生活的速度令人目眩。与以往的技术革命（无线电、核裂变或互联网）不同，政府并未引领潮流。我们知道AI可能是危险的；聊天机器人建议青少年自杀，并且可能很快就能指导如何制造生物武器。然而，目前没有类似美国食品药品监督管理局的机构，在新模型公开发布前进行安全性测试。与核工业不同，公司通常不必披露危险的违规行为或事故。科技行业…</p>
         <div class="footer">
           <span class="date">2026-03-02T11:00:09.000Z</span>
           <a href="https://www.theguardian.com/commentisfree/2026/mar/02/meta-oversight-board-ai" target="_blank" class="btn-link">阅读原文 →</a>
@@ -1766,6 +2160,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>订阅了《AI为大众》？与我们分享你最喜欢的提示词</h4>
@@ -1778,6 +2173,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>对AI有很多不满，但若有一种正念的使用方式呢？</h4>
@@ -1790,6 +2186,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>美国学校正大力押注人工智能，纽约市会是下一个吗？</h4>
@@ -1802,6 +2199,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>中国的新学习伙伴：人工智能聊天机器人</h4>
@@ -1814,6 +2212,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Verge</span>
         </div>
         <h4>联想展示带小狗眼睛的机器人手臂等桌面AI概念产品</h4>
@@ -1826,6 +2225,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>Google联手Airtel在印度加强RCS反垃圾信息防护</h4>
@@ -1838,10 +2238,11 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>据报道美军在伊朗打击中使用Claude，无视特朗普禁令</h4>
-        <p class="content">特朗普称Anthropic为‘激进左翼AI公司，由一群不了解真实世界的人运营’。据报道，尽管特朗普数小时前宣布切断与该公司及其AI工具的所有联系，美军仍使用了Anthropic的AI模型Claude来为其对伊朗的打击提供信息。据《华尔街日报》和Axios报道，在周六开始的美国-以色列对伊朗的大规模联合轰炸期间使用了Claude。这凸显了当技术已深度融入作战行动时，美军从其任务中撤出强大AI工具的复杂性。</p>
+        <p class="content">特朗普称Anthropic为‘激进左翼AI公司，由一群不了解真实世界的人运营’。据报道，尽管特朗普数小时前宣布切断与该公司及其AI工具的所有联系，美军仍使用了Anthropic的AI模型Claude来为其对伊朗的打击提供信息。据《华尔街日报》和Axios报道，在周六开始的美国-以色列对伊朗的大规模联合轰炸期间使用了Claude。这凸显了当技术已深度融入作战行动时，美军从其任务中撤出强大AI工具的复…</p>
         <div class="footer">
           <span class="date">2026-03-01T17:00:43.000Z</span>
           <a href="https://www.theguardian.com/technology/2026/mar/01/claude-anthropic-iran-strikes-us-military" target="_blank" class="btn-link">阅读原文 →</a>
@@ -1850,6 +2251,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>投资者透露他们不再在AI SaaS公司中寻找什么</h4>
@@ -1862,6 +2264,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>OpenAI透露与五角大楼协议的更多细节</h4>
@@ -1874,6 +2277,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>数据中心开发商面临压力，需披露其对英国净排放的影响</h4>
@@ -1886,6 +2290,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>至少，音乐不会说谎</h4>
@@ -1898,6 +2303,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>数据中心将如何影响澳大利亚的电价、供水和排放？</h4>
@@ -1910,10 +2316,11 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>读者回复：如果计算机总是说“是”，世界会怎样？</h4>
-        <p class="content">在这个长期连载的专栏中，读者们回答了其他读者的问题：我们能否应对一个计算机不再说“不”的世界？……本周的问题是：如果莎士比亚被丢到现代伦敦会怎样？经过多年计算机说“不”给我们带来的偏头痛和早生华发，我开始担心计算机——或者更确切地说，像ChatGPT和Gemini这样的大型语言模型AI——太热衷于表现得友善和说“是”了。我承认我使用过这两种程序，但我注意到，嗯，它们似乎在试图讨好，会说诸如“杰夫，你完全正确”和“这差不多是对的”这样的话。通常，当我问“你介意再思考一下这个问题吗？”，我会得到另一个回应：“杰夫，你再次质疑这个结果是完全正确的。事实证明，我的回答有点仓促了……”如果世界更多地依赖于由大型语言模型从互联网信息海洋中筛选出的信息来运行，会有什么后果？我们能否期待一个AI更关心显得富有同情心（以获得好评？）而非事实准确的未来？呃，是不是有点太像人类了？杰夫·科利特，爱丁堡 继续阅读...</p>
+        <p class="content">在这个长期连载的专栏中，读者们回答了其他读者的问题：我们能否应对一个计算机不再说“不”的世界？……本周的问题是：如果莎士比亚被丢到现代伦敦会怎样？经过多年计算机说“不”给我们带来的偏头痛和早生华发，我开始担心计算机——或者更确切地说，像ChatGPT和Gemini这样的大型语言模型AI——太热衷于表现得友善和说“是”了。我承认我使用过这两种程序，但我注意到，嗯，它们似乎在试图讨好，会说诸如“杰夫，…</p>
         <div class="footer">
           <span class="date">2026-03-01T14:00:43.000Z</span>
           <a href="https://www.theguardian.com/lifeandstyle/2026/mar/01/readers-reply-what-would-happen-to-the-world-if-computer-said-yes" target="_blank" class="btn-link">阅读原文 →</a>
@@ -1922,6 +2329,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>SaaS进，SaaS出：揭秘SaaS末日背后的驱动力</h4>
@@ -1934,6 +2342,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>“老板软件”工具正在追踪你吗？</h4>
@@ -1946,6 +2355,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>抗AI的‘光环’股票推动英国和欧盟市场创下历史新高</h4>
@@ -1958,6 +2368,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>Anthropic为自己设下的陷阱</h4>
@@ -1970,6 +2381,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TechCrunch</span>
         </div>
         <h4>推动AI繁荣的数十亿美元基础设施协议</h4>
@@ -1982,6 +2394,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">纽约时报</span>
         </div>
         <h4>OpenAI与美国国防部达成人工智能协议，此前Anthropic发生冲突</h4>
@@ -1994,6 +2407,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">新闻</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">theguardian</span>
         </div>
         <h4>丈夫欲用ChatGPT打造可持续住房，随后其生活被AI掌控</h4>
@@ -2005,17 +2419,18 @@ Windows supported.</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#f97316,#fb923c)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#f97316,#ea580c)">
         <div class="header-left">
           <span class="category-icon">👥</span>
           <span>社区</span>
         </div>
         <span class="count">13条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>公众号躺更神器！OpenClaw+Claude Skill 实现自动读对标 + 写文 + 配图 + 存入草稿箱</h4>
@@ -2028,6 +2443,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>Unity 资源导入设置脚本 笔记</h4>
@@ -2040,6 +2456,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>RAG技术学习笔记（含实操解析）</h4>
@@ -2052,6 +2469,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>SCALE | 重构 AI 时代数据库能力的全新评估标准</h4>
@@ -2064,6 +2482,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>从'傻等'到'流淌'：我在AI项目中实现流式输出的血泪史（附真实代码+深度解析）</h4>
@@ -2076,6 +2495,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>通用管理后台组件库-9-高级表格组件</h4>
@@ -2088,6 +2508,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>Context 不是压缩出来的，而是设计出来的</h4>
@@ -2100,6 +2521,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>CC Switch 作者故事启发 - 从转行到破局</h4>
@@ -2112,6 +2534,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>移动端开发稳了？AI 目前还无法取代客户端开发，小红书的论文告诉你数据</h4>
@@ -2124,6 +2547,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>从零构建一个 Mini Claude Code：面向初学者的 Agent 开发实战指南</h4>
@@ -2136,6 +2560,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>OpenClaw 是什么？为什么节后热度如此之高？</h4>
@@ -2148,6 +2573,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>OpenClaw 从能聊到能干差的是这 50 个 Skills 😍😍😍</h4>
@@ -2160,6 +2586,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">博客/研究/评论/深度报道</span>
+          <span class="tag section">社区</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">稀土掘金</span>
         </div>
         <h4>AI 正在造就你的「认知卸载」，但是时代如此</h4>
@@ -2171,17 +2598,18 @@ Windows supported.</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#8b5cf6,#a78bfa)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">
         <div class="header-left">
           <span class="category-icon">🔍</span>
           <span>网络搜索</span>
         </div>
         <span class="count">41条</span>
       </div>
-      <div class="group-content" style="display:none">
+      <div class="group-content">
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">TRIPURA STAR NEWS</span>
         </div>
         <h4>AI在教育领域的应用</h4>
@@ -2194,15 +2622,14 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">National Today</span>
         </div>
         <h4>对失败AI初创公司的调查导致洛杉矶联合学区总监和顾问被调查</h4>
         <p class="content">来源：National Today
 日期：2026-03-03T06:47:01Z
 板块：网络搜索
-链接：https://nationaltoday.com/us/ca/los-angeles/news/2026/03/03/probe-into-failed-ai-startup-leads-to-investigations-of-lausd-superintendent-and-consultant/
-
-一项针对一家失败的人工智能初创公司的调查，已导致对洛杉矶联合学区总监阿尔贝托·卡瓦略及其顾问的独立调查。该调查源于对卡瓦略在2022年批准的一项价值数百万美元、旨在开发AI学习工具的合同，以及该初创公司随后倒闭的审查。</p>
+链接：https://nationaltoday.com/us/ca/los-angeles/news/2026/03/03/probe-into-failed-ai-startup-leads-to-investigations-of-lausd-superintendent-and-consul…</p>
         <div class="footer">
           <span class="date">2026-03-03T06:47:01Z</span>
           <a href="https://nationaltoday.com/us/ca/los-angeles/news/2026/03/03/probe-into-failed-ai-startup-leads-to-investigations-of-lausd-superintendent-and-consultant/" target="_blank" class="btn-link">阅读原文 →</a>
@@ -2211,6 +2638,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Times of India</span>
         </div>
         <h4>麻省理工学院提供免费AI学习课程：查看面向初学者、高级和研究人员的课程列表</h4>
@@ -2223,6 +2651,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">EdTech Innovation Hub</span>
         </div>
         <h4>SFBU与OpenAI启动AI教育合作 | ETIH教育科技新闻</h4>
@@ -2235,6 +2664,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">Markets Herald</span>
         </div>
         <h4>人工智能在高等教育的未来：以信任、伦理和问责为基础构建</h4>
@@ -2247,6 +2677,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Hans India</span>
         </div>
         <h4>在学校引入人工智能时，年龄适宜性至关重要</h4>
@@ -2259,6 +2690,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>人工智能赋能教学改革</h4>
@@ -2271,6 +2703,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>AI与高等教育“接轨”，路还有多远</h4>
@@ -2283,6 +2716,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>当「技术派」遭遇「教研派」:AI+教育赛道,谁更懂老师的痛?</h4>
@@ -2295,6 +2729,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>2026教育大转折:AI全面进课堂</h4>
@@ -2307,6 +2742,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>AI赋能教育!教育部让科技“看见”每个孩子,精准培养不落下一人</h4>
@@ -2319,6 +2755,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>AI时代来临,教育方式该变了 ...@王云飞观察的动态</h4>
@@ -2331,6 +2768,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>教育部AI基地落户门头沟,“小悟空空间站”新学期启用</h4>
@@ -2343,6 +2781,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>教、学、管、评、研、全链渗透:AI 教育的场景适配与技术支撑体系</h4>
@@ -2355,6 +2794,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>教育部文件!教师不得将AI用于下列情形!AI出错,教师担责</h4>
@@ -2367,6 +2807,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>不要让下一代的大脑成为AI的跑马场</h4>
@@ -2379,6 +2820,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>人工智能赋能 构建教育新域新质</h4>
@@ -2391,6 +2833,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>人工智能时代:教育必须从“知识考核”转向“能力革命” - 哔哩哔哩</h4>
@@ -2403,6 +2846,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>AI时代最稀缺的教育:高质量陪伴与情绪看见</h4>
@@ -2415,6 +2859,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>代表委员说|徐玖平:人工智能时代的教育革新重在“认知赋能”</h4>
@@ -2427,6 +2872,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>人工智能如何支持远程教育</h4>
@@ -2439,6 +2885,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>AI深度融入上海中小学课堂 赋能教育提质增效与创新人才培养</h4>
@@ -2451,6 +2898,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">baidu</span>
         </div>
         <h4>【中国日报】AI时代的教育改革再思考-四川大学</h4>
@@ -2463,6 +2911,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">WVVA</span>
         </div>
         <h4>西弗吉尼亚州教育部着手在课堂中整合AI工具</h4>
@@ -2475,6 +2924,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">Caribbean National Weekly</span>
         </div>
         <h4>CFBC毕业生在第37届毕业典礼上被敦促拥抱AI与终身学习</h4>
@@ -2487,6 +2937,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">GovTech</span>
         </div>
         <h4>密歇根大学教授对AI使用仍持不同态度</h4>
@@ -2499,6 +2950,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">decaturish.com</span>
         </div>
         <h4>迪凯特高中将举办与埃默里大学专家的AI讨论会</h4>
@@ -2511,6 +2963,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">New Jersey Institute of Technology (NJIT)</span>
         </div>
         <h4>新泽西理工学院将全天课程调整为全校范围的AI探索日</h4>
@@ -2523,6 +2976,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Washington Post</span>
         </div>
         <h4>观点 | 未来成功的最佳教育可能让你大吃一惊</h4>
@@ -2535,6 +2989,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">EdSource</span>
         </div>
         <h4>更新：美国众议院立法者称教师需要接受人工智能培训</h4>
@@ -2547,6 +3002,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">York College</span>
         </div>
         <h4>约克学院教师参与纽约市立大学-智利人工智能教育研讨会</h4>
@@ -2559,6 +3015,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">WHRO</span>
         </div>
         <h4>弗吉尼亚州立法者提议为教育领域人工智能应用设立护栏</h4>
@@ -2571,6 +3028,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">The Knight News</span>
         </div>
         <h4>纽约市立大学获AI教育奖</h4>
@@ -2583,6 +3041,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">Union-Bulletin</span>
         </div>
         <h4>瓦拉瓦拉学区获得微软资助以利用人工智能推进学习</h4>
@@ -2595,6 +3054,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">advtech.co.za</span>
         </div>
         <h4>ADvTECH教师培训平台获SACE认可，AI正重塑教育</h4>
@@ -2607,6 +3067,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">Duke Today</span>
         </div>
         <h4>杜克大学为学术领导者开设AI学院</h4>
@@ -2619,6 +3080,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">Disruption Banking</span>
         </div>
         <h4>国际证监会组织宣布启动首届人工智能时代投资者教育科技冲刺赛申请征集</h4>
@@ -2631,6 +3093,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">Crowdfund Insider</span>
         </div>
         <h4>阿联酋将AI精通与金融素养纳入新教育路线图</h4>
@@ -2643,6 +3106,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">NDTV</span>
         </div>
         <h4>Anthropic推出免费AI学习平台，提供Claude、AI通识与开发者工具课程</h4>
@@ -2655,6 +3119,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">Los Angeles Times</span>
         </div>
         <h4>一位有魅力的洛杉矶教育家、一位人脉广泛的顾问与一家失败AI公司的FBI调查</h4>
@@ -2667,6 +3132,7 @@ Windows supported.</div>
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
+          <span class="tag section">网络搜索</span>
           <span class="tag source" style="background:#64748b20;color:#64748b">bing</span>
         </div>
         <h4>Jubilant Bhartia基金会与麦吉尔大学合作成立人工智能教育与研究中心</h4>
@@ -2679,6 +3145,7 @@ Windows supported.</div>
     </div></div>
 
 <script>
+// 标签切换
 function switchTab(index){
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
@@ -2686,17 +3153,29 @@ function switchTab(index){
   panels.forEach((p,i)=>p.classList.toggle('active',i===index));
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+// 分组折叠
 function toggleGroup(el){
   const content = el.nextElementSibling;
-  content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  const isOpen = content.style.display === 'none' || !content.style.display;
+  content.style.display = isOpen ? 'block' : 'none';
 }
+
+// 摘要折叠
 function toggleAbstract(el){
   const content = el.nextElementSibling;
   const isOpen = content.style.display === 'block';
   content.style.display = isOpen ? 'none' : 'block';
   el.classList.toggle('active',!isOpen);
-  el.querySelector('.collapse-text').textContent = isOpen ? '英文摘要（点击查看）' : '英文摘要（点击收起）';
+  el.querySelector('.collapse-text').textContent = isOpen ? '点击查看详情' : '点击收起详情';
+  el.querySelector('.collapse-arrow').textContent = isOpen ? '▼' : '▲';
 }
+
+// 默认展开第一个分组
+document.addEventListener('DOMContentLoaded',function(){
+  const firstGroup = document.querySelector('.group-content');
+  if(firstGroup) firstGroup.style.display = 'block';
+});
 </script>
 </body>
 </html>
