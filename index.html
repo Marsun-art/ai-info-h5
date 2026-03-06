@@ -25,14 +25,12 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;color:var(--primary);-webkit-font-smoothing:antialiased}
 
-/* 头部样式 */
 .header{text-align:center;margin:32px 0 24px;padding:0 16px}
 .header h2{font-size:32px;font-weight:800;background:linear-gradient(135deg,#0ea5e9,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
 .header p{font-size:14px;color:var(--secondary);display:flex;align-items:center;justify-content:center;gap:8px}
 .header p::before{content:"";width:8px;height:8px;background:var(--success);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.1)}}
 
-/* 标签栏 */
 .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
 .tab{position:relative;padding:16px 8px;border-radius:var(--radius-lg);text-align:center;font-size:13px;font-weight:700;cursor:pointer;border:none;color:#fff;transition:all 0.3s ease;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
 .tab:nth-child(1){background:linear-gradient(135deg,#10b981,#0ea5e9)}
@@ -42,34 +40,28 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
 .tab.active{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
 .tab .tab-icon{display:block;font-size:22px;margin-bottom:6px}
 
-/* 面板 */
 .panel{display:none;animation:fadeIn 0.4s ease}
 .panel.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1,transform:translateY(0)}}
 
-/* 卡片样式 */
 .card{background:var(--surface);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-radius:var(--radius-xl);padding:24px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border);transition:all 0.3s ease}
 .card:hover{transform:translateY(-4px);box-shadow:0 15px 45px rgba(14, 165, 233, 0.15)}
 
-/* 标签样式 */
 .label-tag{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-right:8px;margin-bottom:6px}
 .label-tag.info{background:#dbeafe;color:#1d4ed8}
 .label-tag.value{background:#dcfce7;color:#15803d}
 .label-tag.scene{background:#fef3c7;color:#b45309}
 .label-tag.reason{background:#fce7f3;color:#be185d}
 
-/* 字段网格布局 */
 .field-grid{display:grid;gap:8px;margin:12px 0}
 .field{line-height:1.6;margin:8px 0}
 
-/* 按钮样式 */
 .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 20px;border-radius:var(--radius);font-size:15px;font-weight:700;text-decoration:none;transition:all 0.3s;border:none;cursor:pointer;margin-top:20px;color:#fff}
 .github-btn{background:linear-gradient(135deg,#10b981,#059669)}
 .paper-btn{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
 .btn-link{display:inline-flex;align-items:center;gap:4px;color:var(--accent);font-size:14px;font-weight:700;text-decoration:none;transition:gap 0.2s}
 .btn-link:hover{gap:8px}
 
-/* 分组卡片 */
 .group-card{margin-bottom:16px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
 .group-header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;color:#fff;font-weight:700;cursor:pointer;transition:all 0.2s}
 .group-header:hover{opacity:0.95}
@@ -79,7 +71,6 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
 .group-content{padding:20px;background:var(--surface);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);animation:slideDown 0.4s ease}
 @keyframes slideDown{from{opacity:0;max-height:0}to{opacity:1;max-height:3000px}}
 
-/* 筛选项 */
 .filter-item{padding:20px;border-bottom:1px solid var(--border)}
 .filter-item:last-child{border-bottom:none}
 .filter-item h4{font-size:18px;color:var(--primary);margin-bottom:12px;font-weight:700}
@@ -87,14 +78,12 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
 .filter-item .footer{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;border-top:1px dashed var(--border)}
 .date{font-size:13px;color:var(--secondary)}
 
-/* 标签组 */
 .tag-group{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .tag{padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600}
 .tag.category{background:#e0e7ff;color:#4f46e5}
 .tag.section{background:#f0f9ff;color:#0369a1}
 .tag.source{background:rgba(14,165,233,0.1);color:#0ea5e9}
 
-/* GitHub卡片 */
 .repo-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .repo-title-wrapper{display:flex;align-items:center;gap:8px}
 .repo-icon{font-size:24px}
@@ -105,27 +94,22 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
 .lang-badge{background:#fafafa;color:#374151;border:1px solid #e5e7eb}
 .score-badge{background:#fef3c7;color:#b45309}
 
-/* 论文卡片 */
-.paper-badge{display:inline-block;background:#f0f9ff;color:#0369a1;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px}
 .paper-title{font-size:20px;font-weight:700;margin-bottom:12px;line-height:1.5}
 .paper-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
 .meta-item{font-size:14px;color:var(--secondary)}
 .abstract-en{color:#475569;margin-bottom:8px}
 .abstract-cn{color:#0f172a;font-weight:500}
 
-/* 折叠区域 */
 .collapse-section{margin:16px 0}
 .collapse-btn{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f8fafc;border-radius:var(--radius);cursor:pointer;font-weight:600;color:var(--primary)}
 .collapse-content{display:none;padding:16px;background:#fff;border-radius:0 0 var(--radius) var(--radius);margin-top:4px;font-size:14px;color:var(--secondary)}
-.collapse-btn.active .collapse-arrow{transform:rotate(180px)}
+.collapse-btn.active .collapse-arrow{transform:rotate(180deg)}
 .collapse-arrow{transition:transform 0.3s ease}
 
-/* 空状态 */
 .empty-state{text-align:center;padding:80px 20px;color:var(--secondary)}
 .empty-state .icon{font-size:64px;margin-bottom:20px;opacity:.6}
 .empty-state p{font-size:16px;font-weight:500}
 
-/* 响应式 */
 @media (max-width:380px){
   .tabs{gap:6px}
   .tab{padding:12px 4px;font-size:12px}
@@ -158,17 +142,16 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
   </div>
 </div>
 
-<!-- 内容面板 -->
 <div class="panel active">
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#10b981,#059669)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(16,185,129,0.7), rgba(5,150,105,0.7))">
         <div class="header-left">
           <span class="category-icon">💡</span>
           <span>AI使用技巧/方法</span>
         </div>
         <span class="count">12条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <h4>公众号躺更神器！OpenClaw+Claude Skill 实现自动读对标 + 写文 + 配图 + 存入草稿箱</h4>
         <div class="field-grid">
@@ -315,14 +298,14 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#ec4899,#db2777)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(236,72,153,0.7), rgba(219,39,119,0.7))">
         <div class="header-left">
           <span class="category-icon">🚀</span>
           <span>AI落地实践/案例</span>
         </div>
         <span class="count">14条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <h4>从'傻等'到'流淌'：我在AI项目中实现流式输出的血泪史（附真实代码+深度解析）</h4>
         <div class="field-grid">
@@ -493,14 +476,14 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(14,165,233,0.7), rgba(2,132,199,0.7))">
         <div class="header-left">
           <span class="category-icon">🛠️</span>
           <span>AI工具/产品</span>
         </div>
         <span class="count">9条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <h4>CC Switch 作者故事启发 - 从转行到破局</h4>
         <div class="field-grid">
@@ -611,14 +594,14 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(139,92,246,0.7), rgba(124,58,237,0.7))">
         <div class="header-left">
           <span class="category-icon">📋</span>
           <span>AI政策/规划</span>
         </div>
         <span class="count">9条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <h4>在学校引入人工智能时，年龄适宜性至关重要</h4>
         <div class="field-grid">
@@ -729,14 +712,14 @@ body{padding:12px;background:var(--bg);font-family:-apple-system,BlinkMacSystemF
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(245,158,11,0.7), rgba(217,119,6,0.7))">
         <div class="header-left">
           <span class="category-icon">📊</span>
           <span>AI行业数据/趋势</span>
         </div>
         <span class="count">6条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <h4>当「技术派」遭遇「教研派」:AI+教育赛道,谁更懂老师的痛?</h4>
         <div class="field-grid">
@@ -836,14 +819,6 @@ pixel of video.</div>
       <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（课堂活动监测、在线学习专注度分析）、科研支持（人体运动分析、行为学研究）、校园安全（区域入侵检测、紧急情况人员定位）、健康关怀（学生宿舍异常活动与生命体征监测）、设施管理（图书馆/实验室空间利用率分析）。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>技术方案高度贴合高校对隐私、成本与多场景应用的需求，其非视觉感知特性在合规性与易用性上优势明显，软硬件设计考虑了校园IT环境适配与扩展性。</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/ruvnet/RuView/main/README.md</div>
-    </div>
     <a href="https://github.com/ruvnet/RuView" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -870,14 +845,6 @@ RAG Agent. Perfect for code exploration</div>
       <div class="field"><span class="label-tag scene">适用场景</span>教学辅助：编程课程代码结构分析与理解；科研支持：研究项目代码库探索与依赖分析；课程设计：教师构建教学案例代码知识图谱；毕业设计：学生项目代码审查与架构理解；实验室管理：研究团队代码资产梳理与导航。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>产品高度贴合计算机教育场景，纯客户端方案完美匹配高校IT环境与隐私合规要求，MCP协议支持主流AI编程工具，扩展性强。</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/abhigyanpatwari/GitNexus/main/README.md</div>
-    </div>
     <a href="https://github.com/abhigyanpatwari/GitNexus" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -907,14 +874,6 @@ levels of tasks that could take minutes to hours.</div>
       <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（课件生成、研究报告）、科研支持（文献分析、数据管道）、校园自动化（内容工作流、仪表板搭建）、学术写作（报告生成）、项目开发（代码生成与测试）。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>子代理架构贴合高校多任务研究需求，沙箱隔离保障校园IT安全，技能扩展性支持教学科研场景定制，落地可行性高。</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/bytedance/deer-flow/main/README.md</div>
-    </div>
     <a href="https://github.com/bytedance/deer-flow" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -943,14 +902,6 @@ Network, and Database built in Rust.</div>
       <div class="field"><span class="label-tag scene">适用场景</span>教学辅助（智能课件检索与推荐）、科研支持（文献知识图谱与相似性分析）、校园管理（个性化学习路径规划）、学术协作（多模态研究数据管理）、智能问答（课程答疑与学习资源匹配）。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>产品高度贴合高校教学科研场景，自学习与本地AI特性完美匹配师生对数据隐私与实时响应的需求；技术栈轻量且兼容校园IT环境，部署成本低，具备优秀的落地可行性。</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/ruvnet/ruvector/main/README.md</div>
-    </div>
     <a href="https://github.com/ruvnet/ruvector" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -981,14 +932,6 @@ Network, and Database built in Rust.</div>
 4. 语言学习：多语言语音识别练习。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>产品高度贴合高校多语言教学与科研转录需求，设备端运行满足数据隐私与成本控制，技术栈适配校园多样IT环境，具备良好落地可行性。</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/moonshine-ai/moonshine/main/README.md</div>
-    </div>
     <a href="https://github.com/moonshine-ai/moonshine" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1019,14 +962,6 @@ Network, and Database built in Rust.</div>
 4. 实验管理：通过Trackio技能跟踪和可视化训练实验过程。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>技能库高度贴合高校AI教学与科研需求，标准化格式易于集成到现有IT环境，支持多场景复用，降低师生使用AI工具门槛。</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/huggingface/skills/main/README.md</div>
-    </div>
     <a href="https://github.com/huggingface/skills" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1057,14 +992,6 @@ and RL Training.</div>
       <div class="field"><span class="label-tag scene">适用场景</span>AI代码执行、编程智能体开发、GUI智能体测试、智能体评估、强化学习训练</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>平台提供安全可控的沙箱环境，高度契合高校AI教学与科研中对代码安全执行、实验环境隔离及资源调度的核心需求，技术架构与校园IT环境适配性强。</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/alibaba/OpenSandbox/main/README.md</div>
-    </div>
     <a href="https://github.com/alibaba/OpenSandbox" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1097,14 +1024,6 @@ debugging agent systems that require effective context management.</div>
 4. 系统评估：建立AI教学工具的性能评估与优化框架。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/muratcankoylan/Agent-Skills-for-Context-Engineering/main/README.md</div>
-    </div>
     <a href="https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1131,14 +1050,6 @@ debugging agent systems that require effective context management.</div>
       <div class="field"><span class="label-tag scene">适用场景</span>实时多人协作应用开发、在线游戏后端、实时聊天系统、协同编辑工具、实时数据同步项目。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/clockworklabs/SpacetimeDB/master/README.md</div>
-    </div>
     <a href="https://github.com/clockworklabs/SpacetimeDB" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1169,14 +1080,6 @@ debugging agent systems that require effective context management.</div>
 4. 校园信息系统的小型功能迭代。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/obra/superpowers/main/README.md</div>
-    </div>
     <a href="https://github.com/obra/superpowers" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1204,14 +1107,6 @@ debugging agent systems that require effective context management.</div>
       <div class="field"><span class="label-tag scene">适用场景</span>编程教学辅助、自动化脚本编写、代码项目分析与重构、多步骤任务分解与执行、团队协作编程模拟。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/shareAI-lab/learn-claude-code/main/README.md</div>
-    </div>
     <a href="https://github.com/shareAI-lab/learn-claude-code" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1235,14 +1130,6 @@ debugging agent systems that require effective context management.</div>
       <div class="field"><span class="label-tag scene">适用场景</span>教学辅助：现代软件开发课程实践环境搭建；科研支持：标准化Python项目依赖管理与环境隔离；技能培训：学生掌握生产级开发工具链（Conda, Poetry）。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/mihail911/modern-software-dev-assignments/master/README.md</div>
-    </div>
     <a href="https://github.com/mihail911/modern-software-dev-assignments" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1276,14 +1163,6 @@ commands.</div>
 4. 教职工技术工具开发支持。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/anthropics/claude-code/main/README.md</div>
-    </div>
     <a href="https://github.com/anthropics/claude-code" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1322,14 +1201,6 @@ Tools & AI Models</div>
 3. 技术安全审计与漏洞发现。</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/x1xhlol/system-prompts-and-models-of-ai-tools/main/README.md</div>
-    </div>
     <a href="https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
@@ -1361,21 +1232,12 @@ Windows supported.</div>
 3. 多平台社交聊天（Discord/Telegram）</div>
     </div>
     <div class="field"><span class="label-tag reason">推荐理由</span>无</div>
-    <div class="collapse-section">
-      <div class="collapse-btn" onclick="toggleAbstract(this)">
-        <span class="collapse-icon">📄</span>
-        <span class="collapse-text">README预览（点击查看）</span>
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="collapse-content">https://raw.githubusercontent.com/moeru-ai/airi/main/README.md</div>
-    </div>
     <a href="https://github.com/moeru-ai/airi" target="_blank" class="btn-primary github-btn">
       <span>🔗</span> 访问仓库
     </a>
   </div></div>
 <div class="panel">
   <div class="card paper-card">
-    <div class="paper-badge">📝 学术论文</div>
     <h3 class="paper-title">生成式AI时代用户感知的揭示：基于情感驱动的AI教育应用在电子教学数字化转型中的作用评估</h3>
     <div class="paper-meta">
       <span class="meta-item">👤 Adeleh Mazaherian, Erfan Nourbakhsh</span>
@@ -1396,7 +1258,7 @@ Windows supported.</div>
       </div>
       <div class="collapse-content">
         <div class="abstract-en">Unveiling User Perceptions in the Generative AI Era: A Sentiment-Driven\nEvaluation of AI Educational Apps' Role in Digital Transformation of e-Teaching</div>
-        <div class="abstract-cn">The rapid integration of generative artificial intelligence into education has driven digital transformation in e-teaching, yet user perceptions of AI educational apps remain underexplored. This study performs a sentiment-driven evaluation of user reviews from top AI ed-apps on the Google Play Store…</div>
+        <div class="abstract-cn">The rapid integration of generative artificial intelligence into education has driven digital transformation in e-teaching, yet user perceptions of AI educational apps remain underexplored. This study…</div>
       </div>
     </div>
     <a href="https://huggingface.co/papers/2512.11934" target="_blank" class="btn-primary paper-btn">
@@ -1404,7 +1266,6 @@ Windows supported.</div>
     </a>
   </div>
   <div class="card paper-card">
-    <div class="paper-badge">📝 学术论文</div>
     <h3 class="paper-title">数学误解基准：利用AI辅助教学弥合中学代数学习差距</h3>
     <div class="paper-meta">
       <span class="meta-item">👤 Otero Nancy, Druga Stefania, Lan Andrew</span>
@@ -1425,7 +1286,7 @@ Windows supported.</div>
       </div>
       <div class="collapse-content">
         <div class="abstract-en">A Benchmark for Math Misconceptions: Bridging Gaps in Middle School Algebra with\nAI-Supported Instruction</div>
-        <div class="abstract-cn">This study introduces an evaluation benchmark for middle school algebra to be used in artificial intelligence(AI) based educational platforms. The goal is to support the design of AI systems that can enhance learner conceptual understanding of algebra by taking into account their current level of al…</div>
+        <div class="abstract-cn">This study introduces an evaluation benchmark for middle school algebra to be used in artificial intelligence(AI) based educational platforms. The goal is to support the design of AI systems that can …</div>
       </div>
     </div>
     <a href="https://huggingface.co/papers/2412.03765" target="_blank" class="btn-primary paper-btn">
@@ -1433,7 +1294,6 @@ Windows supported.</div>
     </a>
   </div>
   <div class="card paper-card">
-    <div class="paper-badge">📝 学术论文</div>
     <h3 class="paper-title">人工智能评估量表再探：一个教育评估框架</h3>
     <div class="paper-meta">
       <span class="meta-item">👤 Mike Perkins, Jasper Roe, Leon Furze</span>
@@ -1454,7 +1314,7 @@ Windows supported.</div>
       </div>
       <div class="collapse-content">
         <div class="abstract-en">The AI Assessment Scale Revisited: A Framework for Educational Assessment</div>
-        <div class="abstract-cn">Recent developments in Generative Artificial Intelligence (GenAI) have created significant uncertainty in education, particularly in terms of assessment practices. Against this backdrop, we present an updated version of the AI Assessment Scale (AIAS), a framework with two fundamental purposes: to fa…</div>
+        <div class="abstract-cn">Recent developments in Generative Artificial Intelligence (GenAI) have created significant uncertainty in education, particularly in terms of assessment practices. Against this backdrop, we present an…</div>
       </div>
     </div>
     <a href="https://huggingface.co/papers/2412.09029" target="_blank" class="btn-primary paper-btn">
@@ -1462,7 +1322,6 @@ Windows supported.</div>
     </a>
   </div>
   <div class="card paper-card">
-    <div class="paper-badge">📝 学术论文</div>
     <h3 class="paper-title">AI驱动的虚拟教师提升教育效率：利用大型预训练模型进行自主错误分析与纠正</h3>
     <div class="paper-meta">
       <span class="meta-item">👤 Tianlong Xu, Yi-Fan Zhang, Zhendong Chu, Shen Wang, Qingsong Wen</span>
@@ -1483,7 +1342,7 @@ Windows supported.</div>
       </div>
       <div class="collapse-content">
         <div class="abstract-en">AI-Driven Virtual Teacher for Enhanced Educational Efficiency: Leveraging Large\nPretrain Models for Autonomous Error Analysis and Correction</div>
-        <div class="abstract-cn">Students frequently make mistakes while solving mathematical problems, and traditional error correction methods are both time-consuming and labor-intensive. This paper introduces an innovative Virtual AI Teacher system designed to autonomously analyze and correct student Errors (VATE). Leveraging ad…</div>
+        <div class="abstract-cn">Students frequently make mistakes while solving mathematical problems, and traditional error correction methods are both time-consuming and labor-intensive. This paper introduces an innovative Virtual…</div>
       </div>
     </div>
     <a href="https://huggingface.co/papers/2409.09403" target="_blank" class="btn-primary paper-btn">
@@ -1491,7 +1350,6 @@ Windows supported.</div>
     </a>
   </div>
   <div class="card paper-card">
-    <div class="paper-badge">📝 学术论文</div>
     <h3 class="paper-title">COGENT：一种面向课程大纲的年级适配性教育内容生成框架</h3>
     <div class="paper-meta">
       <span class="meta-item">👤 Zhengyuan Liu, Stella Xin Yin, Dion Hoe-Lian Goh, Nancy F. Chen</span>
@@ -1512,7 +1370,7 @@ Windows supported.</div>
       </div>
       <div class="collapse-content">
         <div class="abstract-en">COGENT: A Curriculum-oriented Framework for Generating Grade-appropriate\nEducational Content</div>
-        <div class="abstract-cn">While Generative AI has demonstrated strong potential and versatility in content generation, its application to educational contexts presents several challenges. Models often fail to align with curriculum standards and maintain grade-appropriate reading levels consistently. Furthermore, STEM educati…</div>
+        <div class="abstract-cn">While Generative AI has demonstrated strong potential and versatility in content generation, its application to educational contexts presents several challenges. Models often fail to align with curric…</div>
       </div>
     </div>
     <a href="https://huggingface.co/papers/2506.09367" target="_blank" class="btn-primary paper-btn">
@@ -1520,7 +1378,6 @@ Windows supported.</div>
     </a>
   </div>
   <div class="card paper-card">
-    <div class="paper-badge">📝 学术论文</div>
     <h3 class="paper-title">评估大型语言模型在GMAT考试中的表现：对商科教育未来的启示</h3>
     <div class="paper-meta">
       <span class="meta-item">👤 Vahid Ashrafimoghari, Necdet Gürkan, Jordan W. Suchow</span>
@@ -1541,7 +1398,7 @@ Windows supported.</div>
       </div>
       <div class="collapse-content">
         <div class="abstract-en">Evaluating Large Language Models on the GMAT: Implications for the Future of\nBusiness Education</div>
-        <div class="abstract-cn">The rapid evolution of artificial intelligence (AI), especially in the domain of Large Language Models (LLMs ) and generative AI , has opened new avenues for application across various fields, yet its role in business education remains underexplored. This study introduces the first benchmark to asse…</div>
+        <div class="abstract-cn">The rapid evolution of artificial intelligence (AI), especially in the domain of Large Language Models (LLMs ) and generative AI , has opened new avenues for application across various fields, yet its…</div>
       </div>
     </div>
     <a href="https://huggingface.co/papers/2401.02985" target="_blank" class="btn-primary paper-btn">
@@ -1549,7 +1406,6 @@ Windows supported.</div>
     </a>
   </div>
   <div class="card paper-card">
-    <div class="paper-badge">📝 学术论文</div>
     <h3 class="paper-title">教师应参与其中吗？一项关于生成式AI个性化任务在中学教育中的研究</h3>
     <div class="paper-meta">
       <span class="meta-item">👤 Candace Walkington, Mingyu Feng, Itffini Pruitt-Britton, Theodora Beauchamp, Andrew Lan</span>
@@ -1570,7 +1426,7 @@ Windows supported.</div>
       </div>
       <div class="collapse-content">
         <div class="abstract-en">Should There be a Teacher In-the-Loop? A Study of Generative AI Personalized\nTasks Middle School</div>
-        <div class="abstract-cn">Adapting instruction to the fine-grained needs of individual students is a powerful application of recent advances in large language models . These generative AI models can create tasks that correspond to students' interests and enact context personalization, enhancing students' interest in learning…</div>
+        <div class="abstract-cn">Adapting instruction to the fine-grained needs of individual students is a powerful application of recent advances in large language models . These generative AI models can create tasks that correspon…</div>
       </div>
     </div>
     <a href="https://huggingface.co/papers/2602.15876" target="_blank" class="btn-primary paper-btn">
@@ -1579,14 +1435,14 @@ Windows supported.</div>
   </div></div>
 <div class="panel">
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#07c160,#059669)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(7,193,96,0.7), rgba(5,150,105,0.7))">
         <div class="header-left">
           <span class="category-icon">📢</span>
           <span>公众号</span>
         </div>
         <span class="count">18条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
@@ -1823,14 +1679,14 @@ Windows supported.</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(37,99,235,0.7), rgba(29,78,216,0.7))">
         <div class="header-left">
           <span class="category-icon">📰</span>
           <span>新闻</span>
         </div>
         <span class="count">45条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">其他</span>
@@ -2419,14 +2275,14 @@ Windows supported.</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#f97316,#ea580c)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(249,115,22,0.7), rgba(234,88,12,0.7))">
         <div class="header-left">
           <span class="category-icon">👥</span>
           <span>社区</span>
         </div>
         <span class="count">13条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">产品发布/更新</span>
@@ -2598,14 +2454,14 @@ Windows supported.</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(to right, rgba(139,92,246,0.7), rgba(124,58,237,0.7))">
         <div class="header-left">
           <span class="category-icon">🔍</span>
           <span>网络搜索</span>
         </div>
         <span class="count">41条</span>
       </div>
-      <div class="group-content">
+      <div class="group-content" style="display:none;">
       <div class="filter-item">
         <div class="tag-group">
           <span class="tag category">教育领域</span>
@@ -3145,7 +3001,6 @@ Windows supported.</div>
     </div></div>
 
 <script>
-// 标签切换
 function switchTab(index){
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
@@ -3154,28 +3009,19 @@ function switchTab(index){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// 分组折叠
 function toggleGroup(el){
   const content = el.nextElementSibling;
-  const isOpen = content.style.display === 'none' || !content.style.display;
-  content.style.display = isOpen ? 'block' : 'none';
+  content.style.display = content.style.display === 'block' ? 'none' : 'block';
 }
 
-// 摘要折叠
 function toggleAbstract(el){
   const content = el.nextElementSibling;
   const isOpen = content.style.display === 'block';
   content.style.display = isOpen ? 'none' : 'block';
   el.classList.toggle('active',!isOpen);
-  el.querySelector('.collapse-text').textContent = isOpen ? '点击查看详情' : '点击收起详情';
+  el.querySelector('.collapse-text').textContent = isOpen ? '论文摘要（点击查看）' : '论文摘要（点击收起）';
   el.querySelector('.collapse-arrow').textContent = isOpen ? '▼' : '▲';
 }
-
-// 默认展开第一个分组
-document.addEventListener('DOMContentLoaded',function(){
-  const firstGroup = document.querySelector('.group-content');
-  if(firstGroup) firstGroup.style.display = 'block';
-});
 </script>
 </body>
 </html>
