@@ -6416,9 +6416,9 @@ function showBubbles() {
     return;
   }
 
-  // 精炼筛选和全部资讯：显示各分类颜色气泡
-  const expandedGroups = activePanel.querySelectorAll('.group-content.show');
-  if (expandedGroups.length === 0) {
+  // 精炼筛选和全部资讯：显示所有分类的气泡
+  const allGroups = activePanel.querySelectorAll('.group-card');
+  if (allGroups.length === 0) {
     if (bubbleNav) bubbleNav.classList.remove('show');
     return;
   }
@@ -6429,13 +6429,23 @@ function showBubbles() {
     document.body.appendChild(bubbleNav);
   }
 
-  const colorMap = getCategoryColors();
   let bubblesHTML = '<div class="bubble home" onclick="scrollToTop()" title="回到顶部">↑</div>';
 
-  expandedGroups.forEach((group, idx) => {
-    const header = group.previousElementSibling;
+  // 找到当前展开的分类索引
+  const expandedGroups = activePanel.querySelectorAll('.group-content.show');
+  let expandedIndex = -1;
+  if (expandedGroups.length > 0) {
+    const firstExpanded = expandedGroups[0];
+    Array.from(allGroups).forEach((group, idx) => {
+      if (group.querySelector('.group-content') === firstExpanded) {
+        expandedIndex = idx;
+      }
+    });
+  }
+
+  allGroups.forEach((group, idx) => {
+    const header = group.querySelector('.group-header');
     const bgStyle = header.style.background;
-    // 从背景中提取主色
     let mainColor = '#64748b';
     if (bgStyle.includes('#0ea5e9')) mainColor = '#0ea5e9';
     else if (bgStyle.includes('#8b5cf6')) mainColor = '#8b5cf6';
@@ -6447,7 +6457,9 @@ function showBubbles() {
     else if (bgStyle.includes('#f97316')) mainColor = '#f97316';
 
     const category = header.querySelector('.header-left span:last-child').textContent;
-    bubblesHTML += '<div class="bubble" style="background:' + mainColor + '" onclick="handleBubbleClick(' + idx + ')" title="' + category + '"></div>';
+    const isExpanded = (idx === expandedIndex);
+    const activeClass = isExpanded ? ' active' : '';
+    bubblesHTML += '<div class="bubble' + activeClass + '" style="background:' + mainColor + '" onclick="handleBubbleClick(' + idx + ')" title="' + category + '"></div>';
   });
 
   bubbleNav.innerHTML = bubblesHTML;
@@ -6456,29 +6468,29 @@ function showBubbles() {
 
 function handleBubbleClick(idx) {
   const activePanel = document.querySelector('.panel.active');
-  const expandedGroups = activePanel.querySelectorAll('.group-content.show');
+  const allGroups = activePanel.querySelectorAll('.group-card');
 
   // 收起当前展开的所有分组
+  const expandedGroups = activePanel.querySelectorAll('.group-content.show');
   expandedGroups.forEach(group => {
     group.classList.remove('show');
     group.previousElementSibling.classList.remove('active');
   });
 
-  // 展开目标分组（如果有）
-  const targetGroup = activePanel.querySelectorAll('.group-card')[idx];
-  if (targetGroup) {
-    const content = targetGroup.querySelector('.group-content');
-    const header = targetGroup.querySelector('.group-header');
-    content.classList.add('show');
-    header.classList.add('active');
-    content.scrollIntoView({behavior:'smooth',block:'center'});
+  // 展开目标分组（如果点击的不是当前已展开的）
+  if (allGroups[idx]) {
+    const targetContent = allGroups[idx].querySelector('.group-content');
+    const targetHeader = allGroups[idx].querySelector('.group-header');
+    targetContent.classList.add('show');
+    targetHeader.classList.add('active');
+    setTimeout(function() {
+      targetContent.scrollIntoView({behavior:'smooth',block:'center'});
+    }, 100);
   }
 
-  // 隐藏气泡
-  const bubbleNav = document.querySelector('.bubble-nav');
-  if (bubbleNav) bubbleNav.classList.remove('show');
+  // 更新气泡状态
+  setTimeout(showBubbles, 150);
 }
-
 function scrollToTop() {
   window.scrollTo({top:0,behavior:'smooth'});
   const bubbleNav = document.querySelector('.bubble-nav');
