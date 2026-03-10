@@ -443,6 +443,14 @@ body{
   .paper-meta{gap:10px}
 }
 
+/* 底部导航气泡 */
+.bubble-nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:1000;opacity:0;visibility:hidden;transition:all 0.3s ease}
+.bubble-nav.show{opacity:1;visibility:visible}
+.bubble{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:transform 0.2s ease,box-shadow 0.2s ease;border:2px solid #fff}
+.bubble:hover{transform:scale(1.1)}
+.bubble.home{background:#fff;color:var(--primary)}
+.bubble.active{transform:scale(1.15);box-shadow:0 6px 20px rgba(0,0,0,0.2)}
+
 /* 滚动条美化 */
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:var(--border-light);border-radius:3px}
@@ -6359,6 +6367,9 @@ function toggleGroup(el){
   const isShow = content.classList.contains('show');
   content.classList.toggle('show',!isShow);
   header.classList.toggle('active',!isShow);
+
+  // 触发动态气泡更新
+  setTimeout(showBubbles, 100);
 }
 
 function toggleAbstract(el){
@@ -6369,6 +6380,140 @@ function toggleAbstract(el){
   el.querySelector('.collapse-text').textContent = isOpen ? '论文摘要（点击查看）' : '论文摘要（点击收起）';
   el.querySelector('.collapse-arrow').textContent = isOpen ? '▼' : '▲';
 }
+
+/* 底部气泡导航 */
+function getCategoryColors() {
+  return {
+    "AI工具/产品": "#0ea5e9",
+    "AI政策/规划": "#8b5cf6",
+    "AI使用技巧/方法": "#10b981",
+    "AI行业数据/趋势": "#f59e0b",
+    "AI落地实践/案例": "#ec4899",
+    "公众号": "#07c160",
+    "新闻": "#3b82f6",
+    "社区": "#f97316",
+    "网络搜索": "#8b5cf6",
+    "其他": "#64748b"
+  };
+}
+
+function showBubbles() {
+  const activePanel = document.querySelector('.panel.active');
+  if (!activePanel) return;
+
+  let bubbleNav = document.querySelector('.bubble-nav');
+  const tabIndex = Array.from(document.querySelectorAll('.panel')).indexOf(activePanel);
+
+  // GitHub和论文页签：只显示白色气泡
+  if (tabIndex === 1 || tabIndex === 2) {
+    if (!bubbleNav) {
+      bubbleNav = document.createElement('div');
+      bubbleNav.className = 'bubble-nav';
+      document.body.appendChild(bubbleNav);
+    }
+    bubbleNav.innerHTML = '<div class="bubble home" onclick="scrollToTop()" title="回到顶部">↑</div>';
+    bubbleNav.classList.add('show');
+    return;
+  }
+
+  // 精炼筛选和全部资讯：显示各分类颜色气泡
+  const expandedGroups = activePanel.querySelectorAll('.group-content.show');
+  if (expandedGroups.length === 0) {
+    if (bubbleNav) bubbleNav.classList.remove('show');
+    return;
+  }
+
+  if (!bubbleNav) {
+    bubbleNav = document.createElement('div');
+    bubbleNav.className = 'bubble-nav';
+    document.body.appendChild(bubbleNav);
+  }
+
+  const colorMap = getCategoryColors();
+  let bubblesHTML = '<div class="bubble home" onclick="scrollToTop()" title="回到顶部">↑</div>';
+
+  expandedGroups.forEach((group, idx) => {
+    const header = group.previousElementSibling;
+    const bgStyle = header.style.background;
+    // 从背景中提取主色
+    let mainColor = '#64748b';
+    if (bgStyle.includes('#0ea5e9')) mainColor = '#0ea5e9';
+    else if (bgStyle.includes('#8b5cf6')) mainColor = '#8b5cf6';
+    else if (bgStyle.includes('#10b981')) mainColor = '#10b981';
+    else if (bgStyle.includes('#f59e0b')) mainColor = '#f59e0b';
+    else if (bgStyle.includes('#ec4899')) mainColor = '#ec4899';
+    else if (bgStyle.includes('#07c160')) mainColor = '#07c160';
+    else if (bgStyle.includes('#3b82f6')) mainColor = '#3b82f6';
+    else if (bgStyle.includes('#f97316')) mainColor = '#f97316';
+
+    const category = header.querySelector('.header-left span:last-child').textContent;
+    bubblesHTML += '<div class="bubble" style="background:' + mainColor + '" onclick="handleBubbleClick(' + idx + ')" title="' + category + '"></div>';
+  });
+
+  bubbleNav.innerHTML = bubblesHTML;
+  bubbleNav.classList.add('show');
+}
+
+function handleBubbleClick(idx) {
+  const activePanel = document.querySelector('.panel.active');
+  const expandedGroups = activePanel.querySelectorAll('.group-content.show');
+
+  // 收起当前展开的所有分组
+  expandedGroups.forEach(group => {
+    group.classList.remove('show');
+    group.previousElementSibling.classList.remove('active');
+  });
+
+  // 展开目标分组（如果有）
+  const targetGroup = activePanel.querySelectorAll('.group-card')[idx];
+  if (targetGroup) {
+    const content = targetGroup.querySelector('.group-content');
+    const header = targetGroup.querySelector('.group-header');
+    content.classList.add('show');
+    header.classList.add('active');
+    content.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  // 隐藏气泡
+  const bubbleNav = document.querySelector('.bubble-nav');
+  if (bubbleNav) bubbleNav.classList.remove('show');
+}
+
+function scrollToTop() {
+  window.scrollTo({top:0,behavior:'smooth'});
+  const bubbleNav = document.querySelector('.bubble-nav');
+  if (bubbleNav) bubbleNav.classList.remove('show');
+}
+
+// 监听滚动
+let lastScrollY = 0;
+window.addEventListener('scroll',function(){
+  const scrollY = window.scrollY;
+  const activePanel = document.querySelector('.panel.active');
+  if (!activePanel) return;
+
+  const tabIndex = Array.from(document.querySelectorAll('.panel')).indexOf(activePanel);
+
+  // 精炼筛选和全部资讯：检测是否有展开的分组
+  if (tabIndex === 0 || tabIndex === 3) {
+    const hasExpanded = activePanel.querySelectorAll('.group-content.show').length > 0;
+    if (hasExpanded && scrollY > 200) {
+      showBubbles();
+    } else {
+      const bubbleNav = document.querySelector('.bubble-nav');
+      if (bubbleNav) bubbleNav.classList.remove('show');
+    }
+  }
+  // GitHub和论文：向上滑动时显示气泡
+  else if ((tabIndex === 1 || tabIndex === 2) && scrollY > 300) {
+    showBubbles();
+  } else if (tabIndex === 1 || tabIndex === 2) {
+    const bubbleNav = document.querySelector('.bubble-nav');
+    if (bubbleNav) bubbleNav.classList.remove('show');
+  }
+
+  lastScrollY = scrollY;
+});
 </script>
 </body>
 </html>
