@@ -6445,12 +6445,11 @@ function showBubbles() {
 
   allGroups.forEach((group, idx) => {
     const header = group.querySelector('.group-header');
-    const category = header.getAttribute('data-color') || '#64748b';
-
+    const categoryColor = header.getAttribute('data-color') || '#64748b';
     const category = header.querySelector('.header-left span:last-child').textContent;
     const isExpanded = (idx === expandedIndex);
     const activeClass = isExpanded ? ' active' : '';
-    bubblesHTML += '<div class="bubble' + activeClass + '" style="background:' + mainColor + '" onclick="handleBubbleClick(' + idx + ')" title="' + category + '"></div>';
+    bubblesHTML += '<div class="bubble' + activeClass + '" style="background:' + categoryColor + '" onclick="handleBubbleClick(' + idx + ')" title="' + category + '"></div>';
   });
 
   bubbleNav.innerHTML = bubblesHTML;
