@@ -6446,10 +6446,10 @@ function showBubbles() {
   allGroups.forEach((group, idx) => {
     const header = group.querySelector('.group-header');
     const categoryColor = header.getAttribute('data-color') || '#64748b';
-    const category = header.querySelector('.header-left span:last-child').textContent;
+    const categoryName = header.querySelector('.header-left span:last-child').textContent;
     const isExpanded = (idx === expandedIndex);
     const activeClass = isExpanded ? ' active' : '';
-    bubblesHTML += '<div class="bubble' + activeClass + '" style="background:' + categoryColor + '" onclick="handleBubbleClick(' + idx + ')" title="' + category + '"></div>';
+    bubblesHTML += '<div class="bubble' + activeClass + '" style="background:' + categoryColor + '" onclick="handleBubbleClick(' + idx + ')" title="' + categoryName + '"></div>';
   });
 
   bubbleNav.innerHTML = bubblesHTML;
@@ -6467,7 +6467,7 @@ function handleBubbleClick(idx) {
     group.previousElementSibling.classList.remove('active');
   });
 
-  // 展开目标分组
+  // 展开目标分组（如果点击的不是当前已展开的）
   if (allGroups[idx]) {
     const targetContent = allGroups[idx].querySelector('.group-content');
     const targetHeader = allGroups[idx].querySelector('.group-header');
