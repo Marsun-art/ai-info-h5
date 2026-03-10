@@ -496,7 +496,7 @@ body{
 
 <div class="panel active">
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #ec4899 0%, #db2777 100%)" data-color="#ec4899">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%)" data-color="#f472b6">
         <div class="header-left">
           <span class="category-icon">🚀</span>
           <span>AI落地实践/案例</span>
@@ -965,7 +965,7 @@ body{
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%)" data-color="#10b981">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%)" data-color="#34d399">
         <div class="header-left">
           <span class="category-icon">💡</span>
           <span>AI使用技巧/方法</span>
@@ -1098,7 +1098,7 @@ body{
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)" data-color="#0ea5e9">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%)" data-color="#38bdf8">
         <div class="header-left">
           <span class="category-icon">🛠️</span>
           <span>AI工具/产品</span>
@@ -1639,7 +1639,7 @@ body{
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #f59e0b 0%, #d97706 100%)" data-color="#f59e0b">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)" data-color="#fbbf24">
         <div class="header-left">
           <span class="category-icon">📊</span>
           <span>AI行业数据/趋势</span>
@@ -1976,7 +1976,7 @@ body{
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)" data-color="#8b5cf6">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%)" data-color="#a78bfa">
         <div class="header-left">
           <span class="category-icon">📋</span>
           <span>AI政策/规划</span>
@@ -3191,7 +3191,7 @@ Educational Data</div>
   </div></div>
 <div class="panel">
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #07c160 0%, #059669 100%)" data-color="#07c160">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #34d399 0%, #07c160 50%, #059669 100%)" data-color="#34d399">
         <div class="header-left">
           <span class="category-icon">📢</span>
           <span>公众号</span>
@@ -4985,7 +4985,7 @@ Educational Data</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)" data-color="#3b82f6">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%)" data-color="#60a5fa">
         <div class="header-left">
           <span class="category-icon">📰</span>
           <span>新闻</span>
@@ -5600,7 +5600,7 @@ Educational Data</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #f97316 0%, #ea580c 100%)" data-color="#f97316">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)" data-color="#fb923c">
         <div class="header-left">
           <span class="category-icon">👥</span>
           <span>社区</span>
@@ -5730,7 +5730,7 @@ Educational Data</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)" data-color="#8b5cf6">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%)" data-color="#a78bfa">
         <div class="header-left">
           <span class="category-icon">🔍</span>
           <span>网络搜索</span>
@@ -6365,6 +6365,20 @@ function toggleGroup(el){
   const header = el;
   const content = el.nextElementSibling;
   const isShow = content.classList.contains('show');
+
+  // 收起当前页签下所有其他分组
+  const activePanel = document.querySelector('.panel.active');
+  const allGroups = activePanel.querySelectorAll('.group-card');
+  allGroups.forEach(function(group) {
+    const gContent = group.querySelector('.group-content');
+    const gHeader = group.querySelector('.group-header');
+    if (gContent !== content) {
+      gContent.classList.remove('show');
+      gHeader.classList.remove('active');
+    }
+  });
+
+  // 展开/收起当前分组
   content.classList.toggle('show',!isShow);
   header.classList.toggle('active',!isShow);
 
