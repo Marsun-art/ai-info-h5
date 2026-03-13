@@ -7698,8 +7698,20 @@ function toggleGroup(el){
   content.classList.toggle('show',!isShow);
   header.classList.toggle('active',!isShow);
 
+  // 展开时滚动到分组标题顶部
+  if (!isShow) {
+    setTimeout(function() {
+      const headerRect = header.getBoundingClientRect();
+      const targetY = headerRect.top + window.scrollY - 80;
+      window.scrollTo({
+        top: targetY,
+        behavior: 'smooth'
+      });
+    }, 100);
+  }
+
   // 触发动态气泡更新
-  setTimeout(showBubbles, 100);
+  setTimeout(showBubbles, 150);
 }
 
 function toggleAbstract(el){
