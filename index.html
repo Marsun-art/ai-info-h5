@@ -66,6 +66,29 @@
   --surface-glass:rgba(30,41,59,0.85);
   --border:#334155;
   --border-light:#1e293b;
+  --accent:#38bdf8;
+  --accent-dark:#0ea5e9;
+}
+[data-theme="dark"] .tab.active{
+  background:linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+}
+[data-theme="dark"] .filter-item:hover{
+  background:linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border-color:var(--accent);
+}
+[data-theme="dark"] .filter-item h4{
+  color:#f1f5f9;
+}
+[data-theme="dark"] .card:hover{
+  border-color:var(--accent);
+}
+[data-theme="dark"] .btn-link{
+  background:linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
+  color:#38bdf8;
+}
+[data-theme="dark"] .collapse-btn{
+  background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-color:var(--border);
 }
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -477,44 +500,6 @@ body{
 ::-webkit-scrollbar-thumb{background:var(--secondary-light);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--secondary)}
 
-/* 刷新提示横幅 */
-.update-banner{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  padding:10px 16px;
-  margin-bottom:16px;
-  background:var(--surface);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-sm);
-  border:1px solid var(--border-light);
-  font-size:12px;
-  color:var(--secondary);
-  flex-wrap:wrap;
-}
-.update-banner .update-item{
-  display:flex;
-  align-items:center;
-  gap:4px;
-}
-.update-banner .update-dot{
-  width:6px;
-  height:6px;
-  background:var(--success);
-  border-radius:50%;
-  animation:pulse 2s infinite;
-}
-.update-banner .update-count{
-  color:var(--accent);
-  font-weight:700;
-}
-.update-banner .separator{
-  width:1px;
-  height:12px;
-  background:var(--border);
-}
-
 /* 暗黑模式切换 */
 .theme-toggle{
   position:absolute;
@@ -553,7 +538,7 @@ body{
   <div class="header-card" onclick="flipHeader(this)">
     <div class="header-front">
       <h2>教育AI+ 信息聚合</h2>
-      <p>每日更新 | 2026/3/13</p>
+      <p>今日更新 501 条 | 3月13日</p>
       <div class="hint">👆 点我认识一下</div>
     </div>
     <div class="header-back">
@@ -562,14 +547,6 @@ body{
       <p>让我为您带来每日资讯</p>
     </div>
   </div>
-</div>
-
-<div class="update-banner">
-  <div class="update-item"><span class="update-dot"></span>今日更新 <span class="update-count">58</span> 条</div>
-  <div class="separator"></div>
-  <div class="update-item">🕐 更新时间 07:47</div>
-  <div class="separator"></div>
-  <div class="update-item">📅 3月13日 自动更新</div>
 </div>
 
 <div class="tabs">
