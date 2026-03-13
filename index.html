@@ -101,6 +101,37 @@
   border-color:var(--accent) !important;
   color:#e2e8f0 !important;
 }
+
+/* 分类标签暗黑模式背景 */
+[data-theme="dark"] .group-header[data-color="#38bdf8"]{
+  background:linear-gradient(135deg, #164e63 0%, #0c4a6e 50%, #082f49 100%) !important;
+}
+[data-theme="dark"] .group-header[data-color="#a78bfa"]{
+  background:linear-gradient(135deg, #3b2f80 0%, #2e1f5e 50%, #1e1b4b 100%) !important;
+}
+[data-theme="dark"] .group-header[data-color="#34d399"]{
+  background:linear-gradient(135deg, #064e3b 0%, #065f46 50%, #022c22 100%) !important;
+}
+[data-theme="dark"] .group-header[data-color="#fbbf24"]{
+  background:linear-gradient(135deg, #78350f 0%, #713f12 50%, #451a03 100%) !important;
+}
+[data-theme="dark"] .group-header[data-color="#f472b6"]{
+  background:linear-gradient(135deg, #831843 0%, #702459 50%, #500724 100%) !important;
+}
+[data-theme="dark"] .group-header[data-color="#94a3b8"]{
+  background:linear-gradient(135deg, #334155 0%, #1e293b 50%, #0f172a 100%) !important;
+}
+
+/* 全部资讯板块暗黑模式背景 */
+[data-theme="dark"] .group-header[data-color="#34d399"]{
+  background:linear-gradient(135deg, #064e3b 0%, #065f46 50%, #022c22 100%) !important;
+}
+[data-theme="dark"] .group-header[data-color="#60a5fa"]{
+  background:linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%) !important;
+}
+[data-theme="dark"] .group-header[data-color="#fb923c"]{
+  background:linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #7c2d12 100%) !important;
+}
 [data-theme="dark"] .collapse-content{
   background:#0f172a;
   border-color:#334155;
@@ -595,7 +626,7 @@ body{
 
 <div class="panel active">
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)" data-color="#fbbf24">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)" data-color="#fbbf24" data-dark-bg="linear-gradient(135deg, #78350f 0%, #713f12 50%, #451a03 100%)" data-dark-primary="#fbbf24">
         <div class="header-left">
           <span class="category-icon">📊</span>
           <span>AI行业数据/趋势</span>
@@ -872,7 +903,7 @@ body{
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%)" data-color="#34d399">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%)" data-color="#34d399" data-dark-bg="linear-gradient(135deg, #064e3b 0%, #065f46 50%, #022c22 100%)" data-dark-primary="#34d399">
         <div class="header-left">
           <span class="category-icon">💡</span>
           <span>AI使用技巧/方法</span>
@@ -1101,7 +1132,7 @@ body{
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%)" data-color="#38bdf8">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%)" data-color="#38bdf8" data-dark-bg="linear-gradient(135deg, #164e63 0%, #0c4a6e 50%, #082f49 100%)" data-dark-primary="#38bdf8">
         <div class="header-left">
           <span class="category-icon">🛠️</span>
           <span>AI工具/产品</span>
@@ -1846,7 +1877,7 @@ body{
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%)" data-color="#f472b6">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%)" data-color="#f472b6" data-dark-bg="linear-gradient(135deg, #831843 0%, #702459 50%, #500724 100%)" data-dark-primary="#f472b6">
         <div class="header-left">
           <span class="category-icon">🚀</span>
           <span>AI落地实践/案例</span>
@@ -2435,7 +2466,7 @@ body{
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%)" data-color="#a78bfa">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%)" data-color="#a78bfa" data-dark-bg="linear-gradient(135deg, #3b2f80 0%, #2e1f5e 50%, #1e1b4b 100%)" data-dark-primary="#a78bfa">
         <div class="header-left">
           <span class="category-icon">📋</span>
           <span>AI政策/规划</span>
@@ -3914,7 +3945,7 @@ Educational Data</div>
   </div></div>
 <div class="panel">
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #34d399 0%, #07c160 50%, #059669 100%)" data-color="#34d399">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #34d399 0%, #07c160 50%, #059669 100%)" data-color="#34d399" data-dark-bg="linear-gradient(135deg, #064e3b 0%, #065f46 50%, #022c22 100%)" data-dark-primary="#34d399">
         <div class="header-left">
           <span class="category-icon">📢</span>
           <span>公众号</span>
@@ -6011,7 +6042,7 @@ Educational Data</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%)" data-color="#60a5fa">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%)" data-color="#60a5fa" data-dark-bg="linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%)" data-dark-primary="#60a5fa">
         <div class="header-left">
           <span class="category-icon">📰</span>
           <span>新闻</span>
@@ -6837,7 +6868,7 @@ Educational Data</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)" data-color="#fb923c">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)" data-color="#fb923c" data-dark-bg="linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #7c2d12 100%)" data-dark-primary="#fb923c">
         <div class="header-left">
           <span class="category-icon">👥</span>
           <span>社区</span>
@@ -6941,7 +6972,7 @@ Educational Data</div>
       </div></div>
     </div>
     <div class="group-card">
-      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%)" data-color="#a78bfa">
+      <div class="group-header" onclick="toggleGroup(this)" style="background:linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%)" data-color="#a78bfa" data-dark-bg="linear-gradient(135deg, #3b2f80 0%, #2e1f5e 50%, #1e1b4b 100%)" data-dark-primary="#a78bfa">
         <div class="header-left">
           <span class="category-icon">🔍</span>
           <span>网络搜索</span>
