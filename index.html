@@ -7663,13 +7663,6 @@ function flipHeader(el){
 }
 
 function switchTab(index){
-  // 保存当前页面的滚动位置
-  const activePanel = document.querySelector('.panel.active');
-  const currentTabIndex = Array.from(document.querySelectorAll('.panel')).indexOf(activePanel);
-  if (currentTabIndex !== -1) {
-    sessionStorage.setItem('scrollPos_' + currentTabIndex, window.scrollY);
-  }
-
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
   tabs.forEach((t,i)=>t.classList.toggle('active',i===index));
@@ -7681,19 +7674,7 @@ function switchTab(index){
       p.style.animation='fadeSlide 0.4s cubic-bezier(0.4,0,0.2,1)';
     }
   });
-
-  // 恢复目标页面的滚动位置
-  const savedPos = sessionStorage.getItem('scrollPos_' + index);
-  if (savedPos !== null) {
-    setTimeout(function() {
-      window.scrollTo({top: parseInt(savedPos), behavior: 'auto'});
-    }, 50);
-  } else {
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-
-  // 更新气泡
-  setTimeout(showBubbles, 100);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function toggleGroup(el){
@@ -7717,20 +7698,8 @@ function toggleGroup(el){
   content.classList.toggle('show',!isShow);
   header.classList.toggle('active',!isShow);
 
-  // 展开时滚动到分组顶部
-  if (!isShow) {
-    setTimeout(function() {
-      const headerRect = header.getBoundingClientRect();
-      const targetY = headerRect.top + window.scrollY - 80;
-      window.scrollTo({
-        top: targetY,
-        behavior: 'smooth'
-      });
-    }, 100);
-  }
-
   // 触发动态气泡更新
-  setTimeout(showBubbles, 150);
+  setTimeout(showBubbles, 100);
 }
 
 function toggleAbstract(el){
@@ -7848,18 +7817,14 @@ function scrollToTop() {
   if (bubbleNav) bubbleNav.classList.remove('show');
 }
 
-// 监听滚动，保存滚动位置
+// 监听滚动
 let lastScrollY = 0;
 window.addEventListener('scroll',function(){
   const scrollY = window.scrollY;
   const activePanel = document.querySelector('.panel.active');
   if (!activePanel) return;
 
-  // 保存滚动位置
   const tabIndex = Array.from(document.querySelectorAll('.panel')).indexOf(activePanel);
-  if (tabIndex !== -1) {
-    sessionStorage.setItem('scrollPos_' + tabIndex, scrollY);
-  }
 
   // 精炼筛选和全部资讯：检测是否有展开的分组
   if (tabIndex === 0 || tabIndex === 3) {
@@ -7880,41 +7845,6 @@ window.addEventListener('scroll',function(){
   }
 
   lastScrollY = scrollY;
-});
-
-// 页面加载时恢复滚动位置（处理外部链接返回场景）
-window.addEventListener('pageshow', function(event) {
-  const activePanel = document.querySelector('.panel.active');
-  if (activePanel) {
-    const tabIndex = Array.from(document.querySelectorAll('.panel')).indexOf(activePanel);
-    const savedPos = sessionStorage.getItem('scrollPos_' + tabIndex);
-    if (savedPos !== null && parseInt(savedPos) > 0) {
-      setTimeout(function() {
-        window.scrollTo({top: parseInt(savedPos), behavior: 'auto'});
-      }, 100);
-    }
-  }
-});
-
-// 记录返回状态，区分首次加载 vs 返回
-window.addEventListener('load', function() {
-  // 标记为非返回（首次加载）
-  sessionStorage.setItem('isBackNavigation', 'false');
-});
-
-// 监听 popstate 处理返回按钮
-window.addEventListener('popstate', function(event) {
-  sessionStorage.setItem('isBackNavigation', 'true');
-  const activePanel = document.querySelector('.panel.active');
-  if (activePanel) {
-    const tabIndex = Array.from(document.querySelectorAll('.panel')).indexOf(activePanel);
-    const savedPos = sessionStorage.getItem('scrollPos_' + tabIndex);
-    if (savedPos !== null) {
-      setTimeout(function() {
-        window.scrollTo({top: parseInt(savedPos), behavior: 'auto'});
-      }, 100);
-    }
-  }
 });
 </script>
 </body>
