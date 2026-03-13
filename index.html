@@ -95,9 +95,11 @@
   background:linear-gradient(135deg, #334155 0%, #1e293b 100%);
   border-color:var(--accent);
 }
-[data-theme="dark"] .collapse-btn.active{
-  background:linear-gradient(135deg, #334155 0%, #1e293b 100%);
-  border-color:var(--accent);
+[data-theme="dark"] .collapse-btn.active,
+[data-theme="dark"] .collapse-btn[aria-expanded="true"]{
+  background:linear-gradient(135deg, #334155 0%, #1e293b 100%) !important;
+  border-color:var(--accent) !important;
+  color:#e2e8f0 !important;
 }
 [data-theme="dark"] .collapse-content{
   background:#0f172a;
@@ -7749,13 +7751,10 @@ Educational Data</div>
 </div>
 
 <script>
-// 暗黑模式初始化（默认白天模式）
+// 暗黑模式初始化（默认白天模式，每次刷新都是白天）
 (function(){
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    updateThemeIcon(true);
-  }
+  // 每次进入页面都是白天模式，只有手动点击才会切换
+  localStorage.removeItem('theme');
 })();
 
 function toggleTheme(){
@@ -7835,8 +7834,18 @@ function toggleGroup(el){
 function toggleAbstract(el){
   const content = el.nextElementSibling;
   const isOpen = content.classList.contains('show');
-  content.classList.toggle('show');
-  el.classList.toggle('active',!isOpen);
+  if (isOpen) {
+    content.classList.remove('show');
+    el.classList.remove('active');
+    el.style.background = '';
+  } else {
+    content.classList.add('show');
+    el.classList.add('active');
+    // 暗黑模式下强制设置背景色
+    if (document.documentElement.getAttribute('data-theme') === 'dark') {
+      el.style.background = 'linear-gradient(135deg, #334155 0%, #1e293b 100%)';
+    }
+  }
   el.querySelector('.collapse-text').textContent = isOpen ? '论文摘要（点击查看）' : '论文摘要（点击收起）';
   el.querySelector('.collapse-arrow').textContent = isOpen ? '▼' : '▲';
 }
