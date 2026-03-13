@@ -54,6 +54,20 @@
   --space-xl:32px;
 }
 
+/* 暗黑模式 */
+[data-theme="dark"]{
+  --primary:#f1f5f9;
+  --primary-light:#e2e8f0;
+  --secondary:#94a3b8;
+  --secondary-light:#64748b;
+  --bg:#0f172a;
+  --bg-gradient:linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1f1035 100%);
+  --surface:#1e293b;
+  --surface-glass:rgba(30,41,59,0.85);
+  --border:#334155;
+  --border-light:#1e293b;
+}
+
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 
 body{
@@ -462,11 +476,80 @@ body{
 ::-webkit-scrollbar-track{background:var(--border-light);border-radius:3px}
 ::-webkit-scrollbar-thumb{background:var(--secondary-light);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--secondary)}
+
+/* 刷新提示横幅 */
+.update-banner{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:10px 16px;
+  margin-bottom:16px;
+  background:var(--surface);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  border:1px solid var(--border-light);
+  font-size:12px;
+  color:var(--secondary);
+  flex-wrap:wrap;
+}
+.update-banner .update-item{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+.update-banner .update-dot{
+  width:6px;
+  height:6px;
+  background:var(--success);
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+.update-banner .update-count{
+  color:var(--accent);
+  font-weight:700;
+}
+.update-banner .separator{
+  width:1px;
+  height:12px;
+  background:var(--border);
+}
+
+/* 暗黑模式切换 */
+.theme-toggle{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:none;
+  background:var(--border-light);
+  color:var(--secondary);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+  transition:all 0.3s ease;
+  box-shadow:var(--shadow-sm);
+  z-index:5;
+}
+.theme-toggle:hover{
+  background:var(--accent);
+  color:#fff;
+  transform:scale(1.1);
+}
+[data-theme="dark"] .theme-toggle{
+  background:var(--primary-light);
+  color:var(--warning);
+}
 </style>
 </head>
 <body>
 <div class="container">
 <div class="header">
+  <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">🌙</button>
   <div class="header-card" onclick="flipHeader(this)">
     <div class="header-front">
       <h2>教育AI+ 信息聚合</h2>
@@ -479,6 +562,14 @@ body{
       <p>让我为您带来每日资讯</p>
     </div>
   </div>
+</div>
+
+<div class="update-banner">
+  <div class="update-item"><span class="update-dot"></span>今日更新 <span class="update-count">58</span> 条</div>
+  <div class="separator"></div>
+  <div class="update-item">🕐 更新时间 07:47</div>
+  <div class="separator"></div>
+  <div class="update-item">📅 3月13日 自动更新</div>
 </div>
 
 <div class="tabs">
@@ -7658,6 +7749,34 @@ Educational Data</div>
 </div>
 
 <script>
+// 暗黑模式初始化
+(function(){
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    updateThemeIcon(true);
+  }
+})();
+
+function toggleTheme(){
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    updateThemeIcon(false);
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    updateThemeIcon(true);
+  }
+}
+
+function updateThemeIcon(isDark){
+  const btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+}
+
 function flipHeader(el){
   el.classList.toggle('flipped');
 }
