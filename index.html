@@ -89,6 +89,21 @@
 [data-theme="dark"] .collapse-btn{
   background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   border-color:var(--border);
+  color:#f1f5f9;
+}
+[data-theme="dark"] .collapse-btn:hover{
+  border-color:var(--accent);
+}
+[data-theme="dark"] .collapse-content{
+  background:#0f172a;
+  border-color:#334155;
+  color:#94a3b8;
+}
+[data-theme="dark"] .abstract-en{
+  color:#94a3b8;
+}
+[data-theme="dark"] .abstract-cn{
+  color:#e2e8f0;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -7726,11 +7741,10 @@ Educational Data</div>
 </div>
 
 <script>
-// 暗黑模式初始化
+// 暗黑模式初始化（默认白天模式）
 (function(){
   const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+  if (savedTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
     updateThemeIcon(true);
   }
