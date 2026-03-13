@@ -92,6 +92,11 @@
   color:#f1f5f9;
 }
 [data-theme="dark"] .collapse-btn:hover{
+  background:linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-color:var(--accent);
+}
+[data-theme="dark"] .collapse-btn.active{
+  background:linear-gradient(135deg, #334155 0%, #1e293b 100%);
   border-color:var(--accent);
 }
 [data-theme="dark"] .collapse-content{
@@ -240,7 +245,7 @@ body{
   transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
   border:none;
   cursor:pointer;
-  margin-top:18px;
+  margin-top:12px;
   color:#fff;
   box-shadow:var(--shadow-md)
 }
@@ -436,16 +441,17 @@ body{
 .abstract-cn{color:var(--primary);font-weight:500;font-size:14px;line-height:1.8}
 
 /* 折叠区域 */
-.collapse-section{margin:18px 0}
+.collapse-section{margin:12px 0}
 .collapse-btn{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:14px 18px;
+  padding:12px 16px;
   background:linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   border-radius:var(--radius-lg);
   cursor:pointer;
-  font-weight:600;
+  font-weight:500;
+  font-size:13px;
   color:var(--primary);
   transition:all 0.2s ease;
   border:1px solid var(--border-light)
@@ -454,21 +460,23 @@ body{
   background:linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
   border-color:var(--accent)
 }
-.collapse-left{display:flex;align-items:center;gap:10px}
-.collapse-icon{font-size:18px}
+.collapse-left{display:flex;align-items:center;gap:8px}
+.collapse-icon{font-size:16px}
+.collapse-text{font-size:13px}
 .collapse-content{
   display:none;
-  padding:20px;
+  padding:16px;
   background:#fff;
   border-radius:0 0 var(--radius-lg) var(--radius-lg);
-  margin-top:8px;
+  margin-top:6px;
   font-size:14px;
   color:var(--secondary);
   border:1px solid var(--border-light);
   border-top:none
 }
+.collapse-content.show{display:block}
 .collapse-btn.active .collapse-arrow{transform:rotate(180deg)}
-.collapse-arrow{font-size:12px;transition:transform 0.3s ease}
+.collapse-arrow{font-size:11px;transition:transform 0.3s ease}
 
 /* 空状态 */
 .empty-state{
@@ -7826,8 +7834,8 @@ function toggleGroup(el){
 
 function toggleAbstract(el){
   const content = el.nextElementSibling;
-  const isOpen = content.style.display === 'block';
-  content.style.display = isOpen ? 'none' : 'block';
+  const isOpen = content.classList.contains('show');
+  content.classList.toggle('show');
   el.classList.toggle('active',!isOpen);
   el.querySelector('.collapse-text').textContent = isOpen ? '论文摘要（点击查看）' : '论文摘要（点击收起）';
   el.querySelector('.collapse-arrow').textContent = isOpen ? '▼' : '▲';
