@@ -724,11 +724,23 @@ body{
 <div class="overview-modal" id="overviewModal" onclick="closeOverview(event)">
   <div class="overview-card" onclick="event.stopPropagation()">
     <div class="overview-header">
-      <h3>📋 当前AI资讯概览</h3>
+      <h3>📋 今日AI资讯概览</h3>
       <button class="overview-close" onclick="closeOverview()">×</button>
     </div>
-    <div class="overview-content" id="overviewText">
-      
+    <div class="overview-content">
+      **AI重塑世界：从编程到教育，智能革命全面加速**
+
+**核心要点整合：**
+*   **AI Agent爆发**：微信、飞书等平台正深度集成AI智能体，将其作为“自然语言命令行”，接管工作流程。OpenAI、谷歌、Anthropic三大巨头争夺桌面智能体主导权，AI主战场转向系统级接管。
+*   **编程工具进化**：Cursor发布基于Kimi K2.5的Composer 2模型，引发套壳争议后确认合规。Claude Code等工具通过隐藏命令（如并行提问/代码回退）极大提升开发效率。AI编程助手正从代码补全向自主编程、项目复盘演进。
+*   **模型能力跃进**：MiniMax M2.7模型强调自我进化与多智能体协作。世界模型、3D数字人、视频生成等技术快速迭代，成本降低，实时交互成为可能。
+*   **行业应用与冲击**：AI在影视行业替代场景搭建等基础环节，催生AI原生内容新赛道。企业存在“赌博型裁员”风险。AI设计Agent能结合真实供应链生成可落地方案。
+*   **基础设施与竞争**：英伟达提出AI竞争核心从算力转向“每度电的智商”（Token产出），并布局全栈智驾方案。蚂蚁集团指出基础设施正以模型和GPU为中心重构。
+*   **科研前沿突破**：研究聚焦提升模型推理效率（如化学隐空间推理）、校准模型自信度、改进训练范式（如掩码高信息密度区域），推动AI向更可靠、高效方向发展。
+*   **教育深度融合**：AI正系统性赋能教育，用于精准学情诊断、个性化学习、自动化管理。政策与学界强调AI应作为辅助工具，融入教研机制，服务于育人本质，并关注伦理与公平。
+*   **安全与治理挑战**：AI技术引发数据泄露、就业冲击、审美同质化、内容安全等担忧。行业呼吁明确使用边界，加强安全约束与合规披露。
+
+**一句话总结：AI技术正从对话工具演变为渗透各行业的流程接管者与生产力引擎，在引发效率革命的同时，也带来了深刻的就业、安全与伦理挑战。**
     </div>
   </div>
 </div>
@@ -742,7 +754,7 @@ body{
   <div class="header-card" onclick="flipHeader(this)">
     <div class="header-front">
       <h2>教育AI+ 信息聚合</h2>
-      <p>每周一/周五更新 3月27日更新385条</p>
+      <p>今日更新 385 条 | 3月27日</p>
       <div class="hint">👆 点我认识一下</div>
     </div>
     <div class="header-back">
@@ -4564,9 +4576,6 @@ Business Education</div>
 </div>
 
 <script>
-// 全局变量存储概览内容
-var overviewContent = <%= JSON.stringify(overviewText || '') %>;
-
 // 暗黑模式初始化（默认白天模式，每次刷新都是白天）
 (function(){
   // 每次进入页面都是白天模式，只有手动点击才会切换
@@ -4589,12 +4598,7 @@ function toggleTheme(){
 /* 概览弹窗 */
 function showOverview(){
   const modal = document.getElementById('overviewModal');
-  const contentEl = document.getElementById('overviewText');
   if(modal){
-    // 首次打开时渲染 markdown
-    if(contentEl && overviewContent){
-      contentEl.innerHTML = renderMarkdown(overviewContent);
-    }
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
   }
@@ -4608,50 +4612,6 @@ function closeOverview(event){
     modal.classList.remove('show');
     document.body.style.overflow = '';
   }
-}
-
-// 简单 Markdown 渲染函数
-function renderMarkdown(text){
-  if(!text) return '';
-  let html = text
-    // 转义 HTML
-    .replace(/&/g, '&')
-    .replace(/</g, '<')
-    .replace(/>/g, '>')
-    // 加粗 **text** 或 *text*
-    .replace(/**([^*]+)**/g, '<strong>$1</strong>')
-    .replace(/*([^*]+)*/g, '<strong>$1</strong>')
-    // 斜线 _text_ 或 *text*
-    .replace(/([^**])*([^*]+)*([^*])/g, '$1<em>$2</em>$3')
-    .replace(/([^_])_([^_]+)_([^_])/g, '$1<em>$2</em>$3')
-    // 标题 ### 转为 h4
-    .replace(/^### (.+)$/gm, '<h4>$1</h4>')
-    // 标题 ## 转为 h3
-    .replace(/^## (.+)$/gm, '<h3>$1</h3>')
-    // 标题 # 转为 h2
-    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
-    // 无序列表 - 或 *
-    .replace(/^[*-] (.+)$/gm, '<li>$1</li>')
-    // 段落分隔（空行）
-    .replace(/
-
-/g, '</p><p>')
-    // 换行
-    .replace(/
-/g, '<br>');
-
-  // 包裹段落
-  html = '<p>' + html + '</p>';
-  // 处理连续的无序列表
-  html = html.replace(/(<li>.*</li>)/g, '<ul>$1</ul>');
-  html = html.replace(/</ul><ul>/g, '');
-
-  // 处理标题样式
-  html = html.replace(/<h2>/g, '<h2 style="color:var(--accent-dark);margin:16px 0 8px;font-size:16px;">');
-  html = html.replace(/<h3>/g, '<h3 style="color:var(--primary);margin:14px 0 6px;font-size:15px;">');
-  html = html.replace(/<h4>/g, '<h4 style="color:var(--secondary);margin:12px 0 4px;font-size:14px;font-weight:600;">');
-
-  return html;
 }
 
 // 按 ESC 关闭弹窗
