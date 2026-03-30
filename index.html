@@ -237,17 +237,74 @@ body{
   background:var(--accent);
   color:#fff;
 }
-.search-count{
-  font-size:10px;
-  background:var(--accent);
-  color:#fff;
-  padding:2px 6px;
-  border-radius:10px;
-  margin-left:4px;
+/* 搜索结果视图 */
+.search-results{
   display:none;
 }
-.search-count.show{
-  display:inline;
+.search-results.show{
+  display:block;
+}
+.search-results-header{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 16px;
+  background:var(--surface);
+  border-radius:var(--radius-lg);
+  margin-bottom:16px;
+  box-shadow:var(--shadow-md);
+}
+.search-results-icon{
+  font-size:18px;
+}
+.search-results-text{
+  font-size:14px;
+  color:var(--secondary);
+  flex:1;
+}
+.search-results-text span{
+  color:var(--primary);
+  font-weight:600;
+}
+.search-results-count{
+  font-size:12px;
+  background:var(--accent);
+  color:#fff;
+  padding:4px 10px;
+  border-radius:12px;
+  font-weight:600;
+}
+.search-exit{
+  padding:8px 14px;
+  background:linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  font-size:12px;
+  font-weight:600;
+  color:var(--secondary);
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+.search-exit:hover{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+.search-results-content .empty-state{
+  display:none;
+}
+
+[data-theme="dark"] .search-results-header{
+  background:var(--surface);
+}
+[data-theme="dark"] .search-exit{
+  background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-color:var(--border);
+  color:var(--secondary);
+}
+[data-theme="dark"] .search-exit:hover{
+  background:var(--accent);
+  color:#fff;
 }
 
 /* 标签切换 */
@@ -832,22 +889,33 @@ body{
   <span class="search-clear" onclick="clearSearch()" title="清除搜索">×</span>
 </div>
 
+<!-- 搜索结果视图 -->
+<div class="search-results" id="searchResults" style="display:none">
+  <div class="search-results-header">
+    <span class="search-results-icon">🔍</span>
+    <span class="search-results-text">搜索"<span id="searchKeyword"></span>"</span>
+    <span class="search-results-count" id="totalMatchCount">0</span>
+    <button class="search-exit" onclick="clearSearch()">退出搜索 ×</button>
+  </div>
+  <div class="search-results-content" id="searchResultsContent"></div>
+</div>
+
 <div class="tabs">
-  <div class="tab active" onclick="switchTab(0, true)">
+  <div class="tab active" onclick="switchTab(0)">
     <span class="tab-icon">✨</span>
-    <div class="tab-label">精炼筛选 <span class="search-count" id="count0"></span></div>
+    <div class="tab-label">精炼筛选</div>
   </div>
-  <div class="tab" onclick="switchTab(1, true)">
+  <div class="tab" onclick="switchTab(1)">
     <span class="tab-icon">📦</span>
-    <div class="tab-label">GitHub <span class="search-count" id="count1"></span></div>
+    <div class="tab-label">GitHub</div>
   </div>
-  <div class="tab" onclick="switchTab(2, true)">
+  <div class="tab" onclick="switchTab(2)">
     <span class="tab-icon">📝</span>
-    <div class="tab-label">论文 <span class="search-count" id="count2"></span></div>
+    <div class="tab-label">论文</div>
   </div>
-  <div class="tab" onclick="switchTab(3, true)">
+  <div class="tab" onclick="switchTab(3)">
     <span class="tab-icon">📰</span>
-    <div class="tab-label">全部资讯 <span class="search-count" id="count3"></span></div>
+    <div class="tab-label">全部资讯</div>
   </div>
 </div>
 
@@ -6915,7 +6983,7 @@ function flipHeader(el){
   el.classList.toggle('flipped');
 }
 
-function switchTab(index, fromSearch = false){
+function switchTab(index){
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
   tabs.forEach((t,i)=>t.classList.toggle('active',i===index));
@@ -6927,9 +6995,7 @@ function switchTab(index, fromSearch = false){
       p.style.animation='fadeSlide 0.4s cubic-bezier(0.4,0,0.2,1)';
     }
   });
-  if (!fromSearch) {
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 /* 搜索功能 */
@@ -6938,50 +7004,100 @@ function handleSearch(keyword) {
   const clearBtn = document.querySelector('.search-clear');
   clearBtn.classList.toggle('show', currentSearchTerm !== '');
 
-  // 更新每个Tab的匹配数量
-  updateSearchCounts();
+  const tabs = document.querySelector('.tabs');
+  const panels = document.querySelectorAll('.panel');
+  const searchResults = document.getElementById('searchResults');
 
-  // 过滤当前Tab的内容
-  filterCurrentTab();
+  if (currentSearchTerm) {
+    // 搜索模式：隐藏Tab，显示搜索结果
+    tabs.style.display = 'none';
+    panels.forEach(p => p.style.display = 'none');
+    searchResults.style.display = 'block';
+    searchResults.classList.add('show');
 
-  // 如果有搜索词且不在搜索模式，切换到匹配内容的Tab
-  if (currentSearchTerm && !fromSearchMode) {
-    autoSwitchToMatchedTab();
+    // 渲染搜索结果
+    renderSearchResults();
+  } else {
+    // 非搜索模式：显示Tab，隐藏搜索结果
+    tabs.style.display = '';
+    panels.forEach(p => p.style.display = '');
+    searchResults.style.display = 'none';
+    searchResults.classList.remove('show');
   }
 }
 
-function updateSearchCounts() {
-  if (currentSearchTerm === '') {
-    for (let i = 0; i < 4; i++) {
-      const countEl = document.getElementById('count' + i);
-      if (countEl) countEl.classList.remove('show');
-    }
-    return;
+function renderSearchResults() {
+  const keyword = document.getElementById('searchInput').value.trim();
+  document.getElementById('searchKeyword').textContent = keyword;
+
+  let html = '';
+  let totalCount = 0;
+
+  // 渲染精炼筛选结果
+  const filterMatches = allItems.filter.filter(item => matchesSearch(item));
+  if (filterMatches.length > 0) {
+    html += '<div class="group-card"><div class="group-header" style="background:linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%)"><div class="header-left"><span class="category-icon">✨</span><span>精炼筛选</span></div><div class="header-right"><span class="count">' + filterMatches.length + '条</span></div></div><div class="group-content show" style="display:block">';
+    filterMatches.forEach(item => {
+      html += renderFilterItem(item);
+    });
+    html += '</div></div>';
+    totalCount += filterMatches.length;
   }
 
-  const counts = [
-    countMatches(allItems.filter),
-    countMatches(allItems.github),
-    countMatches(allItems.paper),
-    countMatches(allItems.news)
-  ];
-
-  for (let i = 0; i < 4; i++) {
-    const countEl = document.getElementById('count' + i);
-    if (countEl) {
-      if (counts[i] > 0) {
-        countEl.textContent = counts[i];
-        countEl.classList.add('show');
-      } else {
-        countEl.classList.remove('show');
-      }
-    }
+  // 渲染GitHub结果
+  const githubMatches = allItems.github.filter(item => matchesSearch(item));
+  if (githubMatches.length > 0) {
+    html += '<div class="card repo-card">' + renderGithubCard(githubMatches[0]) + '</div>';
+    totalCount += githubMatches.length;
   }
+
+  // 渲染论文结果
+  const paperMatches = allItems.paper.filter(item => matchesSearch(item));
+  if (paperMatches.length > 0) {
+    html += '<div class="card paper-card">' + renderPaperCard(paperMatches[0]) + '</div>';
+    totalCount += paperMatches.length;
+  }
+
+  // 渲染全部资讯结果
+  const newsMatches = allItems.news.filter(item => matchesSearch(item));
+  if (newsMatches.length > 0) {
+    html += '<div class="group-card"><div class="group-header" style="background:linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%)"><div class="header-left"><span class="category-icon">📰</span><span>全部资讯</span></div><div class="header-right"><span class="count">' + newsMatches.length + '条</span></div></div><div class="group-content show" style="display:block">';
+    newsMatches.forEach(item => {
+      html += renderNewsItem(item);
+    });
+    html += '</div></div>';
+    totalCount += newsMatches.length;
+  }
+
+  // 无结果提示
+  if (totalCount === 0) {
+    html = '<div class="empty-state" style="display:block"><div class="icon">🔍</div><p>未找到相关结果</p></div>';
+  }
+
+  document.getElementById('searchResultsContent').innerHTML = html;
+  document.getElementById('totalMatchCount').textContent = totalCount + '条匹配';
 }
 
-function countMatches(items) {
-  if (!currentSearchTerm) return items.length;
-  return items.filter(item => matchesSearch(item)).length;
+// 渲染搜索结果中的精炼筛选项
+function renderFilterItem(item) {
+  return '<div class="filter-item"><h4>' + (item.标题 || item.名称 || '未命名') + '</h4><div class="field-grid"><div class="field"><span class="label-tag info">核心信息</span>' + (item.核心信息 || '暂无') + '</div><div class="field"><span class="label-tag value">核心价值</span>' + (item.核心价值 || '暂无') + '</div><div class="field"><span class="label-tag scene">适用场景</span>' + (item.适用场景 || '暂无') + '</div></div><div class="footer"><span class="date">📅 ' + formatDate(item.日期) + '</span><a href="' + (item.链接 || '#') + '" target="_blank" class="btn-link">查看详情 <span class="arrow">→</span></a></div></div>';
+}
+
+// 渲染搜索结果中的GitHub卡片
+function renderGithubCard(item) {
+  const langColors = { 'Python': '#3572A5', 'JavaScript': '#f1e05a', 'TypeScript': '#2b7489', 'Java': '#b07219', 'Go': '#00ADD8', 'Rust': '#dea584', 'C++': '#f34b7d', 'C': '#555555', 'HTML': '#e34c26', 'CSS': '#563d7c', 'Shell': '#89e051' };
+  const langColor = langColors[item.开发语言] || '#6b7280';
+  return '<div class="repo-header"><div class="repo-title-wrapper"><span class="repo-icon">📦</span><h3>' + (item.仓库名 || '未命名') + '</h3></div><span class="stars">⭐ ' + (item["stars this week"] || 0) + '</span></div><div class="repo-meta"><span class="lang-badge" style="border-color:' + langColor + ';color:' + langColor + '"><span class="lang-dot" style="background:' + langColor + '"></span>' + (item.开发语言 || 'Unknown') + '</span><span class="score-badge">推荐得分 ' + (item.推荐得分 || 0) + '</span></div><div class="field"><span class="label-tag info">仓库描述</span>' + (item.仓库描述 || '暂无') + '</div><div class="field-grid"><div class="field"><span class="label-tag info">核心信息</span>' + (item.核心信息 || '暂无') + '</div><div class="field"><span class="label-tag value">核心价值</span>' + (item.核心价值 || '暂无') + '</div><div class="field"><span class="label-tag scene">适用场景</span>' + (item.适用场景 || '暂无') + '</div></div><div class="field"><span class="label-tag reason">推荐理由</span>' + (item.推荐理由 || '暂无') + '</div><a href="' + (item.仓库地址 || '#') + '" target="_blank" class="btn-primary github-btn"><span>🔗</span> 访问仓库</a>';
+}
+
+// 渲染搜索结果中的论文卡片
+function renderPaperCard(item) {
+  return '<h3 class="paper-title">' + (item.论文中文标题 || '未命名') + '</h3><div class="paper-meta"><span class="meta-item">👤 ' + (item.作者 || '未知') + '</span><span class="meta-item">📅 ' + formatDate(item.发表时间) + '</span><span class="score-badge">⭐ ' + (item.推荐得分 || 0) + '</span></div><div class="field-grid"><div class="field"><span class="label-tag info">核心信息</span>' + (item.核心信息 || '暂无') + '</div><div class="field"><span class="label-tag value">核心价值</span>' + (item.核心价值 || '暂无') + '</div><div class="field"><span class="label-tag scene">适用场景</span>' + (item.适用场景 || '暂无') + '</div></div><div class="field"><span class="label-tag reason">推荐理由</span>' + (item.推荐理由 || '暂无') + '</div><a href="https://huggingface.co' + (item.论文URL || '#') + '" target="_blank" class="btn-primary paper-btn"><span>📖</span> 阅读全文</a>';
+}
+
+// 渲染搜索结果中的资讯项
+function renderNewsItem(item) {
+  return '<div class="filter-item"><div class="tag-group"><span class="tag category">' + (item.分类 || '未分类') + '</span><span class="tag section">' + (item.板块 || '其他') + '</span></div><h4>' + (item.标题 || '未命名') + '</h4><p class="content">' + truncateText(item.内容) + '</p><div class="footer"><span class="date">📅 ' + formatDate(item.日期) + '</span><a href="' + (item.链接 || '#') + '" target="_blank" class="btn-link">阅读原文 <span class="arrow">→</span></a></div></div>';
 }
 
 function matchesSearch(item) {
@@ -6994,78 +7110,6 @@ function matchesSearch(item) {
     item.类别, item.板块
   ];
   return searchFields.some(field => field && String(field).toLowerCase().includes(currentSearchTerm));
-}
-
-function filterCurrentTab() {
-  const activePanel = document.querySelector('.panel.active');
-  if (!activePanel) return;
-
-  const tabIndex = Array.from(document.querySelectorAll('.panel')).indexOf(activePanel);
-  const items = activePanel.querySelectorAll('.group-card, .card');
-
-  // 搜索时强制展开所有分组
-  const hasSearch = currentSearchTerm !== '';
-
-  items.forEach(item => {
-    let shouldShow = true;
-    if (currentSearchTerm) {
-      const text = item.textContent.toLowerCase();
-      shouldShow = text.includes(currentSearchTerm);
-    }
-    item.style.display = shouldShow ? '' : 'none';
-  });
-
-  // 处理分组卡片的展开/收起
-  if (tabIndex === 0 || tabIndex === 3) {
-    const groups = activePanel.querySelectorAll('.group-card');
-    groups.forEach(group => {
-      const groupContent = group.querySelector('.group-content');
-      const groupHeader = group.querySelector('.group-header');
-      const itemsInGroup = group.querySelectorAll('.filter-item');
-
-      // 计算组内可见项目
-      const visibleItemsInGroup = Array.from(itemsInGroup).filter(item => item.style.display !== 'none');
-      const groupHasVisibleItems = visibleItemsInGroup.length > 0;
-
-      // 搜索时展开分组，非搜索时收起
-      if (hasSearch && groupHasVisibleItems) {
-        groupContent.classList.add('show');
-        groupHeader.classList.add('active');
-      } else if (!hasSearch) {
-        groupContent.classList.remove('show');
-        groupHeader.classList.remove('active');
-      }
-
-      group.style.display = groupHasVisibleItems ? '' : 'none';
-    });
-  }
-
-  // 处理空状态
-  const visibleItems = Array.from(items).filter(item => item.style.display !== 'none');
-  const emptyState = activePanel.querySelector('.empty-state');
-  const hasContent = visibleItems.length > 0;
-
-  if (emptyState) {
-    emptyState.style.display = hasContent ? 'none' : '';
-  }
-
-  // 更新底部气泡
-  if (currentSearchTerm || window.scrollY > 200) {
-    setTimeout(showBubbles, 100);
-  }
-}
-
-let fromSearchMode = false;
-function autoSwitchToMatchedTab() {
-  const tabs = ['filter', 'github', 'paper', 'news'];
-  for (let i = 0; i < tabs.length; i++) {
-    if (countMatches(allItems[tabs[i]]) > 0) {
-      fromSearchMode = true;
-      switchTab(i, true);
-      fromSearchMode = false;
-      break;
-    }
-  }
 }
 
 function clearSearch() {
