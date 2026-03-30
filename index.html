@@ -7000,7 +7000,7 @@ function switchTab(index){
 
 /* 搜索功能 */
 function handleSearch(keyword) {
-  currentSearchTerm = keyword.trim().toLowerCase();
+  currentSearchTerm = keyword.trim();
   const clearBtn = document.querySelector('.search-clear');
   clearBtn.classList.toggle('show', currentSearchTerm !== '');
 
@@ -7030,11 +7030,22 @@ function renderSearchResults() {
   const keyword = document.getElementById('searchInput').value.trim();
   document.getElementById('searchKeyword').textContent = keyword;
 
+  // 调试：检查数据
+  console.log('Search term:', currentSearchTerm);
+  console.log('allItems:', JSON.stringify(allItems).substring(0, 200));
+
   let html = '';
   let totalCount = 0;
 
+  // 安全获取数据
+  const filterData = allItems.filter || [];
+  const githubData = allItems.github || [];
+  const paperData = allItems.paper || [];
+  const newsData = allItems.news || [];
+
   // 渲染精炼筛选结果
-  const filterMatches = allItems.filter.filter(item => matchesSearch(item));
+  const filterMatches = filterData.filter(item => matchesSearch(item));
+  console.log('Filter matches:', filterMatches.length);
   if (filterMatches.length > 0) {
     html += '<div class="group-card"><div class="group-header" style="background:linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%)"><div class="header-left"><span class="category-icon">✨</span><span>精炼筛选</span></div><div class="header-right"><span class="count">' + filterMatches.length + '条</span></div></div><div class="group-content show" style="display:block">';
     filterMatches.forEach(item => {
@@ -7045,21 +7056,28 @@ function renderSearchResults() {
   }
 
   // 渲染GitHub结果
-  const githubMatches = allItems.github.filter(item => matchesSearch(item));
+  const githubMatches = githubData.filter(item => matchesSearch(item));
+  console.log('GitHub matches:', githubMatches.length);
   if (githubMatches.length > 0) {
-    html += '<div class="card repo-card">' + renderGithubCard(githubMatches[0]) + '</div>';
+    githubMatches.forEach(item => {
+      html += '<div class="card repo-card">' + renderGithubCard(item) + '</div>';
+    });
     totalCount += githubMatches.length;
   }
 
   // 渲染论文结果
-  const paperMatches = allItems.paper.filter(item => matchesSearch(item));
+  const paperMatches = paperData.filter(item => matchesSearch(item));
+  console.log('Paper matches:', paperMatches.length);
   if (paperMatches.length > 0) {
-    html += '<div class="card paper-card">' + renderPaperCard(paperMatches[0]) + '</div>';
+    paperMatches.forEach(item => {
+      html += '<div class="card paper-card">' + renderPaperCard(item) + '</div>';
+    });
     totalCount += paperMatches.length;
   }
 
   // 渲染全部资讯结果
-  const newsMatches = allItems.news.filter(item => matchesSearch(item));
+  const newsMatches = newsData.filter(item => matchesSearch(item));
+  console.log('News matches:', newsMatches.length);
   if (newsMatches.length > 0) {
     html += '<div class="group-card"><div class="group-header" style="background:linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%)"><div class="header-left"><span class="category-icon">📰</span><span>全部资讯</span></div><div class="header-right"><span class="count">' + newsMatches.length + '条</span></div></div><div class="group-content show" style="display:block">';
     newsMatches.forEach(item => {
@@ -7102,6 +7120,7 @@ function renderNewsItem(item) {
 
 function matchesSearch(item) {
   if (!currentSearchTerm) return true;
+  const searchLower = currentSearchTerm.toLowerCase();
   const searchFields = [
     item.标题, item.名称, item.内容, item.分类, item.来源,
     item.核心信息, item.核心价值, item.适用场景, item.推荐理由,
@@ -7109,7 +7128,7 @@ function matchesSearch(item) {
     item.论文中文标题, item.论文英文标题, item.论文摘要, item.作者,
     item.类别, item.板块
   ];
-  return searchFields.some(field => field && String(field).toLowerCase().includes(currentSearchTerm));
+  return searchFields.some(field => field && String(field).toLowerCase().includes(searchLower));
 }
 
 function clearSearch() {
